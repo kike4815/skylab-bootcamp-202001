@@ -1,3 +1,8 @@
+if (typeof require !== 'undefined'){
+
+    var Murray = require('./murray')
+}
+
 describe('Murray prototype shift', function(){
 
     it('should return the first position', function () {

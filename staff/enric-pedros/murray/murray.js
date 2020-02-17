@@ -143,5 +143,8 @@ Murray.prototype.indexOf = function (element, value=0) {
     }
 }
 
+if (typeof module !== 'undefined'){
 
+    module.exports = Murray
+}
 

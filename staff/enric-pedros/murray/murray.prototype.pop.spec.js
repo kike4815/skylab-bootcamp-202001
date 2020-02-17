@@ -1,3 +1,8 @@
+if (typeof require !== 'undefined'){
+
+    var Murray = require('./murray')
+}
+
 describe('Murray prototype pop', function(){
 
     it('should return the last position', function () {

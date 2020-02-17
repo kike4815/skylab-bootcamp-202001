@@ -1,3 +1,5 @@
+const Murray = require('./murray')
+
 describe('Murray prototype UNshift', function(){
 
     it('should return the new length of the same array', function () {
