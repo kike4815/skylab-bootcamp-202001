@@ -9,8 +9,13 @@ const app = express()
 app.use(express.static('public'))
 app.use(express.static('utils'))
 
+app.get('/', (req, res) =>{
+   console.log(req)
+   console.log(res)
+  });
+  
 
-app.listen(8080)
+app.listen(8000)
 
 // const {argv : [,,port = 8080]} = process
 
