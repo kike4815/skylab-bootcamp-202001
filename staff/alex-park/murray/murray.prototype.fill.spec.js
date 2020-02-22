@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined')
+    var Murray = require('./murray')
+
 describe('Murray.prototype.fill', function () {
     it('should modify the murray with an static value specified as a first argument', function() {
         var murray = new Murray(1,2,3,4,5);

@@ -1,3 +1,5 @@
+if(typeof require !== "undefined") var Murray = require("./murray.prototype.constructor")
+
 describe("Murray.prototype.concat", function(){
     it("should murrayOne and murrayTwo not to be modified after using the method", function(){
         var murrayOne = new Murray(1, 2, 3);

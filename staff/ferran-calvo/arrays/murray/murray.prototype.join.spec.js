@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
 describe('Murray.prototype.join', function () {
     it('it should return a string "1,2,3,4"',function(){
         var a = new Murray(1,2,3,4);

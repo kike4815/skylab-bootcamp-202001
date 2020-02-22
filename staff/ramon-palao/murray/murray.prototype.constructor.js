@@ -135,3 +135,7 @@ Murray.prototype.join = function(value = ","){
     }
     return result;
 };
+
+if(typeof module !== "undefined") {
+    module.exports = Murray
+}

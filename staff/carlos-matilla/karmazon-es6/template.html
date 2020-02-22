@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Googl</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Googl App</h1>
+
+    <form class="login">
+        <h2>Sign-in</h2>
+
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+
+        <p class="feedback feedback--error">Wrong credentials</p>
+
+        <button>Login</button>
+
+        <a href="">Register</a>
+    </form>
+
+    <form class="register">
+        <h2>Sign-up</h2>
+
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="surname" placeholder="surname">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+
+        <p class="feedback feedback--error">Username is already registered</p>
+
+        <button>Register</button>
+
+        <a href="">Login</a>
+    </form>
+    
+    <form class="googl search">
+        <h2>Googl</h2>
+
+        <input type="text" name="query" placeholder="criteria">
+
+        <p class="feedback feedback--warning">No results</p>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <ul class="googl results"></ul>
+
+    <form class="ecosia search">
+        <h2>Ecosia</h2>
+
+        <input type="text" name="query" placeholder="criteria">
+        <button type="submit">Search</button>
+    </form>
+
+    <ul class="ecosia results"></ul>
+
+    <form class="bing search">
+        <h2>Bing</h2>
+
+        <input type="text" name="query" placeholder="criteria">
+        <button type="submit">Search</button>
+    </form>
+
+    <ul class="bing results"></ul>
+
+    <form class="yahoo search">
+        <h2>Yahoo</h2>
+
+        <input type="text" name="query" placeholder="criteria">
+        <button type="submit">Search</button>
+    </form>
+
+    <ul class="yahoo results"></ul>
+</body>
+</html>

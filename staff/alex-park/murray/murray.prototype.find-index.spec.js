@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined')
+    var Murray = require('./murray')
+
 describe('Murray.prototype.findIndex', function() {
     it('should return the index of the first element of a murray that meets the callback criteria', function() {
         var murray = new Murray(1,2,3,4,5);

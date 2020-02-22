@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe('Murray.prototype.from', function () {
 
     it('It should replicate the same murray', function () {

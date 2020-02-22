@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined')
+    var Murray = require('./murray')
+
 describe('Murray.prototype.shift', function() {
     it('should remove the first element of a murray and return it', function() {
         var murray = new Murray(1,2,3,4,5);

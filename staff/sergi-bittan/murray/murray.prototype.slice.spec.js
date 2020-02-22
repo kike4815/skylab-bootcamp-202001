@@ -1,4 +1,6 @@
-"use strict";
+if (typeof require !== "undefined")
+var Murray = require("./murray")
+
 describe("Murray.prototype.slice", function(){
     
     it("should return a new murray from an initial position", function(){

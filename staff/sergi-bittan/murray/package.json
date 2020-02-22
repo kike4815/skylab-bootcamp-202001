@@ -1,0 +1,16 @@
+{
+  "name": "murray",
+  "version": "1.0.0",
+  "description": "",
+  "main": "murray.js",
+  "dependencies": {
+    "jasmine": "^3.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npx jasmine *.spec.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

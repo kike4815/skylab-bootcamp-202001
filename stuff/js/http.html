@@ -8,8 +8,9 @@
 </head>
 <body>
     <h1>Google</h1>
-    <form action="https://www.google.com/search" method="post">
-        <input type="text" name="q">
+    <form action="https://www.google.com/search" method="get"> <!-- NOTE what if method is 'post'? -->
+        <input type="text" name="q" placeholder="q">
+        <input type="text" name="query" placeholder="query">
         <button type="submit">Search</button>
     </form>
 </body>

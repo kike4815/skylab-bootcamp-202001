@@ -1,3 +1,7 @@
+if (typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
+
 describe('Murray.prototype.every', function () {
     it("it should be false, all the elements don't pass the condition",function(){
         var a = new Murray(1,2,3,4)

@@ -166,23 +166,24 @@ Murray.prototype.findIndex = function(callback){
     return index;
 }
 Murray.prototype.concat = function(){
-    debugger
-    newMurray = new Murray;
-    for (var i = 0;i < this.length; i++)
-    {
+    
+    var newMurray = new Murray
+    for (let i = 0; i < this.length; i++) {
         newMurray.push(this[i])
     }
-    for (var i = 0; i < arguments.length; i++)
-    {
-        if (arguments[i] instanceof Murray)
-        {
-            for (var j = 0; j < arguments[i].length; j++)
-            {
-                newMurray.push(arguments[i][j]);
-            }
+    for (let i = 0; i < arguments.length; i++) {
+        if(arguments[i] instanceof Murray) {
+        for (let j = 0; j < arguments[i].length; j++) {
+            newMurray.push(arguments[i][j])
         }
-        newMurray.push(arguments[i]);
+        } else {
+        newMurray.push(arguments[i])
+        }
     }
+    return newMurray
 }
+
+if (typeof module !== "undefined")
+    module.exports = Murray
 
 

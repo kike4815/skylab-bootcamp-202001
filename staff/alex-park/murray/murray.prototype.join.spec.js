@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined')
+    var Murray = require('./murray')
+
 describe('Murray.protptype.join', function() {
     it('should return a string of all murray elements separated by the desired separator specified as an argument', function () {
         var murray = new Murray(1,2,3,4,5);

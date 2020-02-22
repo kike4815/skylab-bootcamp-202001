@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+}
+
+body {
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+.search--hide {
+  display: none;
+}
+.search input {
+  display: block;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.search button {
+  display: block;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.login {
+  display: flex;
+  width: 25%;
+  height: 50%;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 1rem;
+  background-color: #cacaca;
+}
+.login h2 {
+  margin: 4rem 0;
+}
+.login input {
+  height: 1.25rem;
+  border: 1px solid black;
+  margin: 0.5rem 3rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  outline: none;
+}
+.login button {
+  height: 1.5rem;
+  margin: 2rem 5rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  outline: none;
+  background-color: red;
+}
+.register {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+.register--hide {
+  display: none;
+}
+.register input {
+  display: block;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.register button {
+  display: block;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.register a {
+  display: block;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.feedback {
+  color: green;
+}
+.feedback--error {
+  color: red;
+}
+.feedback--warning {
+  color: orange;
+}
+
+/*# sourceMappingURL=style.css.map */

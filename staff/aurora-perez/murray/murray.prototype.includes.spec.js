@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+
+
 describe('Murray.prototype.includes', function () {
     it('should return a boolean value of TRUE if the value specified as the first argument is result on the murray', function() {
         var murray = new Murray(1,2,3,4,5);

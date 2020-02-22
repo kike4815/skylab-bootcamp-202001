@@ -1,3 +1,5 @@
+if(typeof require !== "undefined") var Murray = require("./murray.prototype.constructor")
+
 describe("Murray.prototype.filter", function(){
     it("should the original murray not to be modified", function(){
         var murray = new Murray(20, 12, 6, 8);

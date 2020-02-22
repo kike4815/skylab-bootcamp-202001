@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe('Murray.prototype.some', function () {
 
     it('It should return \'true\' if there is a value within the murray that fulfills the condition', function () {

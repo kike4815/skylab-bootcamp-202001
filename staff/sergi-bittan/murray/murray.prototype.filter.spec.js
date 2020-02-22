@@ -1,4 +1,7 @@
-"use strict"
+
+if (typeof require !== "undefined")
+var Murray = require ("./murray")
+
 describe("Murray.prototype.filter", function(){
     it("should return a new murray with all the numbers within the existing murray than are > 18", function(){
         var murray = new Murray(10, 13, 56, 34, 57, 22);

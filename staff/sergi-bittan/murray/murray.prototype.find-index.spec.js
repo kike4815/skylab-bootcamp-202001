@@ -1,3 +1,6 @@
+if (typeof require !=="undefined")
+var Murray = require ("./murray")
+
 describe("Murray.prototype.findIndex", function(){
     it("Should return de index of specific element", function(){
         var murray = new Murray(3 ,5, 8, 3, 2);

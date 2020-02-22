@@ -1,3 +1,6 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+    
 describe("Murray.prototype.toString", function () {
     it("should return a string with all values of the murray, separated by a comma", function() {
         var murray = new Murray (1, 2, 3, 4);

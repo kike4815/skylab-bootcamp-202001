@@ -230,3 +230,6 @@ Murray.prototype.fill = function (value, start, end) {
     for (start; start < end; start++) { this[start] = value };
     return this;
 };
+
+if (typeof module !== 'undefined') 
+    module.exports = Murray

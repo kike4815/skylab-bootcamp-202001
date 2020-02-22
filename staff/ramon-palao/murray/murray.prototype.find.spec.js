@@ -1,3 +1,5 @@
+if(typeof require !== "undefined") var Murray = require("./murray.prototype.constructor")
+
 describe("Murray.prototype.find", function(){
     it("should return the first element of murray that matches the expression", function(){
         var murray = new Murray(3, 4, 14, 19);

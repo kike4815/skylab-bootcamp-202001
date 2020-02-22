@@ -1,3 +1,6 @@
+if (typeof require !== "undefined")
+var Murray = require("./murray")
+
 describe("Murray.prototype.shift", function(){
     it("Should return the first element of the murray", function(){
         var murray = new Murray(1, 5, 4, 5, 7);

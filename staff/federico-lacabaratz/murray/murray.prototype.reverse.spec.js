@@ -1,4 +1,4 @@
-'use strict'
+if (typeof require !== 'undefined')  var Murray = require('./murray');
 
 describe('Murray.prototype.reverse', function(){
     

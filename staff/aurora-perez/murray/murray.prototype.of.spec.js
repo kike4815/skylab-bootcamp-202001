@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+
+
 describe ('murray.of', function(){
     it('it creates a new murray from a variable number of arguments.', function(){
         var murray = Murray.of(1, 2, 3);

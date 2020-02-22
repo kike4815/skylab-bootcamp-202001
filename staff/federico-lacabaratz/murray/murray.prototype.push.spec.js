@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe('Murray.prototype.push', function () {
     it('should have added 4 at the end of murray [1, 2, 3]', function () {
         var murray = new Murray(1, 2, 3);

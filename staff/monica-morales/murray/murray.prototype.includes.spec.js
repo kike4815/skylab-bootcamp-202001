@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
+
 describe('Murray.prototype.includes',function(){
     
     it('Should return a boolean', function(){

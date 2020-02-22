@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
+
 describe('Murray.prototype.every', function () {
 
     it('should return a boolean "true"', function () {

@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined')
+    var Murray = require('./murray')
+
 describe('Murray.prototype.map', function() {
     it('should return a new murray with all values changed according to the callback specifications', function() {
         var murray = new Murray(1,2,3,4,5);

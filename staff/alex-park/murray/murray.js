@@ -23,8 +23,8 @@ function Murray() {
     }
 }
 
-Murray.prototype.push = function() {
-    for(var i = 0; i < arguments.length; i++) {
+Murray.prototype.push = function () {
+    for (var i = 0; i < arguments.length; i++) {
         this[this.length] = arguments[i];
         this.length++;
     }
@@ -37,26 +37,26 @@ Murray.prototype.forEach = function (expression) {
     for (var i = 0; i < this.length; i++) expression(this[i], i, this);
 };
 
-Murray.prototype.pop = function() {    
+Murray.prototype.pop = function () {
     if (this.length === 0) {
         this[0] = undefined;
         return this[0];
-        
+
     } else {
-        var poppedValue = this[this.length-1];
+        var poppedValue = this[this.length - 1];
         this.length = --this.length;
         delete this[this.length];
         return poppedValue;
     }
 };
 
-Murray.prototype.toString = function() {
+Murray.prototype.toString = function () {
     var str = '';
     for (var i = 0; i < this.length; i++) {
         if (this[i] === undefined) {
-            i === this.length-1? str += `` : str += `,`; 
+            i === this.length - 1 ? str += `` : str += `,`;
         } else {
-            i === this.length-1? str += `${this[i]}` : str += `${this[i]},`;
+            i === this.length - 1 ? str += `${this[i]}` : str += `${this[i]},`;
 
         }
     }
@@ -64,12 +64,12 @@ Murray.prototype.toString = function() {
     return str;
 };
 
-Murray.prototype.indexOf = function(value, position) {
-    if (isNaN(parseInt(position))) {position = 0};
+Murray.prototype.indexOf = function (value, position) {
+    if (isNaN(parseInt(position))) { position = 0 };
 
-    if (position < 0){position = this.length + position};
-    if (position===undefined){position = 0};
-    if (position && typeof position === 'boolean') {position = 1};
+    if (position < 0) { position = this.length + position };
+    if (position === undefined) { position = 0 };
+    if (position && typeof position === 'boolean') { position = 1 };
 
     for (position = parseInt(position); position < this.length; position++) {
         if (value === this[position]) {
@@ -81,14 +81,14 @@ Murray.prototype.indexOf = function(value, position) {
     return -1;
 };
 
-Murray.prototype.reverse = function() {
+Murray.prototype.reverse = function () {
     var reversedMurray = [];
 
     for (var i = 0; i < this.length; i++) {
         reversedMurray[reversedMurray.length] = this[this.length - i - 1];
     }
-    
-    for(var i = 0; i < this.length; i++) {
+
+    for (var i = 0; i < this.length; i++) {
         this[i] = reversedMurray[i];
     }
 
@@ -96,7 +96,7 @@ Murray.prototype.reverse = function() {
 };
 
 Murray.prototype.map = function (expression) {
-    if (!(typeof expression === 'function')) {throw new TypeError(expression + " is not a function")};
+    if (!(typeof expression === 'function')) { throw new TypeError(expression + " is not a function") };
 
     var result = new Murray;
 
@@ -104,30 +104,30 @@ Murray.prototype.map = function (expression) {
         result[i] = expression(this[i]);
         result.length++;
     }
-    
+
     return result;
 };
 
 Murray.prototype.join = function (separator) {
     var joinedString = '';
-  
-    for (var i = 0; i < this.length; i++){
-        i === this.length -1?
-            joinedString += `${this[i]}`:
-            joinedString += `${this[i]}`+ `${separator}`;
+
+    for (var i = 0; i < this.length; i++) {
+        i === this.length - 1 ?
+            joinedString += `${this[i]}` :
+            joinedString += `${this[i]}` + `${separator}`;
     }
-    
+
     return joinedString;
 };
 
 Murray.prototype.find = function (expression) {
-    if (typeof expression !== 'function') {throw new TypeError(expression + ' is not a function')};
+    if (typeof expression !== 'function') { throw new TypeError(expression + ' is not a function') };
 
     var result;
-    
+
     for (var i = 0; i < this.length; i++) {
         if (expression(this[i])) {
-            return result = this[i]; 
+            return result = this[i];
 
         } else {
             result = undefined;
@@ -138,19 +138,19 @@ Murray.prototype.find = function (expression) {
 };
 
 Murray.prototype.findIndex = function (expression) {
-    if (typeof expression !== 'function') {throw new TypeError(expression + ' is not a function')};
+    if (typeof expression !== 'function') { throw new TypeError(expression + ' is not a function') };
 
     var result = -1;
 
     for (var i = 0; i < this.length; i++) {
-        if (expression(this[i])){ return result = i };
+        if (expression(this[i])) { return result = i };
 
     }
 
     return result;
 };
 
-Murray.prototype.shift = function (){
+Murray.prototype.shift = function () {
     var result;
 
     if (this.length === 0) {
@@ -158,8 +158,8 @@ Murray.prototype.shift = function (){
 
     } else {
         result = this[0];
-        for (var i = 0; i < this.length; i++){ this[i] = this[i+1] };
-        
+        for (var i = 0; i < this.length; i++) { this[i] = this[i + 1] };
+
         this.length--;
     }
 
@@ -182,11 +182,11 @@ Murray.prototype.filter = function (condition) {
 };
 
 Murray.prototype.every = function (condition) {
-    if (typeof condition !== 'function') {throw new TypeError (condition + ' is not a function')};
+    if (typeof condition !== 'function') { throw new TypeError(condition + ' is not a function') };
 
     for (var i = 0; i < this.length; i++) { if (!condition(this[i])) { return false }; };
 
-    return true; 
+    return true;
 };
 
 Murray.of = function () {
@@ -201,12 +201,12 @@ Murray.of = function () {
 };
 
 Murray.prototype.includes = function (value, position) {
-    if (position && typeof position === 'boolean') {position = 1 };
+    if (position && typeof position === 'boolean') { position = 1 };
     if (isNaN(parseInt(position))) { position = 0 };
     if (position < 0) { position = this.length + position };
 
     position = parseInt(position);
-    
+
     for (position; position < this.length; position++) {
         if (this[position] === value) { return true };
     }
@@ -236,7 +236,7 @@ Murray.prototype.concat = function () {
 Murray.prototype.fill = function (value, start, end) {
     if (isNaN(parseInt(start))) { start = 0 };
     if (start && typeof start === 'boolean') { start = 1 };
-    if (start<0) { start = this.length + start };
+    if (start < 0) { start = this.length + start };
 
     if (isNaN(parseInt(end))) { end = this.length };
     if (end && typeof end === 'boolean') { end = 1 };
@@ -249,3 +249,6 @@ Murray.prototype.fill = function (value, start, end) {
 
     return this;
 };
+
+if (typeof module !== 'undefined')
+    module.exports = Murray

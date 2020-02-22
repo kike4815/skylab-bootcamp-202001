@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+
+
 describe ('SHIFT', function(){
     it ('should removes the first element from an murray and returns that removed element.', function(){
         var murray = new Murray (1, 2, 3, 4, 5);

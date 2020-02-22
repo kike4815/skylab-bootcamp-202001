@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe('Murray.prototype.map',function(){
     
     it('Should transform [1, 5, 10, 15] into [2, 10, 20, 30]',function(){

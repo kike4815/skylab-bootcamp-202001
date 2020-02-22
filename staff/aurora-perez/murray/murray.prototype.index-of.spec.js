@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+
+
 describe('Murray.prototype.indexOf', function() {
     it('should return the index of the identified value, from certain position.', function () {
         var murray = new Murray (10, 20, 30, 40, 50, 60, 70);

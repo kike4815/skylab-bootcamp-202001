@@ -1,4 +1,7 @@
-"use stric"
+if (typeof require !== "undefined")
+var Murray = require("./murray")
+
+
 describe("Murray.prototype.reverse", function(){
     it("Should reverse all elements of the murray.", function(){
         var murray = new Murray("1","2","3","4");

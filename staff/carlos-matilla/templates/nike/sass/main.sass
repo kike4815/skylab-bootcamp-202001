@@ -1,0 +1,88 @@
+
+main 
+    display: flex
+    justify-content: center
+    width: 100%
+    background-color: $blanco
+   
+
+    .filtros
+        width: 15%
+        background-color: $blanco
+       
+
+        .filtros__titulo
+            width: 100%
+            background-color: $blanco
+            height: 10vh
+            display: flex
+            justify-content: center
+            align-items: center
+            font-size: 1.3em
+            font-weight: bold
+            color: $negro
+
+        .filtros__links
+            width: 100%
+            background-color: $blanco
+            display: flex
+            flex-direction: column
+            align-items: baseline
+            font-size: 1em
+            margin-left: 30px
+            margin-top: 50px
+            color: $negro
+
+            p 
+                margin-bottom: 20px
+
+        
+        
+
+    .resultados
+        width: 80%
+        background-color: $blanco
+        height: 100%
+ 
+
+        .resultados__titulo
+            width: 100%
+            background-color: $blanco
+            height: 10vh
+            display: flex
+            justify-content: flex-end
+            align-items: center
+            color: $negro
+
+            ul 
+                display: flex
+
+                li 
+                    margin-right: 20px
+                   
+                    
+
+        .resultados__imagenes
+            display: flex
+            flex-wrap: wrap
+            justify-content: center
+            align-content: flex-start
+
+@media only screen and (max-device-width : 1100px)
+    .filtros
+        display: none
+  
+    img 
+        display: block
+        margin: 0.5em
+        max-width: 45%
+
+
+
+
+@media only screen and (min-device-width : 1100px)
+    img 
+        display: block
+        margin: 0.5em
+        max-width: 30%
+    

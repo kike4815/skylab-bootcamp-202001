@@ -1,4 +1,7 @@
 "use strict"
+if (typeof require !== 'undefined')
+    var Murray = require('./murray')
+    
 describe("Murray.prototype.every",function(){
     it("Should return true if all elements are true", function(){
         var murray = new Murray(1,4,6,7);

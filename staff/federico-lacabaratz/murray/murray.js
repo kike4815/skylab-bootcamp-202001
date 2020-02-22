@@ -233,3 +233,5 @@ Murray.prototype.toString = function () {
         return string;
     }.bind(this))() + ' }';
 };
+
+if (typeof module !== 'undefined') module.exports = Murray

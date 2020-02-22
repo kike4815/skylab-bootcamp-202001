@@ -18,7 +18,7 @@ const server = net.createServer(socket => {
         if (!alreadyExists)
             sessions[chunk.toString()] = socket
         else {
-            const [user, message] = chunk.toString().split(':')
+            const [user, message] = chunk.toString().split(':') // <user>:<message>
 
             const _socket = sessions[user]
 

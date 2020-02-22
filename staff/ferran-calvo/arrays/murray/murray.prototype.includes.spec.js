@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
 describe('Murray.prototype.includes', function () {
     it('it should return true',function(){
         var a = new Murray(1,2,3,4)

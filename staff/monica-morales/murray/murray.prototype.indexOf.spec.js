@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
+
 describe('Murray.prototype.indexOf',function(){
     
     it('should return the index of the first element found', function(){

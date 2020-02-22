@@ -1,3 +1,5 @@
+if(typeof require !== "undefined") var Murray = require("./murray.prototype.constructor")
+
 describe("Murray.prototype.includes", function(){
     it("should return true if murray includes the value passed as an argument", function(){
         var murray = new Murray(1, 2, 3, 4, 5);

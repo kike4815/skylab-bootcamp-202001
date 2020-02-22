@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe('Murray.prototype.indexOf', function () {
 
     it('It verifies that the input number is included within the murray and returns its index number position', function () {

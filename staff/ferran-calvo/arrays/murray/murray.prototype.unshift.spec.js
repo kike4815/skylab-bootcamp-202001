@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
 describe('Murray.prototype.unshift', function () {
     it('it should be return 4 and the murray changes to (1,2,3,4)',function(){
         var a = new Murray(3,4);

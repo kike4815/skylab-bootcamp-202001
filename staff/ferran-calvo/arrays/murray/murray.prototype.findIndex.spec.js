@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
 describe('Murray.prototype.findIndex', function () {
     it('it should return 2',function(){
         var a = new Murray(1,2,3,4)

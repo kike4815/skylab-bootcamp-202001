@@ -1,3 +1,5 @@
+if(typeof require !== "undefined") var Murray = require("./murray.prototype.constructor")
+
 describe("Murray.prototype.join", function(){
     it("should type of result be a string", function(){
         var murray = new Murray("cat", "dog", "dolphin");

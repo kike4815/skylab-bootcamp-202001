@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe('Murray.prototype.findIndex', function () {
 
     it('It should return the index number of the first number in the murray > than 13', function () {

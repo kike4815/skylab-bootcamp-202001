@@ -1,0 +1,15 @@
+DEBUG 2020-02-19 17:15:27.257 setting up server
+INFO 2020-02-19 17:15:27.271 server up and running on port 8080
+WARN 2020-02-19 17:15:30.621 server abruptly stopped
+DEBUG 2020-02-19 17:16:22.966 setting up server
+INFO 2020-02-19 17:16:22.981 server up and running on port 8080
+WARN 2020-02-19 17:16:24.340 server abruptly stopped
+DEBUG 2020-02-19 17:16:38.481 setting up server
+INFO 2020-02-19 17:16:38.494 server up and running on port 8080
+WARN 2020-02-19 17:16:39.751 server abruptly stopped
+DEBUG 2020-02-19 17:16:58.710 setting up server
+INFO 2020-02-19 17:16:58.725 server up and running on port 8080
+WARN 2020-02-19 17:17:00.384 server abruptly stopped
+DEBUG 2020-02-19 17:17:06.339 setting up server
+INFO 2020-02-19 17:17:06.351 server up and running on port 8080
+WARN 2020-02-19 17:17:07.415 server abruptly stopped

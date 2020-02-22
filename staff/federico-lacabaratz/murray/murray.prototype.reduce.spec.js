@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe('Murray.prototype.reduce', function() {
 
     it('It should return a new single value equal to the summ of al numbers within the murray', function() {

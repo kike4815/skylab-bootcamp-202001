@@ -1,3 +1,5 @@
+if(typeof require !== "undefined") var Murray = require("./murray.prototype.constructor")
+
 describe("Murray.prototype.indexOf", function(){
     it("should return the position of the element if the element is within the murray", function(){
         var murray = new Murray("cat", "dog", "dolphin", "lion");

@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+
+
 describe('Murray.prototype.map', function(){
     it ("it should a new murray with the applied calback ", function(){
         var murray = new Murray (1, 2, 3); 

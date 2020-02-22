@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+
+
 describe("Murray.prototype.concat", function() {
     it('should concatenate the murray with the murray specified on the argument', function() {
         var murray = new Murray(1,2,3,4,5);

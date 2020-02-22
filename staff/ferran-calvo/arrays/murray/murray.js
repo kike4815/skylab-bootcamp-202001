@@ -180,3 +180,7 @@ Murray.prototype.fill= function(value, start = 0, end = this.length){
     }
     return this;
 }
+
+if (typeof module !== 'undefined'){
+    module.exports = Murray
+}

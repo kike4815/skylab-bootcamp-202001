@@ -1,3 +1,5 @@
+if(typeof require !== "undefined") var Murray = require("./murray.prototype.constructor")
+
 describe("Murray.prototype.pop", function(){
     it("should the last element of newMurray be deleted", function(){
         var newMurray = new Murray(1, 2, 3, 4);

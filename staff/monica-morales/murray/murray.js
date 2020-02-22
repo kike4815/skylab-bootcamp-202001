@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 function Murray() {
     var _arguments = arguments;
 
@@ -169,4 +171,6 @@ Murray.prototype.indexOf = function(value, start){
     return -1    
 };
 
-
+if(typeof module !== 'undefined'){
+    module.exports = Murray
+}

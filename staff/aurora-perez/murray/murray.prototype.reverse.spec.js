@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+
+
 describe ('Murray.prototype.revserse', function () {
     it('should return a new murray with the reverted values', function(){
         var murray = new Murray (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);

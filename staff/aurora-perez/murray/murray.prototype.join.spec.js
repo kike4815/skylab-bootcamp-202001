@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+
+
 describe('Murray.prototype.join', function() {
     it("should returns a new string by concatenating all of the elements in an array, separated by specified separator string", function() {
         var murray = new Murray (1, 2, 3);

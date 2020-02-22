@@ -1,3 +1,6 @@
+if(typeof require !== 'undefined')
+    var Murray = require("./murray")
+
 describe('Murray.prototype.find', function(){
     it('should returns the value of the first element in the provided murray that satisfies the provided testing callback', function(){
 

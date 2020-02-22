@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
 describe('Murray.prototype.lastIndexOf', function () {
     it('it should return 3',function(){
         var a = new Murray(2,2,1,2,3,4);

@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe('Murray.prototype.every', function() {
 
     it('Returns \'true\' if all elements in a murray are < than 51', function () {

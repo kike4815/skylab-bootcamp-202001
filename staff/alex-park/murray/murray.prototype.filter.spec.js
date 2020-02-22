@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined')
+    var Murray = require('./murray')
+
 describe('Murray.prototype.filter', function() {
     it('should return a new murray with all elements from the original one that meet the callback criteria', function() {
         var murray = new Murray(10,20,30,40,50);

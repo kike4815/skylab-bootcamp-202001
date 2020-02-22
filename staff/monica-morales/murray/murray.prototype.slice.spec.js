@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
+
 describe('Murray.prototype.slice',function(){
 
     it('should show from second element(include) to the fifth element(no include)', function(){

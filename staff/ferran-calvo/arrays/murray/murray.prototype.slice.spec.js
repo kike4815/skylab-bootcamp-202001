@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
 describe('Murray.prototype.slice', function () {
     it('it should be return a new Murray with positive arguments',function(){
         var a = new Murray(1,2,3,4)

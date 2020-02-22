@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe("Murray.prototype.concat", function() {
     
     it("Verifies that concatenates 2 murrays into a new murray", function(){

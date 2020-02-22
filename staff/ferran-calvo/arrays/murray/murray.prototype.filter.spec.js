@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
 describe('Murray.prototype.filter', function () {
     it('it should be the newest array should be the right condition',function(){
         var a = new Murray(1,2,3,4)

@@ -1,3 +1,6 @@
+if (typeof require !== 'undefined')
+    var Murray = require('./murray')
+
 describe('Murray.prototype.every', function() {
     it('should return a boolean value of true if all elements of a murray meet the callback criteria', function () {
         var murray = new Murray(50,100,200);

@@ -1,3 +1,5 @@
+if (typeof require !== 'undefined')  var Murray = require('./murray');
+
 describe('Murray.prototype.pop', function () {
 
     it('should have delete 4 at the end of murray [1, 2, 3, 4]', function () {

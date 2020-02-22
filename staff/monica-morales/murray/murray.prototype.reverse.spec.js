@@ -1,3 +1,7 @@
+if(typeof require !== 'undefined'){
+    var Murray = require('./murray')
+}
+
 describe('Murray.prototype.reverse',function(){
     
     it('should reverse the order of the elements', function(){

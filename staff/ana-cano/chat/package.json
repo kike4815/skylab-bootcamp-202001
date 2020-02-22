@@ -1,0 +1,16 @@
+{
+  "name": "ana-cano",
+  "version": "1.0.0",
+  "description": "best chat ever",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "telegram",
+    "server"
+  ],
+  "author": "Ana Cano Prieto",
+  "license": "MIT"
+}
