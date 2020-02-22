@@ -8,9 +8,20 @@ const retrieveUser = require('./logic/retrieve-user')
 const bodyParse = require('body-parser')
 const {App, Login, Landing, Register, Home} = require('./components')
 
+// app.use(cookieParserMidWare)
+
+// app.use(express.static(path.join(__dirname, 'public')))
+
+
 app.use(express.static('logic'));
 app.use(express.static('utils'));
 app.use(bodyParse.urlencoded({ extended: false }))
+
+
+
+app.get('/logout',(req,res)=>{
+    res.redirect('/')
+})
 
 app.get('/',(req,res)=>{
     res.send(App({ title: 'My App', body:Landing()}))
@@ -41,18 +52,21 @@ app.post('/register', (req, res) => {
 app.post('/login',(req,res)=> {
 
         const {username, password} = req.body
+        console.log(req.headers)
         try{
             authenticate(username,password)
-            const user = retrieveUser(username)
-            const {name} = user
-            res.send(App({title: 'Home', body: Home({name}) }))
+            res.redirect(`/home/${username}`)
         }catch({message}){
             res.send(App({title:'Login', body: Login({message})}))
         }
-
     })
+    
+app.get('/home/:username',(req,res)=>{
+        const {params : {username}} = req
+        const {name} = retrieveUser(username)
+        res.send(App({title: 'Home', body: Home({name,username}) }))
 
-
+})
 
 app.listen(8080, function () {
     console.log('server up')

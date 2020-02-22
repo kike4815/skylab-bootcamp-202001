@@ -6,6 +6,6 @@ module.exports= function(usernameUser) {
     const _user =  users.find(user => {
             return user.username === usernameUser
         })
-        return {name,surname,username} = _user
+        return _user
     }
 

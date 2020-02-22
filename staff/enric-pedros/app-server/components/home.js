@@ -1,6 +1,6 @@
 module.exports = function({name}) {
     return `
     <h1>Welcome Back, ${name}</h1>
-    <button>LogOut</button>
+    <form method:'GET' action='/logout'><button>LogOut</button></form>
     `
 }
