@@ -1,0 +1,57 @@
+@import url(https://fonts.googleapis.com/css?family=Advent+Pro&display=swap);
+.app {
+  text-align: center;
+}
+
+.login {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 0;
+  text-align: right;
+  font-family: "Advent Pro", sans-serif;
+  width: 33vw;
+  background-color: white;
+}
+.login h1 {
+  margin: 0;
+}
+.login input {
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  background-color: white;
+}
+.login button {
+  border: none;
+  font-family: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  color: white;
+  background-color: black;
+  padding: 0;
+}
+.login__error {
+  color: red;
+  margin: 0;
+}
+.login a {
+  font-size: 0.75rem;
+}
+
+.register {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 1px;
+}
+.register input {
+  border: none;
+}
+.register button {
+  border: none;
+}
+.register__error {
+  color: red;
+}
+
+/*# sourceMappingURL=style.css.map */
