@@ -54,4 +54,38 @@
   color: red;
 }
 
+.search {
+  display: inline-block;
+  padding: 0.5rem;
+}
+.search--hide {
+  display: none;
+}
+.search input {
+  display: block;
+  border: 1px solid pink;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.search button {
+  display: block;
+  border: 1px solid pink;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.results {
+  list-style: none;
+  columns: 3;
+}
+.results--item {
+  display: inline-block;
+}
+
+.item {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=style.css.map */
