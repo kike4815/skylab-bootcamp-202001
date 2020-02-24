@@ -81955,3 +81955,268 @@ DEBUG 2020-02-24 10:08:43.804 setting up server
 INFO 2020-02-24 10:08:43.823 server up and running on port 8081
 DEBUG 2020-02-24 10:09:08.716 setting up server
 INFO 2020-02-24 10:09:08.730 server up and running on port 8080
+DEBUG 2020-02-24 10:12:12.846 setting up server
+INFO 2020-02-24 10:12:12.856 server up and running on port 8080
+INFO 2020-02-24 10:12:23.431 request from ::1:
+GET / HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: document
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+purpose: prefetch
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+if-none-match: W/"305-vUENwGFpSW5dJ3I7Wh0lxetDjTs"
+
+INFO 2020-02-24 10:12:23.465 request from ::1:
+GET /style.css HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: style
+accept: text/css,*/*;q=0.1
+purpose: prefetch
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3A3_C-sNPfl2JmzYj7gcFj9mdElEF5iwYI.4rr6Dv6kh%2FR%2FaT3Nx61F2mALqWmv6a3ukpzd7kCpkoU
+if-none-match: W/"38e-1706c84bd48"
+if-modified-since: Sat, 22 Feb 2020 10:50:03 GMT
+
+INFO 2020-02-24 10:12:27.221 request from ::1:
+POST /login HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+content-length: 21
+cache-control: max-age=0
+origin: http://localhost:8080
+upgrade-insecure-requests: 1
+content-type: application/x-www-form-urlencoded
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: document
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: same-origin
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3A3_C-sNPfl2JmzYj7gcFj9mdElEF5iwYI.4rr6Dv6kh%2FR%2FaT3Nx61F2mALqWmv6a3ukpzd7kCpkoU
+
+INFO 2020-02-24 10:12:28.366 request from ::1:
+GET /home/7 HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+cache-control: max-age=0
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: document
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: same-origin
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3A3_C-sNPfl2JmzYj7gcFj9mdElEF5iwYI.4rr6Dv6kh%2FR%2FaT3Nx61F2mALqWmv6a3ukpzd7kCpkoU
+if-none-match: W/"2f6-49nunC7huwZlhfQVALOM5sR1W5g"
+
+INFO 2020-02-24 10:12:28.916 request from ::1:
+GET /style.css HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-fetch-dest: style
+if-none-match: W/"38e-1706c84bd48"
+if-modified-since: Sat, 22 Feb 2020 10:50:03 GMT
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+accept: text/css,*/*;q=0.1
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+referer: http://localhost:8080/home/7
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3A3_C-sNPfl2JmzYj7gcFj9mdElEF5iwYI.4rr6Dv6kh%2FR%2FaT3Nx61F2mALqWmv6a3ukpzd7kCpkoU
+
+INFO 2020-02-24 10:12:31.364 request from ::1:
+GET /search/?query=mario HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: document
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: same-origin
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+referer: http://localhost:8080/home/7
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3A3_C-sNPfl2JmzYj7gcFj9mdElEF5iwYI.4rr6Dv6kh%2FR%2FaT3Nx61F2mALqWmv6a3ukpzd7kCpkoU
+if-none-match: W/"1b4e-IpruyJ6XWaovETDJOK8EuDdWspI"
+
+INFO 2020-02-24 10:12:32.903 request from ::1:
+GET /style.css HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-fetch-dest: style
+if-none-match: W/"38e-1706c84bd48"
+if-modified-since: Sat, 22 Feb 2020 10:50:03 GMT
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+accept: text/css,*/*;q=0.1
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+referer: http://localhost:8080/search/?query=mario
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3A3_C-sNPfl2JmzYj7gcFj9mdElEF5iwYI.4rr6Dv6kh%2FR%2FaT3Nx61F2mALqWmv6a3ukpzd7kCpkoU
+
+INFO 2020-02-24 10:12:46.032 request from ::1:
+POST /favs/DHT14 HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+content-length: 0
+cache-control: max-age=0
+origin: http://localhost:8080
+upgrade-insecure-requests: 1
+content-type: application/x-www-form-urlencoded
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: document
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: same-origin
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+referer: http://localhost:8080/search/?query=mario
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3A3_C-sNPfl2JmzYj7gcFj9mdElEF5iwYI.4rr6Dv6kh%2FR%2FaT3Nx61F2mALqWmv6a3ukpzd7kCpkoU
+
+DEBUG 2020-02-24 10:46:57.106 setting up server
+INFO 2020-02-24 10:46:57.114 server up and running on port 8080
+INFO 2020-02-24 10:48:46.693 request from ::1:
+GET / HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: document
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+purpose: prefetch
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+if-none-match: W/"305-vUENwGFpSW5dJ3I7Wh0lxetDjTs"
+
+INFO 2020-02-24 10:48:46.734 request from ::1:
+GET /style.css HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: style
+accept: text/css,*/*;q=0.1
+purpose: prefetch
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3AfuALMdERH5gyQtY2nE2oQXbN3QIR4jKA.Q%2BNOscELlZaXq3Db%2FcMNJudMZGwhshu%2FlD2CrTuMcpQ
+if-none-match: W/"38e-1706c84bd48"
+if-modified-since: Sat, 22 Feb 2020 10:50:03 GMT
+
+INFO 2020-02-24 10:48:50.623 request from ::1:
+POST /login HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+content-length: 21
+cache-control: max-age=0
+origin: http://localhost:8080
+upgrade-insecure-requests: 1
+content-type: application/x-www-form-urlencoded
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: document
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: same-origin
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3AfuALMdERH5gyQtY2nE2oQXbN3QIR4jKA.Q%2BNOscELlZaXq3Db%2FcMNJudMZGwhshu%2FlD2CrTuMcpQ
+
+INFO 2020-02-24 10:48:51.801 request from ::1:
+GET /home/7 HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+cache-control: max-age=0
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: document
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: same-origin
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3AfuALMdERH5gyQtY2nE2oQXbN3QIR4jKA.Q%2BNOscELlZaXq3Db%2FcMNJudMZGwhshu%2FlD2CrTuMcpQ
+if-none-match: W/"2f6-49nunC7huwZlhfQVALOM5sR1W5g"
+
+INFO 2020-02-24 10:48:52.318 request from ::1:
+GET /style.css HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-fetch-dest: style
+if-none-match: W/"38e-1706c84bd48"
+if-modified-since: Sat, 22 Feb 2020 10:50:03 GMT
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+accept: text/css,*/*;q=0.1
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+referer: http://localhost:8080/home/7
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3AfuALMdERH5gyQtY2nE2oQXbN3QIR4jKA.Q%2BNOscELlZaXq3Db%2FcMNJudMZGwhshu%2FlD2CrTuMcpQ
+
+INFO 2020-02-24 10:48:54.393 request from ::1:
+GET /search/?query=mario HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: document
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: same-origin
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+referer: http://localhost:8080/home/7
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3AfuALMdERH5gyQtY2nE2oQXbN3QIR4jKA.Q%2BNOscELlZaXq3Db%2FcMNJudMZGwhshu%2FlD2CrTuMcpQ
+if-none-match: W/"1b4e-IpruyJ6XWaovETDJOK8EuDdWspI"
+
+INFO 2020-02-24 10:48:55.905 request from ::1:
+GET /style.css HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36
+sec-fetch-dest: style
+accept: text/css,*/*;q=0.1
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+referer: http://localhost:8080/search/?query=mario
+accept-encoding: gzip, deflate, br
+accept-language: es-ES,es;q=0.9,ca-ES;q=0.8,ca;q=0.7,en;q=0.6
+cookie: connect.sid=s%3AfuALMdERH5gyQtY2nE2oQXbN3QIR4jKA.Q%2BNOscELlZaXq3Db%2FcMNJudMZGwhshu%2FlD2CrTuMcpQ
+if-none-match: W/"38e-1706c84bd48"
+if-modified-since: Sat, 22 Feb 2020 10:50:03 GMT
+
+WARN 2020-02-24 10:53:12.538 server abruptly stopped

@@ -1,4 +1,4 @@
-const { call, toggle } = require('../utils')
+const { call } = require('../utils')
 const atob = require('atob')
 require('../utils/array.prototype.toggle')
 
