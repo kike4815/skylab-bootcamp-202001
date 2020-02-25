@@ -3,6 +3,7 @@ const atob = require('atob')
 require('../utils/array.prototype.toggle')
 
 module.exports=function (token, id, callback) {
+    if(token){
     if (typeof token !== 'string') throw new TypeError(`token ${token} is not a string`)
 
     const [header, payload, signature] = token.split('.')
@@ -11,12 +12,13 @@ module.exports=function (token, id, callback) {
     const { sub } = JSON.parse(atob(payload))
 
     if (!sub) throw new Error('no user id in token')
-
+    }  
     if (typeof id !== 'string') throw new TypeError(`id ${id} is not a string`)
 
     if (typeof callback !== 'function') throw new TypeError(`callback ${callback} is not a function`)
-
-    call(`https://skylabcoders.herokuapp.com/api/v2/users/${sub}`, {
+    
+    if(token){
+    call(`https://skylabcoders.herokuapp.com/api/v2/users/`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -50,4 +52,6 @@ module.exports=function (token, id, callback) {
             callback()
         })
     })
+    }
+
 }

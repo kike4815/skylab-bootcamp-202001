@@ -1,0 +1,22 @@
+extends app
+
+block body
+    if name
+        //- +user(name,username)
+        user({name,username})
+    else
+        a(href='/register') Register 
+        span or 
+        a(href='/login') Login
+    home({query})
+    if results
+        Results({results})
+
+
+
+
+//- ${name? User({name,username}):
+//- a(href='/register') Register or 
+//- a(href='/login') Login}
+//- ${Home({query})}
+//- ${results ? Results({results}):''}

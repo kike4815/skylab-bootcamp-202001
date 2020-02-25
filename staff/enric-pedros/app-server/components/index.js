@@ -4,5 +4,6 @@ module.exports = {
     Home: require('./home'),
     Register: require('./register'),
     Landing: require('./landing'),
-    Details:require('./details')
+    Details:require('./details'),
+    user: require('./user')
 }
