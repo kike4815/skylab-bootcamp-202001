@@ -1,0 +1,7 @@
+mixin item(id, name, isFav, thumbnail, price)
+    li.results--item.item
+        h3= name
+        form(action=(`toggle-fav/${id}`) method="POST")
+            button= isFav ? '💖' : '🤍'
+        img(src=thumbnail)
+        span= `${price} €`

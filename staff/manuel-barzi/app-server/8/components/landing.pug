@@ -1,0 +1,22 @@
+extends app
+
+include user
+include search
+include feedback
+
+block body
+    if (name)
+        +user(name, username)
+    else
+        section
+            a(href="/register") Register
+            |  or 
+            a(href="/login") Login
+    +search(query)
+    if results
+        if (results.length)
+            //- WARN this include is here and not on top (as user and search) because it collides with results array
+            include results 
+            +results(results)
+        else
+            +feedback('warning', 'No results')

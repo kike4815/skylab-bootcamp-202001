@@ -40,6 +40,9 @@
 .register button {
   border: none;
 }
+.register__error {
+  color: red;
+}
 
 .search {
   display: inline-block;

@@ -1,3 +1,5 @@
+const Feedback = require('./feedback')
+
 module.exports = function (props = {}) {
     const { error, username } = props
 
@@ -7,7 +9,7 @@ module.exports = function (props = {}) {
         <input type="text" name="username" placeholder="username" ${username? `value="${username}"`: ''}>
         <input type="password" name="password" placeholder="password">
         <button>Send</button>
-        ${error ? `<p class="login__error">${error}</p>` : ''}
+        ${ error ? Feedback({ level: 'error', message: error }) : ''}
     </form>
     <a href="/register">Register</a>
 </section>`
