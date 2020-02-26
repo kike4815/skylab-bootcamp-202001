@@ -1,50 +1,55 @@
-const {App, Home, Login,Landing} = require('../components')
-const {retrieveUser, searchVehicles} = require('../logic')
+const { searchVehicles, retrieveUser } = require('../logic')
 const { logger } = require('../utils')
 
-module.exports = (req,res)=>{
-    const {session: {acceptCookies, token },query:{query}} = req
+module.exports = (req, res) => {
+    const { query: { query }, session: { token } } = req
 
-    if (token){
+    if (token) {
+        try {
+            retrieveUser(token, (error, user) => {
+                if (error) {
+                    logger.error(error)
 
-        try{
-        retrieveUser(token, (error, user) => {
-            if (error) {
-                const { message } = error
-                const { session: { acceptCookies } } = req
-                return res.send(App({ title: 'Login', body: Login({ error: message }), acceptCookies }))
-            }
-                const { name } = user
-                req.session.query = query
-    
-                searchVehicles(token, query, (error,results)=>{
-                    if(error){
-                       res.send(App({ title: 'Home', body: Home({error}), acceptCookies }))
-                    }
-                    else{
-                       res.send(App({ title: 'Home', body: Home({name,results}), acceptCookies }))
-            
-                    }
-            
-                })
-            
+                    res.redirect('/error')
+                }
+
+                const { name, username } = user
+
+                try {
+                    searchVehicles(token, query, (error, vehicles) => {
+                        const { session: { acceptCookies } } = req
+
+                        if (error) {
+                            logger.error(error)
+
+                            res.redirect('/error')
+                        }
+
+                        res.render('landing', { name, username, query, results: vehicles, acceptCookies })
+                    })
+                } catch (error) {
+                    logger.error(error)
+
+                    res.redirect('/error')
+                }
             })
-        }catch({error}){
-            res.send(App({ title: 'Home', body: Home({error:message}), acceptCookies }))
+        } catch (error) {
+            logger.error(error)
+
+            res.redirect('/error')
         }
-    }else {
-        searchVehicles(undefined, query, (error,vehicles)=>{
-            req.session.query = query
+    } else
+        try {
 
-            if(error){
-               res.send(App({ title: 'Home', body: Home({error}), acceptCookies }))
-            }
-            else{
-               res.send(App({ title: 'Home', body: Landing({query,results:vehicles}), acceptCookies }))
-    
-            }
-    
-        })
-    } 
+            searchVehicles(undefined, query)
+                .then(results => {
+                    const { session: { acceptCookies } } = req
+                    res.render('landing', { query, results, acceptCookies })
 
+                })
+
+        } catch (error) {
+            logger.error(error)
+            res.redirect('/error')
+        }
 }

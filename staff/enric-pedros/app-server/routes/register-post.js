@@ -1,24 +1,28 @@
-const {App, Register } = require('../components')
-const {registerUser} = require('../logic')
+const { registerUser } = require('../logic')
 const { logger } = require('../utils')
 
 module.exports = (req, res) => {
     const { body: { name, surname, username, password } } = req
 
     try {
-        registerUser(name, surname, username, password,(error)=>{
-            if (error) {
+        registerUser(name, surname, username, password)
+            .then(() => {
+                res.redirect('/login')
+            }).catch(error => {
                 const { message } = error
-                const { session: { acceptCookies } } = req 
-                return res.send(App({ title: 'Register', body: Register({ error: message }), acceptCookies }))
-                  
-            }
-            res.redirect('/login')
-        })
+                const { session: { acceptCookies } } = req
 
-    } catch ({ message }) {
+                res.render('register', { error: message, name, surname, username, acceptCookies })
+
+            })
+   
+    }
+    catch (error) {
+        logger.warn(error)
+
+        const { message } = error
         const { session: { acceptCookies } } = req
 
-        res.send(App({ title: 'Register', body: Register({ error: message }), acceptCookies }))
+        res.render('register', { error: message, name, surname, username, acceptCookies })
     }
 }

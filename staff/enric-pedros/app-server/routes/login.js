@@ -1,10 +1,9 @@
+module.exports = (req, res) => {
+    const { session: { token } } = req
 
-
-module.exports=(req, res) => {
-    const { session: { username } } = req
-    if (username) return res.redirect(`/home/${username}`)
+    if (token) return res.redirect('/')
 
     const { session: { acceptCookies } } = req
 
-    res.render('login',{acceptCookies})
+    res.render('login', { acceptCookies })
 }

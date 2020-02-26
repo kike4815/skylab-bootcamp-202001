@@ -1,15 +1,16 @@
 extends app
 
+include feedback
+
 block body
-    section.register
-        h1 Register
-        form(action='/register' method='POST')
-            input(type='text' name='name' placeholder='name')
-            input(type='text' name='surname' placeholder='surname')
-            input(type='text' name='username' placeholder='username')
-            input(type='password' name='password' placeholder='password')
-            button Send
-            //- |         ${error ? &grave;
-            //- p.register__error ${error}
-            //- | &grave; : &apos;&apos;}
-        a(href='/login') Login
+  section.register
+    h1 Register
+    form(action="/register" method="POST")
+      input(type="text" name="name" placeholder="name" value=(name || false))
+      input(type="text" name="surname" placeholder="surname" value=(surname || false))
+      input(type="text" name="username" placeholder="username" value=(username || false))
+      input(type="password" name="password" placeholder="password")
+      button Send
+    if error
+      +feedback('error', error)
+    a(href="/login") Login

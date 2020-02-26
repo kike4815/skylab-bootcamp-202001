@@ -3,6 +3,5 @@ module.exports = {
     retrieveUser: require('./retrieve-user'),
     registerUser: require('./register-user'),
     searchVehicles: require('./search-vehicles'),
-    retrieveVehicle : require('./retrieve-vehicle'),
-    togglefavs : require('./toggle-fav-vehicle')                   
+    toggleFavVehicle: require('./toggle-fav-vehicle')
 }

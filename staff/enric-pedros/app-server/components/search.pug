@@ -1,0 +1,5 @@
+mixin search(query)      
+    form.search(action="/search" method="GET")
+      h2 Search
+      input(type="text" name="query" placeholder="criteria" value=(query || false))
+      button(type="submit") Search

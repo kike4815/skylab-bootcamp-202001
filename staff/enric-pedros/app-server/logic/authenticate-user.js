@@ -1,23 +1,19 @@
-const { call } = require('../utils')
+const { fetch } = require('../utils')
 
-module.exports = function (username, password, callback) {
+module.exports = function (username, password) {
     if (typeof username !== 'string') throw new TypeError(`username ${username} is not a string`)
     if (typeof password !== 'string') throw new TypeError(`password ${password} is not a string`)
-    if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
-    call(`https://skylabcoders.herokuapp.com/api/v2/users/auth`, {
+    return fetch(`https://skylabcoders.herokuapp.com/api/v2/users/auth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
-    }, (error, response) => {
-        
-        
-        if (error) return callback(error)
-
-        const { error: _error, token } = JSON.parse(response.content)
-
-        if (_error) return callback(new Error(_error))
-
-        callback(undefined, token)
     })
+        .then(response => {
+            const { error: _error, token } = JSON.parse(response.content)
+
+            if (_error) throw new Error(_error)
+
+            return token
+        })
 }

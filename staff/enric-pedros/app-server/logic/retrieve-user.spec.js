@@ -1,4 +1,4 @@
-const retrieveUser = require('./retrieve-user')
+const { retrieveUser } = require('.')
 const { call } = require('../utils')
 require('../specs/specs-helper.js')
 

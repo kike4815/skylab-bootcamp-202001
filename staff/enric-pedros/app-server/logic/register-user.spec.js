@@ -1,4 +1,4 @@
-const registerUser = require('./register-user')
+const { registerUser } = require('.')
 const { call } = require('../utils')
 
 describe('registerUser', () => {

@@ -1,22 +1,22 @@
 extends app
 
+include user
+include search
+include feedback
+
 block body
-    if name
-        //- +user(name,username)
-        user({name,username})
+    if (name)
+        +user(name, username)
     else
-        a(href='/register') Register 
-        span or 
-        a(href='/login') Login
-    home({query})
+        section
+            a(href="/register") Register
+            |  or 
+            a(href="/login") Login
+    +search(query)
     if results
-        Results({results})
-
-
-
-
-//- ${name? User({name,username}):
-//- a(href='/register') Register or 
-//- a(href='/login') Login}
-//- ${Home({query})}
-//- ${results ? Results({results}):''}
+        if (results.length)
+            //- WARN this include is here and not on top (as user and search) because it collides with results array
+            include results 
+            +results(results)
+        else
+            +feedback('warning', 'No results')

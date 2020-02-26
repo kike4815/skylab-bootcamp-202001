@@ -1,12 +1,10 @@
-const {Home} = require('../components')
-const {togglefavs} = require('../logic')
+const { toggleFavVehicle } = require('../logic')
+const { logger } = require('../utils')
 
+module.exports = (req, res) => {
+    const { params: { id }, session } = req
 
-module.exports=(req,res)=>{
-    const {session ,params:{id}} = req
- 
     const { token } = session
-
 
     if (!token) {
         session.referer = req.get('referer')
@@ -16,16 +14,24 @@ module.exports=(req,res)=>{
         return session.save(() => res.redirect('/login'))
     }
 
-    togglefavs(token,id,(error)=>{
-        if(error){
-            res.send(App({ title: 'Home', body: Home({error}), acceptCookies }))
-         }
-         const { referer = req.get('referer') } = session
+    try {
+        toggleFavVehicle(token, id, error => {
+            if (error) {
+                logger.error(error)
 
-         delete session.referer
-         delete session.fav
+                res.redirect('/error')
+            }
 
-         session.save(() => res.redirect(referer))
-    })
-    
+            const { referer = req.get('referer') } = session
+
+            delete session.referer
+            delete session.fav
+
+            session.save(() => res.redirect(referer))
+        })
+    } catch (error) {
+        logger.error(error)
+
+        res.redirect('/error')
+    }
 }

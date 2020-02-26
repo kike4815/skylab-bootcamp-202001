@@ -3,5 +3,5 @@ module.exports = (req, res) => {
 
     session.acceptCookies = true
 
-    res.redirect(req.get('referer'))
+    session.save(() => res.redirect(req.get('referer')))
 }

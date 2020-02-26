@@ -1,22 +1,25 @@
+const { retrieveUser } = require('../logic')
+const { logger } = require('../utils')
 
-const {retrieveUser} = require('../logic')
-
-module.exports = ({ session: { acceptCookies, token } }, res) => {
+module.exports = ({ session: { token, acceptCookies } }, res) => {
     
-    try{
-        if (token){
-            retrieveUser(token,error=>{
-                res.render('/search',{acceptCookies})
-                // res.send(App({ title: 'My App', body: Search(), acceptCookies }))
-            })    
-        }else{
-                res.render('landing',{acceptCookies})
-            // res.send(App({ title: 'My App', body: Landing(), acceptCookies }))
+    if (token) {
+        try {
+            retrieveUser(token, (error, user) => {
+                if (error) {
+                    logger.error(error)
+
+                    res.redirect('/error')
+                }
+
+                const { name, username } = user
+
+                res.render('landing', { name, username, acceptCookies })
+            })
+        } catch (error) {
+            logger.error(error)
+
+            res.redirect('/error')
         }
-    }catch(error){
-               res.render('landing',{acceptCookies})
-
-        // res.send(App({ title: 'My App', body: Landing(), acceptCookies }))
-
-    }
+    } else res.render('landing', { acceptCookies })
 }

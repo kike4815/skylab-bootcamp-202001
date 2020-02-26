@@ -1,4 +1,3 @@
-module.exports =({ session: { acceptCookies } }, res) => {
-
-    res.render('register',{acceptCookies})
+module.exports = ({ session: { acceptCookies } }, res) => {
+    res.render('register', { acceptCookies })
 }
