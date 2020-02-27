@@ -5,15 +5,15 @@ module.exports = ({ session: { token, acceptCookies } }, res) => {
     
     if (token) {
         try {
-            retrieveUser(token, (error, user) => {
-                if (error) {
-                    logger.error(error)
+            retrieveUser(token)
+                // if (error) {
+                //     logger.error(error)
 
-                    res.redirect('/error')
-                }
+                //     res.redirect('/error')
+                // }
 
+            .then(user => {
                 const { name, username } = user
-
                 res.render('landing', { name, username, acceptCookies })
             })
         } catch (error) {

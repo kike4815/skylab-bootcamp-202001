@@ -5,18 +5,18 @@ module.exports = (req, res) => {
     const { body: { username, password }, session } = req
 
     try {
-        
+        debugger
         authenticateUser(username, password)
             .then(token => {
                 session.token = token
 
-                session.save(() => {
-                    const { fav } = session
+                // session.save(() => {
+                    // const { fav } = session
 
-                    if (fav) return res.redirect(307, `/toggle-fav/${fav}`)
+                    //if (fav) return res.redirect(307, `/toggle-fav/${fav}`)
 
-                    res.redirect('/')
-                })
+                res.redirect('/')
+                
             })
             .catch(error => {
                 logger.warn(error)
