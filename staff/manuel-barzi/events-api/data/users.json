@@ -1,11 +1,12 @@
 [
     {
-        "id": "d6be0396-fcd1-480c-9f0d-bd0f28fffd4f",
+        "id": "2426a66d-7197-4656-8294-f9fb847a8a26",
         "name": "Pepito",
         "surname": "Grillo",
-        "email": "pepigri4@mail.com",
+        "email": "pepigri@mail.com",
         "password": "123",
-        "created": "2020-02-26T17:42:46.668Z",
-        "authenticated": "2020-02-26T17:43:21.095Z"
+        "created": "2020-02-27T12:02:25.575Z",
+        "authenticated": "2020-02-27T12:02:58.253Z",
+        "retrieved": "2020-02-27T12:03:07.684Z"
     }
 ]

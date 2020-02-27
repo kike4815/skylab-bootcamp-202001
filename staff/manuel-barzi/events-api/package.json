@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
+    "watch": "nodemon .",
     "test": "npx mocha logic utils",
     "test-debug": "npx mocha debug logic utils"
   },
