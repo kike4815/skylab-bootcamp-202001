@@ -4,8 +4,8 @@ const { logger } = require('../utils')
 module.exports = (req, res) => {
     const { query: { query }, session: { token } } = req
 
-    if (token) {
-        try {
+    try {
+        if (token) {
             retrieveUser(token, (error, user) => {
                 if (error) {
                     logger.error(error)
@@ -33,13 +33,7 @@ module.exports = (req, res) => {
                     res.redirect('/error')
                 }
             })
-        } catch (error) {
-            logger.error(error)
-
-            res.redirect('/error')
-        }
-    } else
-        try {
+        } else
             searchVehicles(undefined, query, (error, vehicles) => {
                 const { session: { acceptCookies } } = req
 
@@ -51,9 +45,9 @@ module.exports = (req, res) => {
 
                 res.render('landing', { query, results: vehicles, acceptCookies })
             })
-        } catch (error) {
-            logger.error(error)
+    } catch (error) {
+        logger.error(error)
 
-            res.redirect('/error')
-        }
+        res.redirect('/error')
+    }
 }

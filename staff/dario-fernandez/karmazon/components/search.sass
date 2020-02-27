@@ -1,0 +1,40 @@
+@import ../utils
+@import ../config
+@import ../normalizer
+
+.search
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+    height: 15%
+    width: 90%
+    &__form
+        display: flex
+        align-items: center
+        justify-content: center
+        width: 100%
+    &__query
+        background-color: transparent
+        border-left: 0
+        border-right: 0
+        border-top: 0
+        outline: none
+        color: white
+        font-size: 1.5rem
+        width: 80%
+        height: 3rem
+        max-width: 500px
+        &::placeholder
+            font-weight: 100
+            color: white
+    &__submit
+        border: none
+        margin-left: 1rem
+        background-color: transparent
+        outline: none
+        &>i
+            font-size: 1.7rem
+            color: white
+        &:hover
+            cursor: pointer

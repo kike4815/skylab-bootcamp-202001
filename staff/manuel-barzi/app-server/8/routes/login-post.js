@@ -7,7 +7,6 @@ module.exports = (req, res) => {
     try {
         authenticateUser(username, password)
             .then(token => {
-                debugger
                 session.token = token
 
                 session.save(() => {
@@ -19,7 +18,6 @@ module.exports = (req, res) => {
                 })
             })
             .catch(error => {
-                debugger
                 logger.warn(error)
 
                 const { message } = error

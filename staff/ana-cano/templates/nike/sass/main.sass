@@ -1,0 +1,36 @@
+body
+    height: 100vh
+    width: 100vw
+    
+main
+    padding: 10px
+
+.breadcrumb
+    display: flex
+    list-style: none
+    padding: 10px 0
+    &__item
+        display: inline-block
+        margin-right: 2px
+        &:after
+            content: "/"
+
+.title__main
+    font-weight: bold
+    font-size: 24px
+    margin-bottom: 30px
+
+.gallery
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-gap: 5px
+
+// Estilos para Tablet se aplican a parir de 768px
+@media screen and (min-width: #{$tablet-width})
+    .gallery
+        grid-template-columns: repeat(2, 1fr)
+
+// Estilos para Desktop se aplican a partir de un ancho de pantalla de 1024px
+@media screen and (min-width: #{$desktop-width})
+    .gallery
+        grid-template-columns: repeat(3, 1fr)

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+
+
+<body>
+    <header class="header">
+        <!-- Marcado para la versión mobile -->
+        <ul class="header__wrapper--mobile">
+            <li class="header__logo"><img width="50" height="25" alt="Logo Nike" src="data:image/png;base64,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" /></img></li>
+            <li class="header__search"><i class="fas fa-search"></i></li>
+            <li class="header__cart"><i class="fas fa-shopping-cart"></i></li>
+            <li class="header__menu"><i class="fas fa-bars"></i></li>
+        </ul>
+
+        <!-- Marcado para la versión tablet y desktop -->
+        <ul class="header__wrapper--tabletdesktop">
+            <li class="header__logo fas fa-check">Icon Logo</li>
+            <li class="header__new">Novedades</li>
+            <li class="header__man">Hombre</li>
+            <li class="header__woman">Mujer</li>
+            <li class="header__chils">Niños</li>
+            <li class="header__custos">Personalizar</li>
+            <li class="header__collection">Colecciones</li>
+        </ul>
+    </header>
+
+    <main>
+        <ol class="breadcrumb">
+            <li class="breadcrumb__item">Zapatillas</li>
+            <li class="breadcrumb__item">Air Max</li>
+            <li class="breadcrumb__item">Air Max 90</li>
+        </ol>
+
+        <h1 class="title__main">Air Max 90 Zapatillas</h1>
+
+        <aside class="searched">
+            <p>Air Max (11)</p>
+            <p> Air Max 90 (19)</p>
+            <p>Air Max 95 (3)</p>
+        </aside>
+
+        <div class="gallery">
+            <div class="gallery__item">
+                <img src="https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a91af7f3-bff5-4063-b802-50da7f52eeb8/air-max-90-zapatillas-Dgc4gT.jpg" alt="">
+                <h2>Nike Air Max 90</h2>
+                <span>Zapatillas - Hombre</span>
+                <span>4 colores</span>
+                <span>140€</span>
+            </div>
+            <div class="gallery__item">
+                <img src="https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a91af7f3-bff5-4063-b802-50da7f52eeb8/air-max-90-zapatillas-Dgc4gT.jpg" alt="">
+                <h2>Nike Air Max 90</h2>
+                <span>Zapatillas - Hombre</span>
+                <span>4 colores</span>
+                <span>140€</span>
+            </div>
+            <div class="gallery__item">
+                <img src="https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a91af7f3-bff5-4063-b802-50da7f52eeb8/air-max-90-zapatillas-Dgc4gT.jpg" alt="">
+                <h2>Nike Air Max 90</h2>
+                <span>Zapatillas - Hombre</span>
+                <span>4 colores</span>
+                <span>140€</span>
+            </div>
+            <div class="gallery__item">
+                <img src="https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a91af7f3-bff5-4063-b802-50da7f52eeb8/air-max-90-zapatillas-Dgc4gT.jpg" alt="">
+                <h2>Nike Air Max 90</h2>
+                <span>Zapatillas - Hombre</span>
+                <span>4 colores</span>
+                <span>140€</span>
+            </div>
+            <div class="gallery__item">
+                <img src="https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a91af7f3-bff5-4063-b802-50da7f52eeb8/air-max-90-zapatillas-Dgc4gT.jpg" alt="">
+                <h2>Nike Air Max 90</h2>
+                <span>Zapatillas - Hombre</span>
+                <span>4 colores</span>
+                <span>140€</span>
+            </div>
+            <div class="gallery__item">
+                <img src="https://c.static-nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a91af7f3-bff5-4063-b802-50da7f52eeb8/air-max-90-zapatillas-Dgc4gT.jpg" alt="">
+                <h2>Nike Air Max 90</h2>
+                <span>Zapatillas - Hombre</span>
+                <span>4 colores</span>
+                <span>140€</span>
+            </div>
+        </div>
+
+    </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footertext">
+            <p class="footertext__text">Tarjetas de regalo </p>
+            <p class="footertext__text">Tiendas más cercanas </p>
+            <p class="footertext__text">Regístrate para recibir correos electrónicos </p>
+            <p class="footertext__text">Descuento para estudiantes </p>
+            <p class="footertext__text">Comentarios sobre la web</p>
+        </div>
+        <div class="help">
+            <p class="help__matters">Obtener ayuda</p>
+            <p class="help__matters">Acerca de NIKE</p>
+        </div>
+        <div class="socialmedia">
+            <ul>
+                <li class="socialmedia__social fab fa-twitter"></li>
+                <li class="socialmedia__social fab fa-facebook-f"></li>
+                <li class="socialmedia__social fab fa-youtube"></li>
+                <li class="socialmedia__social fab fa-instagram"></li>
+
+            </ul>
+        </div>
+        <address class="address">
+            <a class="adress__spain fas fa-map-marker-alt"
+                href="https://www.nike.com/es/w/air-max-90-zapatillas-auqmozy7ok"> España</a>
+        </address>
+        <div class="legal">
+            <p class="legal__terms">2020 Todos los derechos reservados</p>
+            <p class="legal__terms">Guías</p>
+            <p class="legal__terms">Condiciones de uso</p>
+            <p class="legal__terms">Condiciones de venta</p>
+            <p class="legal__terms">Política de privacidad y de cookies</p>
+            <p class="legal__terms">Aviso legal</p>
+            <p class="legal__terms">Configuración de cookies</p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

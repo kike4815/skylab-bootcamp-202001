@@ -9,6 +9,7 @@
     "debug": "node debug .",
     "inspect": "node inspect .",
     "test": "npx jasmine utils/*.spec.js logic/*.spec.js",
+    "test-debug": "node inspect node_modules/jasmine/bin/jasmine.js logic/*.spec.js",
     "style": "npx sass components/index.sass public/style.css",
     "style-watch": "npx sass --watch components/index.sass public/style.css"
   },

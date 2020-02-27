@@ -1,0 +1,1 @@
+ReactDOM.render(<App title="KARMAZON" />, document.querySelector('#root'))

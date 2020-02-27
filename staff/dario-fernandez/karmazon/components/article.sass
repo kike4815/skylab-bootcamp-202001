@@ -1,0 +1,28 @@
+@import ../utils
+@import ../config
+@import ../normalizer
+
+.article
+    background-color: white
+    padding: 1rem
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    &>*
+        margin: .5rem
+    &__name
+        font-size: 1rem
+        &:hover
+            cursor: pointer
+            text-decoration: underline
+    &__photo
+        width: 100%
+        &:hover
+            cursor: pointer
+    &__price
+        align-self: flex-end
+        font-weight: 100
+    &__fav
+        cursor: pointer
+        &--faved
+            color: $secondary-color

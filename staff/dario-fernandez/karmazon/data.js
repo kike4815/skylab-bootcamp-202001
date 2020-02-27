@@ -1,0 +1,6 @@
+const users = [
+    {
+        username: '',
+        password: ''
+    }
+]

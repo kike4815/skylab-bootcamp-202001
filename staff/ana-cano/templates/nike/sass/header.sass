@@ -1,0 +1,34 @@
+
+// Estilos para versión mobile (First mobile)
+.header
+  border-bottom: 1px solid #ccc
+  &__wrapper--mobile
+    display: flex
+    list-style-type: none
+    height: 46px
+    justify-content: center
+    align-items: center
+    padding: 0 10px
+  // Ocultamos el menu de desktop desde mobile
+  &__wrapper--tabletdesktop
+    display: none
+  &__logo
+    flex: 1
+  &__search,
+  &__cart
+    margin-right: 15px
+
+// Estilos para Tablet se aplican a parir de 768px
+@media screen and (min-width: #{$tablet-width})
+  ul.header__wrapper--tabletdesktop
+    display: flex
+    list-style-type: none
+  ul.header__wrapper--mobile
+    display: none
+
+  // Estilos para Desktop se aplican a partir de un ancho de pantalla de 1024px
+@media screen and (min-width: #{$desktop-width})
+   ul.header__wrapper--tabletdesktop
+    display: block
+   ul.header__wrapper--mobile
+    display: none

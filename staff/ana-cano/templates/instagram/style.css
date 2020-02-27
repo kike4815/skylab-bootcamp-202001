@@ -1,0 +1,306 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+}
+
+.header__picture {
+    flex: 0;
+    padding: 0 10px;
+}
+
+.header__instagram {
+    flex: 1;
+}
+
+.header__messages {
+    flex: 0;
+    padding: 0 10px;
+}
+
+.avatar {
+    padding: 10px;
+    display: flex;
+}
+
+.avatar_picture {
+    width: 3rem;
+    height: 3rem;
+}
+
+.avatar_caption {
+    padding: 0 0 0 10px;
+}
+
+.headerProfile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    height: 10vh;
+    align-items: center;
+}
+
+.headerProfile__photoprofile {
+    border: 20px solid black;
+    border-radius: 50%;
+}
+
+.histo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1vh;
+    list-style: none;
+    height: 20vh;
+    align-items: center;
+    width: 100vw;
+}
+
+.histo__photos {
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 5rem;
+    width: 5rem;
+}
+
+ul {
+    border: 1px solid red;
+    width: 100vw;
+}
+
+.maininfo {
+    border: 1px solid red;
+    list-style: none;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.maininfo__photoprofile {
+    border: 1px solid black;
+    list-style: none;
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-top: 1vh;
+    margin-left: 1vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.maininfo__nombre {
+    border: 1px solid black;
+    list-style: none;
+    height: 5vh;
+    width: 15vw;
+    border: 1px solid black;
+    margin: 1vw;
+    margin-top: 1vh;
+}
+
+.maininfo__more {
+    border: 1px solid black;
+    list-style: none;
+    height: 5vh;
+    width: 15vw;
+    border: 1px solid black;
+    margin-left: 55vw;
+    margin-top: 1vh;
+}
+
+.maininfo__photofeed {
+    margin: 1vh 0 1vh 0;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* grid-template-rows: 1fr; */
+    grid-template-areas: "heart comment chat favourite";
+}
+
+.buttons__heart {
+    border: 0.5em solid black;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+    grid-area: heart;
+}
+
+.buttons__heart--like {
+    border: 0.5em solid red;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+    grid-area: heart;
+}
+
+.buttons__addcomment {
+    border: 0.5em solid black;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+    grid-area: comment;
+}
+
+.buttons__send {
+    border: 0.5em solid black;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+    grid-area: chat;
+}
+
+.buttons__favourite {
+    grid-area: favourite;
+    border: 0.5em solid black;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+.buttons__favourite--active {
+    grid-area: favourite;
+    border: 0.5em solid red;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+.commentsPost {
+    border: 1px solid black;
+    margin: 2%;
+}
+
+.commentsPost__photo {
+    font-size: 15px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    height: 20vh;
+}
+
+.footerActions {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.footerActions__mainpage {
+    border: 0.5em solid red;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+.footerActions__search {
+    border: 0.5em solid red;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+.footerActions__add {
+    border: 0.5em solid red;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+.footerActions__heart {
+    border: 0.5em solid red;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+.footerActions__profile {
+    border: 0.5em solid red;
+    width: 1%;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
+.editProfile {
+    width: 100vw;
+}
+
+.editProfile__edit {
+    width: 100vw;
+    height: 10vh;
+}
+
+.picturesProfile {
+    border: 2px solid black;
+    height: 70vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 'pictureone picturetwo picturethree' 'picturefour picturefive picturesix' 'pictureseven pictureeight picturenine';
+}
+
+.picturesProfile__one {
+    grid-area: "pictureone";
+    border: 2px solid black;
+}
+
+.picturesProfile__two {
+    grid-area: "picturetwo";
+    border: 2px solid black;
+}
+
+.picturesProfile__three {
+    grid-area: "picturethree";
+    border: 2px solid black;
+}
+
+.picturesProfile__four {
+    grid-area: "picturefour";
+    border: 2px solid black;
+}
+
+.picturesProfile__five {
+    grid-area: "picturefive";
+    border: 2px solid black;
+}
+
+.picturesProfile__six {
+    grid-area: "picturesix";
+    border: 2px solid black;
+}
+
+.picturesProfile__seven {
+    grid-area: "pictureseven";
+    border: 2px solid black;
+}
+
+.picturesProfile__eight {
+    grid-area: "pictureeight";
+    border: 2px solid black;
+}
+
+.picturesProfile__nine {
+    grid-area: "picturenine";
+    border: 2px solid black;
+}

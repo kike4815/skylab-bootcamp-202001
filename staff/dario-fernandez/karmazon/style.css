@@ -1,0 +1,387 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Martel Sans", sans-serif;
+  background-color: #2782C8;
+}
+
+* {
+  margin: 0;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.app__title {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 5rem;
+  font-family: "Bangers", cursive;
+  color: #FFEA34;
+  height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Martel Sans", sans-serif;
+  background-color: #2782C8;
+}
+
+* {
+  margin: 0;
+}
+
+.login {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  color: white;
+}
+.login__container {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 3rem;
+  border: 2px solid white;
+}
+.login__title {
+  color: white;
+  font-size: 1.7rem;
+  letter-spacing: 0.2rem;
+  align-self: flex-start;
+  font-weight: normal;
+}
+.login__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.login__input {
+  color: white;
+  margin-bottom: 3rem;
+  height: 2rem;
+  width: 100%;
+  background-color: transparent;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  font-size: 1rem;
+  font-weight: 100;
+  outline: none;
+}
+.login__input::placeholder {
+  color: white;
+}
+.login__submit {
+  width: 45%;
+  height: 2.5rem;
+  background-color: #2782C8;
+  color: white;
+  border: 2px solid white;
+  border-radius: 20px;
+  font-size: 1rem;
+  outline: none;
+}
+.login__submit:hover {
+  cursor: pointer;
+}
+.login__cta-link {
+  text-decoration: underline;
+  color: #FFEA34;
+}
+.login__cta-link:hover {
+  cursor: pointer;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Martel Sans", sans-serif;
+  background-color: #2782C8;
+}
+
+* {
+  margin: 0;
+}
+
+.register {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 90%;
+  color: white;
+}
+.register__container {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 3rem;
+  border: 2px solid white;
+}
+.register__title {
+  color: white;
+  font-size: 1.7rem;
+  letter-spacing: 0.2rem;
+  align-self: flex-start;
+  font-weight: normal;
+}
+.register__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.register__input {
+  color: white;
+  margin-bottom: 2.5rem;
+  height: 2rem;
+  width: 100%;
+  background-color: transparent;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  font-size: 1rem;
+  font-weight: 100;
+  outline: none;
+}
+.register__input::placeholder {
+  color: white;
+}
+.register__submit {
+  width: 45%;
+  height: 2.5rem;
+  background-color: #2782C8;
+  color: white;
+  border: 2px solid white;
+  border-radius: 20px;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  outline: none;
+}
+.register__submit:hover {
+  cursor: pointer;
+}
+.register__cta-link {
+  text-decoration: underline;
+  color: #FFEA34;
+}
+.register__cta-link:hover {
+  cursor: pointer;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Martel Sans", sans-serif;
+  background-color: #2782C8;
+}
+
+* {
+  margin: 0;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 15%;
+  width: 90%;
+}
+.search__form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.search__query {
+  background-color: transparent;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  outline: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 80%;
+  height: 3rem;
+  max-width: 500px;
+}
+.search__query::placeholder {
+  font-weight: 100;
+  color: white;
+}
+.search__submit {
+  border: none;
+  margin-left: 1rem;
+  background-color: transparent;
+  outline: none;
+}
+.search__submit > i {
+  font-size: 1.7rem;
+  color: white;
+}
+.search__submit:hover {
+  cursor: pointer;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Martel Sans", sans-serif;
+  background-color: #2782C8;
+}
+
+* {
+  margin: 0;
+}
+
+.list {
+  display: grid;
+  width: 100%;
+  max-width: 1024px;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 2rem 0;
+  list-style: none;
+  grid-gap: 1rem;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Martel Sans", sans-serif;
+  background-color: #2782C8;
+}
+
+* {
+  margin: 0;
+}
+
+.article {
+  background-color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.article > * {
+  margin: 0.5rem;
+}
+.article__name {
+  font-size: 1rem;
+}
+.article__name:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.article__photo {
+  width: 100%;
+}
+.article__photo:hover {
+  cursor: pointer;
+}
+.article__price {
+  align-self: flex-end;
+  font-weight: 100;
+}
+.article__fav {
+  cursor: pointer;
+}
+.article__fav--faved {
+  color: #e23f3d;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Martel Sans", sans-serif;
+  background-color: #2782C8;
+}
+
+* {
+  margin: 0;
+}
+
+.details {
+  display: flex;
+  margin: 2rem;
+}
+.details__main {
+  background-color: #FFF;
+  width: 65%;
+  padding: 2rem;
+}
+.details__photo {
+  width: 100%;
+}
+.details__features {
+  width: 35%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: #E0F0F8;
+}
+.details__title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20%;
+}
+.details__close {
+  font-size: 1.5rem;
+  color: #e23f3d;
+  align-self: flex-start;
+}
+.details__close:hover {
+  cursor: pointer;
+}
+.details__features-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 80%;
+}
+.details__description {
+  font-size: 0.9rem;
+  font-weight: 100;
+}
+.details__description > strong {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.feedback {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  max-width: 80%;
+}
+.feedback--error {
+  color: #e23f3d;
+}
+.feedback--warning {
+  color: #FFEA34;
+}
+
+/*# sourceMappingURL=style.css.map */
