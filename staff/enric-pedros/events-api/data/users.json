@@ -1,0 +1,11 @@
+[
+    {
+        "id": "d6be0396-fcd1-480c-9f0d-bd0f28fffd4f",
+        "name": "Pepito",
+        "surname": "Grillo",
+        "email": "pepigri4@mail.com",
+        "password": "123",
+        "created": "2020-02-26T17:42:46.668Z",
+        "authenticated": "2020-02-26T17:43:21.095Z"
+    }
+]
