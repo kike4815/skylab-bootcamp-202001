@@ -6,6 +6,16 @@
         "email": "pepigri4@mail.com",
         "password": "123",
         "created": "2020-02-26T17:42:46.668Z",
-        "authenticated": "2020-02-26T17:43:21.095Z"
+        "authenticated": "2020-02-27T15:03:30.384Z"
+    },
+    {
+        "id": "f5c2db35-e2b8-4f1c-bad6-d44cbbe45f8d",
+        "name": "kike",
+        "surname": "kike",
+        "email": "kike@mail.com",
+        "password": "123",
+        "created": "2020-02-27T15:06:06.319Z",
+        "authenticated": "2020-02-27T15:10:13.376Z",
+        "retrieved": "2020-02-27T15:14:19.965Z"
     }
 ]

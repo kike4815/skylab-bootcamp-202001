@@ -1,11 +1,16 @@
-require('dotenv').config
+require('dotenv').config()
+
+const { env: { PORT = 8080, NODE_ENV: env }, argv: [, , port = PORT] } = process
 
 const express = require('express')
 const winston = require('winston')
-const bodyParser = require('body-parser')
 const { registerUser, authenticateUser, retrieveUser } = require('./routes')
-const jsonBodyParser = bodyParser.json()
-
+const { name, version } = require('./package')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const fs = require('fs')
+const path = require('path')
+const { jwtVerifierMidWare } = require('./mid-wares')
 
 const logger = winston.createLogger({
     level: env === 'development' ? 'debug' : 'info',
@@ -15,12 +20,23 @@ const logger = winston.createLogger({
     ]
 })
 
+const jsonBodyParser = bodyParser.json()
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+
 const app = express()
+
+app.use(morgan('combined', { stream: accessLogStream }))
 
 app.post('/users',jsonBodyParser,registerUser)
 
 app.post('/users/auth', jsonBodyParser, authenticateUser)
 
-app.get('/users', retrieveUser)
+app.get('/users',jwtVerifierMidWare, retrieveUser)
 
 app.listen(port, () => logger.info(`server ${name} ${version} is running on port ${port} `))
+
+process.on('SIGINT', () => {
+    logger.info('server abruptly stopped')
+
+    process.exit(0)
+})

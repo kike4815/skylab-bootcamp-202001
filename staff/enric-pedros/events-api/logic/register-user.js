@@ -13,10 +13,11 @@ module.exports = (name, surname, email, password) => {
 
     let user = users.find(user => user.email === email)
 
-    if(user) throw new Error (`user with email ${email} exists`)
+    if (user) throw new Error(`user with email ${email} already exists`)
 
     user = { id: uuid(), name, surname, email, password, created: new Date }
 
-    return fs.writeFile(path.join(__dirname, '../data/users.json'), JSON.stringify(users, null, 4))
+    users.push(user)
 
+    return fs.writeFile(path.join(__dirname, '../data/users.json'), JSON.stringify(users, null, 4))
 }
