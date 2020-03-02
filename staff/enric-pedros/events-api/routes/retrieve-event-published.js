@@ -1,11 +1,11 @@
-const { retrieveUser } = require('../logic')
+const { retrieveEvent } = require('../logic')
 const { NotFoundError, NotAllowedError } = require('../errors')
 
 module.exports = (req, res) => {
     const { payload: { sub: id } } = req
 
     try {
-        retrieveUser(id)
+        retrieveEvent(id)
             .then(user =>
                 res.status(200).json(user)
             )

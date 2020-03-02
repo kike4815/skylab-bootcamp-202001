@@ -1,42 +1,61 @@
 require('dotenv').config()
 
-const { env: { PORT = 8080, NODE_ENV: env }, argv: [, , port = PORT] } = process
+const { env: { PORT = 8080, NODE_ENV: env, MONGODB_URL }, argv: [, , port = PORT] } = process
 
 const express = require('express')
 const winston = require('winston')
-const { registerUser, authenticateUser, retrieveUser } = require('./routes')
+const { registerUser, authenticateUser, retrieveUser, createEvent,retrieveEvent,retrieveLastEvents, subscribeEvent } = require('./routes')
 const { name, version } = require('./package')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const fs = require('fs')
 const path = require('path')
 const { jwtVerifierMidWare } = require('./mid-wares')
+const { database } = require('./data')
 
-const logger = winston.createLogger({
-    level: env === 'development' ? 'debug' : 'info',
-    format: winston.format.json(),
-    transports: [
-        new winston.transports.File({ filename: 'server.log' })
-    ]
-})
+database.connect(MONGODB_URL)
+    .then(() => {
+        const logger = winston.createLogger({
+            level: env === 'development' ? 'debug' : 'info',
+            format: winston.format.json(),
+            transports: [
+                new winston.transports.File({ filename: 'server.log' })
+            ]
+        })
 
-const jsonBodyParser = bodyParser.json()
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+        if (env !== 'production') {
+            logger.add(new winston.transports.Console({
+                format: winston.format.simple()
+            }))
+        }
 
-const app = express()
+        const jsonBodyParser = bodyParser.json()
 
-app.use(morgan('combined', { stream: accessLogStream }))
+        const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
-app.post('/users',jsonBodyParser,registerUser)
+        const app = express()
 
-app.post('/users/auth', jsonBodyParser, authenticateUser)
+        app.use(morgan('combined', { stream: accessLogStream }))
 
-app.get('/users',jwtVerifierMidWare, retrieveUser)
+        app.post('/users', jsonBodyParser, registerUser)
 
-app.listen(port, () => logger.info(`server ${name} ${version} is running on port ${port} `))
+        app.post('/users/auth', jsonBodyParser, authenticateUser)
 
-process.on('SIGINT', () => {
-    logger.info('server abruptly stopped')
+        app.get('/users', jwtVerifierMidWare, retrieveUser)
 
-    process.exit(0)
-})
+        app.post('/users/:id/events', [jwtVerifierMidWare, jsonBodyParser], createEvent)
+
+        app.get('/events', jwtVerifierMidWare,retrieveEvent)
+
+        app.get('/events/last',retrieveLastEvents)
+
+        app.patch('/users/subscribe', [jwtVerifierMidWare, jsonBodyParser], subscribeEvent)
+
+        app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
+
+        process.on('SIGINT', () => {
+            logger.info('server abruptly stopped')
+
+            process.exit(0)
+        })
+    })

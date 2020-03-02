@@ -42,4 +42,22 @@ describe('validate', () => {
     })
 
     // TODO email validation unit tests
+
+    describe('type', () => {
+        it('should succeed on matching non-primitive type', () => {
+            const name = 'something'
+
+            let target = '', type = String
+            expect(()=> validate.type(target, name, type)).to.not.throw(TypeError, `${name} ${target} is not a ${type.name}`)
+
+            target = 'date', type = Date
+            expect(()=> validate.type(target, name, type)).to.throw(TypeError, `${name} ${target} is not a ${type.name}`)
+
+            target = true, type = Boolean
+            expect(()=> validate.type(target, name, type)).not.to.throw(TypeError, `${name} ${target} is not a ${type.name}`)
+
+            target = 'true', type = Boolean
+            expect(()=> validate.type(target, name, type)).to.throw(TypeError, `${name} ${target} is not a ${type.name.toLowerCase()}`)
+        })
+    })
 })

@@ -1,13 +1,14 @@
-const { retrieveUser } = require('../logic')
+const { subscribeEvent } = require('../logic')
 const { NotFoundError, NotAllowedError } = require('../errors')
 
 module.exports = (req, res) => {
-    const { payload: { sub: id } } = req
+    const { payload: { sub: id }, body: {event} } = req
 
+    debugger
     try {
-        retrieveUser(id)
-            .then(user =>
-                res.status(200).json(user)
+        subscribeEvent(id, event)
+            .then(() =>
+                res.status(200).json({message: 'user has been subscribed to this event'})
             )
             .catch(({ message }) =>
                 res
