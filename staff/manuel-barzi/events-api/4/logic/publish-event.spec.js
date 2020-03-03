@@ -4,10 +4,10 @@ const { env: { TEST_MONGODB_URL } } = process
 const mongoose = require('mongoose')
 const { expect } = require('chai')
 const { random } = Math
-const createEvent = require('./create-event')
+const publishEvent = require('./publish-event')
 const { models: { User, Event } } = require('../data')
 
-describe('createEvent', () => {
+describe('publishEvent', () => {
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     )
@@ -34,7 +34,7 @@ describe('createEvent', () => {
         )
 
         it('should succeed on correct and valid and right data', () =>
-            createEvent(_id, title, description, location, date)
+            publishEvent(_id, title, description, location, date)
                 .then(() =>
                     Event.findOne({ title, description, location, date, publisher: _id })
                 )
