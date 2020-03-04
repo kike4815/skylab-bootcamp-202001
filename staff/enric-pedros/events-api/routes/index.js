@@ -3,7 +3,10 @@ module.exports = {
     authenticateUser: require('./authenticate-user'),
     retrieveUser: require('./retrieve-user'),
     createEvent: require('./create-event'),
-    retrieveEvent: require('./retrieve-event-published'),
-    retrieveLastEvents: require('./retrieve-last-events'),
-    subscribeEvent: require('./subscribe-event')
+    retrieveUserEvents: require('./retrieve-user-events'),
+    retrieveLastUserEvents: require('./retrieve-last-user-events'),
+    suscribe: require('./suscribe'),
+    suscribedEvents: require('./suscribed-events'),
+    updateEvent: require('./update-event'),
+    deleteEvent: require('./delete-event')
 }

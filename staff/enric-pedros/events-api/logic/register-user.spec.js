@@ -1,47 +1,30 @@
-require('dotenv').config()
-
 const { expect } = require('chai')
-const { random } = Math
-const { database, database: { ObjectId } } = require('../data')
-const { registerUser } = require('../logic')
-
-const { env: { TEST_MONGODB_URL } } = process
-
-describe('registerUser', () => {
-    let name, surname, email, password, users
-
-    before(() =>
-        database.connect(TEST_MONGODB_URL)
-            .then(() => users = database.collection('users'))
-    )
-
+// const validate = require('../utils/validate')
+const { users } = require('../data')
+const { authenticateUser, registerUser } = require('../logic')
+describe('register', () => {
+    let name, surname, email, password
     beforeEach(() => {
-        name = `name-${random()}`
-        surname = `surname-${random()}`
-        email = `email-${random()}@mail.com`
-        password = `password-${random()}`
+        name = 'rpc-' + Math.random()
+        surname = 'rpc-' + Math.random()
+        email = 'rpc@' + Math.random() + '.com'
+        password = 'rpc-' + Math.random()
     })
-
-    it('should succeed on correct user data', () =>
+    it('should succeed on new user', () => {
         registerUser(name, surname, email, password)
-            .then(result => {
-                expect(result).not.to.exist
-                expect(result).to.be.undefined
-
-                return users.findOne({ email })
+            .then(response => {
+                expect(response).to.equal(undefined)
             })
-            .then(user => {
-                expect(user).to.exist
-                expect(user._id).to.be.instanceOf(ObjectId)
+    })
+    it('it should create the user wel', () => {
+        registerUser(name, surname, email, password)
+            .then(()=>{
+                const user = users.find(user => user.email === email)
                 expect(user.name).to.equal(name)
                 expect(user.surname).to.equal(surname)
                 expect(user.email).to.equal(email)
-                expect(user.password).to.equal(password) // TODO encrypt this field!
-                expect(user.created).to.be.instanceOf(Date)
+                expect(user.password).to.equal(password)
             })
-    )
+    })
 
-    // TODO unhappy paths and other happies if exist
-
-    after(() => database.disconnect())
 })

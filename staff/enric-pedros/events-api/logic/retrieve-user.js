@@ -1,25 +1,26 @@
 const { validate } = require('../utils')
-const { database, database: { ObjectId } } = require('../data')
-const { NotAllowedError } = require('../errors')
+const {models: {User}} =require('../data')
+const {NotAllowedError, NotFoundError} = require('../errors')
+module.exports = (sub) => {
+    validate.string(sub, 'sub')
 
-module.exports = id => {
-    validate.string(id, 'id')
+    //const _id = ObjectId(sub)
 
-    const _id = ObjectId(id)
+    return User.findById(sub)
+        .then(user =>{
+            if (!user) throw new NotFoundError(`user with id ${sub} does not exist`)
 
-    const users = database.collection('users')
+            if (user.deactivated) throw new NotAllowedError(`user with id ${sub} is deactivated`)
 
-    return users.findOne({ _id })
-        .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${id} does not exist`)
+            user.retrieved = new Date
 
-            if (user.deactivated) throw new NotAllowedError(`user with id ${id} is deactivated`)
+            return user.save()            
+            // return users.updateOne({_id}, {$set:  {retrieved: new Date}})
+            //     .then(() =>{
+            //         const {name, surname, email} = user
 
-            return users.updateOne({ _id }, { $set: { retrieved: new Date } })
-                .then(() => {
-                    const { name, surname, email } = user
-
-                    return { name, surname, email }
-                })
+            //         return {name, surname, email}
+                    
+            //     })
         })
 }

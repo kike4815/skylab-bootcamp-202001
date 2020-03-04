@@ -2,7 +2,7 @@ const { retrieveUser } = require('../logic')
 const { NotFoundError, NotAllowedError } = require('../errors')
 
 module.exports = (req, res) => {
-    const { payload: { sub: id } } = req
+    const {  sub: id  } = req
 
     try {
         retrieveUser(id)
@@ -31,8 +31,6 @@ module.exports = (req, res) => {
 
         res
             .status(status)
-            .json({
-                error: message
-            })
+            .json(message)
     }
 }

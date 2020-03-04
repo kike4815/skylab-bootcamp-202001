@@ -2,18 +2,19 @@ require('dotenv').config()
 
 const { env: { PORT = 8080, NODE_ENV: env, MONGODB_URL }, argv: [, , port = PORT] } = process
 
+const cors = require('cors')
 const express = require('express')
 const winston = require('winston')
-const { registerUser, authenticateUser, retrieveUser, createEvent,retrieveEvent,retrieveLastEvents, subscribeEvent } = require('./routes')
+const { registerUser, authenticateUser, retrieveUser, createEvent, retrieveUserEvents, retrieveLastUserEvents, suscribe, suscribedEvents, updateEvent, deleteEvent} = require('./routes')
 const { name, version } = require('./package')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const fs = require('fs')
 const path = require('path')
-const { jwtVerifierMidWare } = require('./mid-wares')
-const { database } = require('./data')
+const { tokenParse, jwtVerifierMidWare } = require('./utils')
+const mongoose = require('mongoose')
 
-database.connect(MONGODB_URL)
+mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         const logger = winston.createLogger({
             level: env === 'development' ? 'debug' : 'info',
@@ -35,23 +36,31 @@ database.connect(MONGODB_URL)
 
         const app = express()
 
+        app.use(cors())    
+
         app.use(morgan('combined', { stream: accessLogStream }))
 
         app.post('/users', jsonBodyParser, registerUser)
 
         app.post('/users/auth', jsonBodyParser, authenticateUser)
 
-        app.get('/users', jwtVerifierMidWare, retrieveUser)
+        app.get('/users', tokenParse, retrieveUser)
+
+        app.get('/events', jwtVerifierMidWare, retrieveUserEvents )
+
+        app.get('/lastevents', retrieveLastUserEvents )
+
+        app.patch('/users/suscribe', [jwtVerifierMidWare, jsonBodyParser], suscribe)
+
+        app.get('/users/suscribedevents', jwtVerifierMidWare, suscribedEvents)
 
         app.post('/users/:id/events', [jwtVerifierMidWare, jsonBodyParser], createEvent)
 
-        app.get('/events', jwtVerifierMidWare,retrieveEvent)
+        app.patch('/events/:id', [jwtVerifierMidWare, jsonBodyParser], updateEvent)
 
-        app.get('/events/last',retrieveLastEvents)
+        app.delete('/delete/:id', jwtVerifierMidWare, deleteEvent)
 
-        app.patch('/users/subscribe', [jwtVerifierMidWare, jsonBodyParser], subscribeEvent)
-
-        app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
+        app.listen(port, () => logger.info(`server ${name} ${version} up and runing on port ${port}`))
 
         process.on('SIGINT', () => {
             logger.info('server abruptly stopped')

@@ -1,38 +1,35 @@
-const { registerUser } = require('../logic')
+const {registerUser} = require('../logic')
 const { NotAllowedError, ContentError } = require('../errors')
 
-module.exports = (req, res) => {
-    const { body: { name, surname, email, password } } = req
-
+module.exports= (req, res) => {
+    const {body: {name, surname, email, password}} = req
+    
     try {
         registerUser(name, surname, email, password)
-            .then(() => res.status(201).end())
-            .catch(error => {
-                let status = 400
+        .then(() => res.status(201).end())
+        .catch((error) =>{
+            let status = 400
 
-                if (error instanceof NotAllowedError)
-                    status = 409 // conflict
+            if (error instanceof NotAllowedError)
+                status = 409
+            
+            const {message} = error
 
-                const { message } = error
-
-                res
-                    .status(status)
-                    .json({
-                        error: message
-                    })
-            })
-    } catch (error) {
-        let status = 400
-
-        if (error instanceof TypeError || error instanceof ContentError)
-            status = 406 // not acceptable
-
-        const { message } = error
-
+            res
+                .status(status)
+                .json(message)
+        }
+        )
+    }catch (error){   
+        
+        if (error instanceof ContentError)
+            status = 406
+        
+        const {message} = error
+        
         res
-            .status(status)
-            .json({
-                error: message
-            })
+        .status(409)
+        .json(message)
+
     }
 }

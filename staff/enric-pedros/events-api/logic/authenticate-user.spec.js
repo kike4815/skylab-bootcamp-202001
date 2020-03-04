@@ -1,45 +1,54 @@
 require('dotenv').config()
 
+const { expect } = require('chai')
 const { env: { TEST_MONGODB_URL } } = process
 const { database, models: { User } } = require('../data')
-const { expect } = require('chai')
-const { random } = Math
-const authenticateUser = require('./authenticate-user')
+const { authenticateUser } = require('../logic')
+const {NotAllowedError} = require ('../errors')
 
-describe('authenticateUser', () => {
-    before(() =>
+describe('Autenticate user', () => {
+    
+    before(() => 
         database.connect(TEST_MONGODB_URL)
-            .then(() => users = database.collection('users'))
+        .then(() => users = database.collection('users'))
     )
 
     let name, surname, email, password, users
-
+    
     beforeEach(() => {
-        name = `name-${random()}`
-        surname = `surname-${random()}`
-        email = `email-${random()}@mail.com`
-        password = `password-${random()}`
+        name = 'salas-' + Math.random()
+        surname = 'salas-' + Math.random()
+        email = 'salas@' + Math.random() + '.com'
+        password = 'salas-' + Math.random()
     })
 
-    describe('when user already exists', () => {
+    describe('when user already exist', () => {
         let _id
-
+        
         beforeEach(() =>
             users.insertOne(new User({ name, surname, email, password }))
                 .then(({ insertedId }) => _id = insertedId)
         )
-
-        it('should succeed on correct and valid and right credentials', () =>
+        it('should return the token', () => {
             authenticateUser(email, password)
-                .then(id => {
+                .then((id) => {
                     expect(id).to.be.a('string')
                     expect(id.length).to.be.greaterThan(0)
                     expect(id).to.equal(_id.toString())
                 })
-        )
+        })
+        
     })
+    it('should fail on a no registered user', () =>{
+        authenticateUser(email, password)
+        .then(() =>{
+            return new Error('you shall not pass')
+        })
+        .catch((error) => {
+            expect(error).to.be.instanceOf(NotAllowedError)
+            expect(error.message).to.equal('wrong credentials')
 
-    // TODO more happies and unhappies
-
+        })
+    })
     after(() => database.disconnect())
 })
