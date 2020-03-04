@@ -7,9 +7,10 @@ const { random } = Math
 const retrievePublishedEvents = require('./retrieve-published-events')
 const { models: { User, Event } } = require('../data')
 
-describe.skip('retrievePublishedEvents', () => {
+describe('retrievePublishedEvents', () => {
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+            .then(() => Promise.all([User.deleteMany(), Event.deleteMany()]))
     )
 
     let name, surname, email, password, title, description, date, location
@@ -40,6 +41,8 @@ describe.skip('retrievePublishedEvents', () => {
                 .then(() => {
                     const events = []
 
+                    const now = new Date
+
                     date = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate())
 
                     for (let i = 0; i < 20; i++)
@@ -56,11 +59,14 @@ describe.skip('retrievePublishedEvents', () => {
                     expect(events).to.have.lengthOf(10)
 
                     events.forEach(event => {
+                        expect(event.id).to.be.a('string')
+                        expect(event._id).to.be.undefined
                         expect(event.title).to.equal(title)
                         expect(event.description).to.equal(description)
                         expect(event.date).to.deep.equal(date)
                         expect(event.location).to.equal(location)
-                        expect(event.publisher.toString()).to.equal(_id)
+                        expect(event.publisher).to.be.a('string')
+                        expect(event.publisher).to.equal(_id)
                     })
                 })
         )
@@ -68,5 +74,5 @@ describe.skip('retrievePublishedEvents', () => {
 
     // TODO more happies and unhappies
 
-    after(() => mongoose.disconnect())
+    after(() => Promise.all([User.deleteMany(), Event.deleteMany()]).then(() => mongoose.disconnect()))
 })
