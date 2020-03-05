@@ -1,14 +1,11 @@
-require('dotenv').config()
-
-const { env: { TEST_MONGODB_URL } } = process
-const { mongoose, models: { User } } = require('events-data')
-const { expect } = require('chai')
 const { random } = Math
-const authenticateUser = require('./authenticate-user')
-const bcrypt = require('bcryptjs')
+const { mongoose, models: { User } } = require('events-data')
+const { authenticateUser } = require('.')
+
+const { env: { REACT_APP_TEST_MONGODB_URL: TEST_MONGODB_URL } } = process
 
 describe('authenticateUser', () => {
-    before(() =>
+    beforeAll(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => User.deleteMany())
     )
@@ -26,24 +23,24 @@ describe('authenticateUser', () => {
         let _id
 
         beforeEach(() =>
-            bcrypt.hash(password, 10)
-                .then(password =>
-                    User.create({ name, surname, email, password })
-                )
+            User.create({ name, surname, email, password })
                 .then(user => _id = user.id)
         )
 
         it('should succeed on correct and valid and right credentials', () =>
             authenticateUser(email, password)
-                .then(id => {
-                    expect(id).to.be.a('string')
-                    expect(id.length).to.be.greaterThan(0)
-                    expect(id).to.equal(_id)
+                .then(token => {
+                    expect(typeof token).toBe('string')
+                    expect(token.length).toBeGreaterThan(0)
+
+                    const { sub } = JSON.parse(atob(token.split('.')[1]))
+
+                    expect(sub).toBe(_id)
                 })
         )
     })
 
     // TODO more happies and unhappies
 
-    after(() => User.deleteMany().then(() => mongoose.disconnect()))
+    afterAll(() => User.deleteMany().then(() => mongoose.disconnect()))
 })

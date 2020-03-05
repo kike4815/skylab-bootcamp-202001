@@ -1,6 +1,7 @@
 const { validate } = require('events-utils')
 const { models: { User } } = require('events-data')
 const { NotAllowedError } = require('events-errors')
+const bcrypt = require('bcryptjs')
 
 module.exports = (name, surname, email, password) => {
     validate.string(name, 'name')
@@ -13,10 +14,12 @@ module.exports = (name, surname, email, password) => {
         .then(user => {
             if (user) throw new NotAllowedError(`user with email ${email} already exists`)
 
+            return bcrypt.hash(password, 10)
+        })
+        .then(password => {
             user = new User({ name, surname, email, password, created: new Date })
 
             return user.save()
         })
         .then(() => { })
-
 }

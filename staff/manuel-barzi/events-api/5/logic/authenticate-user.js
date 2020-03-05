@@ -1,6 +1,7 @@
 const { validate } = require('events-utils')
 const { models: { User } } = require('events-data')
 const { NotAllowedError } = require('events-errors')
+const bcrypt = require('bcryptjs')
 
 /**
  * Checks user credentials against the storage
@@ -19,13 +20,18 @@ module.exports = (email, password) => {
     validate.email(email)
     validate.string(password, 'password')
 
-    return User.findOne({ email, password })
+    return User.findOne({ email })
         .then(user => {
             if (!user) throw new NotAllowedError(`wrong credentials`)
 
-            user.authenticated = new Date
+            return bcrypt.compare(password, user.password)
+                .then(validPassword => {
+                    if (!validPassword) throw new NotAllowedError(`wrong credentials`)
 
-            return user.save()
+                    user.authenticated = new Date
+
+                    return user.save()
+                })
+                .then(({ id }) => id)
         })
-        .then(({ id }) => id)
 }
