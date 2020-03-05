@@ -1,5 +1,5 @@
 const { retrieveUser } = require('../logic')
-const { NotFoundError, NotAllowedError } = require('../errors')
+const { NotFoundError, NotAllowedError } = require('events-error')
 
 module.exports = (req, res) => {
     const {  sub: id  } = req

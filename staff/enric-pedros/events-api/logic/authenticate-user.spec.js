@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const { env: { TEST_MONGODB_URL } } = process
-const { database, models: { User } } = require('../data')
+const { database, models: { User } } = require('events-data')
 const { authenticateUser } = require('../logic')
 const {NotAllowedError} = require ('../errors')
 

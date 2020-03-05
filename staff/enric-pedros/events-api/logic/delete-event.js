@@ -1,6 +1,5 @@
-const { Types: {ObjectId} } = require('mongoose')
-const { validate } = require('../utils')
-const { models: { Event, User } } = require('../data')
+const { validate } = require('events-utils')
+const { models: { Event, User } } = require('events-data')
 
 module.exports = (userId, eventId) => {
     

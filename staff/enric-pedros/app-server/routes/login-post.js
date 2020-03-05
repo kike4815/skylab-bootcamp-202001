@@ -1,5 +1,5 @@
 const { authenticateUser } = require('../logic')
-const { logger } = require('../utils')
+const { logger } = require('events-utils')
 
 module.exports = (req, res) => {
     const { body: { username, password }, session } = req

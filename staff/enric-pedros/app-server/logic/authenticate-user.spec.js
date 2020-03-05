@@ -1,5 +1,5 @@
 const { authenticateUser } = require('.')
-const { fetch } = require('../utils')
+const { fetch } = require('events-utils')
 require('../specs/specs-helper')
 
 describe('authenticateUser', () => {

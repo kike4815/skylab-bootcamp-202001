@@ -1,13 +1,13 @@
 import React from 'react'
-import registerUser from '../logic/register-user'
 
-export default function Register() {
 
-function handleRegister(event){
+export default function Register({onSubmit, setView}) {
+
+function handleRegister(event){ //MAYBE??? INSIDE OF FORM BETTER
     event.preventDefault()
 
     const {name,surname,email,password} = event.target
-    registerUser(name.value, surname.value, email.value, password.value)
+    onSubmit(name.value, surname.value, email.value, password.value)
 
 }
 
@@ -18,6 +18,11 @@ function handleRegister(event){
             <input type='text' name='email' placeholder='email'></input>
             <input type='password' name='password' placeholder='password'></input>
             <button>Submit</button>
+
+            <a href="" onClick={event=>{
+                event.preventDefault()
+                setView('Login')
+            }}> go To Login</a>
         </form>
     )
 

@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 // const validate = require('../utils/validate')
-const { users } = require('../data')
+const { users } = require('events-data')
 const { authenticateUser, registerUser } = require('../logic')
 describe('register', () => {
     let name, surname, email, password

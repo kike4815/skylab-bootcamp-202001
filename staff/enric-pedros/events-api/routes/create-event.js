@@ -1,5 +1,5 @@
 const { createEvent } = require('../logic')
-const { ContentError } = require('../errors')
+const { ContentError } = require('events-error')
 
 module.exports = (req, res) => {
     const { params: { id }, body: { title, description, location, date } } = req

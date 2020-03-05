@@ -1,4 +1,4 @@
-const { fetch } = require('../utils')
+const { fetch } = require('events-utils')
 
 
 module.exports = function (token) {
@@ -38,7 +38,7 @@ module.exports = function (token) {
 
 
 // RETRIEVE-USER CALLBACK
-// const { call } = require('../utils')
+// const { call } = require('events-utils')
 // const atob = require('atob')
 
 

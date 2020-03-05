@@ -1,5 +1,5 @@
 const {deleteEvent} = require('../logic')
-const {ContentError} = require('../errors')
+const {ContentError} = require('events-error')
 
 module.exports = (req, res) => {
     const {params: {id: eventId}, payload: {sub : userId}} = req

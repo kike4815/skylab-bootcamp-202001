@@ -1,5 +1,5 @@
 const { searchVehicles } = require('.')
-const { call } = require('../utils')
+const { call } = require('events-utils')
 require('../utils/array.prototype.random')
 
 fdescribe('searchVehicles', () => {

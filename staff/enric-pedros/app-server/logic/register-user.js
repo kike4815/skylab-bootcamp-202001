@@ -1,4 +1,4 @@
-const { fetch } = require('../utils')
+const { fetch } = require('events-utils')
 
 module.exports = function (name, surname, username, password) {
     if (typeof name !== 'string') throw new TypeError(`name ${name} is not a string`)

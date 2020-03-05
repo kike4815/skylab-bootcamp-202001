@@ -1,4 +1,4 @@
-const { fetch } = require('../utils')
+const { fetch } = require('events-utils')
 const atob = require('atob')
 require('../utils/array.prototype.toggle')
 

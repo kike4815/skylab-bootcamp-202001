@@ -11,8 +11,8 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const fs = require('fs')
 const path = require('path')
-const { tokenParse, jwtVerifierMidWare } = require('./utils')
-const mongoose = require('mongoose')
+const { tokenParse, jwtVerifierMidWare } = require('events-utils')
+const {mongoose} = require('events-data')
 
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
