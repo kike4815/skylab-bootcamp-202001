@@ -5,7 +5,7 @@ module.exports = (req, res) => {
     const { payload:{sub: userId},params: { id:productId}, body } = req
 
     try {
-        debugger
+    
         modifyProduct(userId,productId,body)
             .then(() => res.status(201).end()) //enviar mensaje desde el cliente de borrado ok!
             .catch(error => {

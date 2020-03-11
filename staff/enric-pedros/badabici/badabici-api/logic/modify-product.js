@@ -5,7 +5,7 @@ const { NotAllowedError, NotFoundError } = require('badabici-errors')
 module.exports = async (id, productId, data) => {
     validate.string(productId, 'productId')
     validate.string(id, 'id')
-
+debugger
     for (let key in data) {
         validate.string(data[key], `${key}`)
     }
@@ -15,7 +15,7 @@ module.exports = async (id, productId, data) => {
     if (!user) throw new NotFoundError('user does not exist')
     if (user.role !== 'superadmin') throw new NotAllowedError(`this user is not the superadmin`)
     
-    const product = await Product.findByIdAndUpdate(productId)
+    const product = await Product.findByIdAndUpdate(productId,data)
 
     if (!product) throw new NotFoundError(`this product doesn't exist`)
 
