@@ -6,7 +6,8 @@ module.exports = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: String, required: true },
-    image: { type:String, data:Buffer},
+    image: { type:String },
     quantity: { type: String, required: true, default: 1},
-    // created: { type: Date, required: true, default: Date.now },
+    discount: {type: Number, default: 1}, //for new discounts 
+    created: { type: Date, required: true, default: Date.now },
 })

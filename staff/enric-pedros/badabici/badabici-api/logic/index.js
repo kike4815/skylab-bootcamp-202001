@@ -8,5 +8,6 @@ module.exports = {
     deleteProduct:require('./delete-product'),
     modifyProduct: require('./modify-product'),
     searchProducts: require('./search-products'),
-    updateUser: require('./update-user')
+    updateUser: require('./update-user'),
+    addForBuy : require('./add-for-buy')
 }

@@ -44,17 +44,17 @@ module.exports = (id, body) => {
         newfields[key] = body[key]
     }
 
-    if (newfields.newpassword !== 'undefined')
-        debugger
+    // if (newfields.newpassword !== 'undefined')
+        
     return User.findById(id)
         .then(user => {
             if (!user) throw new NotAllowedError(`the user does not exists`)
             if (newfields.newpassword) {
-                debugger
+                
                 return bcrypt.compare(newfields.password, user.password)
                     .then(async (validPassword) => {
                         if (!validPassword) throw new NotAllowedError(`wrong credentials`)
-                        debugger
+                        
                         delete newfields.password
                         const newpass = await bcrypt.hash(newfields.newpassword, 10)
 
@@ -62,7 +62,7 @@ module.exports = (id, body) => {
                         return User.findByIdAndUpdate(id, { password: newpass })
                     })
                     .then(() => {
-                        debugger
+                        
                         return User.findByIdAndUpdate(id, { $set: newfields })
                             .then(() => { })
                     })
