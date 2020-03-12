@@ -5,7 +5,7 @@ const { NotAllowedError, NotFoundError } = require('badabici-errors')
 module.exports = async (id, productId, data) => {
     validate.string(productId, 'productId')
     validate.string(id, 'id')
-debugger
+
     for (let key in data) {
         validate.string(data[key], `${key}`)
     }

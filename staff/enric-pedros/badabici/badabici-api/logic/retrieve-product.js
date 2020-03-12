@@ -9,7 +9,7 @@ module.exports = id => {
     return Product.findById(id)
         .then(product => {
             if (!product) throw new NotFoundError(`product with id ${id} not found`)
-            if(product.quantity < 1)throw new Error (`product isn't in stock`)
+            // if(product.quantity < 1)throw new Error (`product isn't in stock`)
             .then(({ category,subcategory,title, description,price,quantity }) => ({ category,subcategory,title, description,price,quantity }))
     
         })

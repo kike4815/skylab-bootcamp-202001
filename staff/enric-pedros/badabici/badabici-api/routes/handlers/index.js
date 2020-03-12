@@ -6,5 +6,7 @@ module.exports = {
     retrieveProduct: require('./retrieve-product'),
     registerAdmin: require('./register-admin'),
     deleteProduct: require('./delete-product'),
-    modifyProduct : require('./modify-product')
+    modifyProduct : require('./modify-product'),
+    searchProducts : require('./search-products'),
+    updateUser: require('./update-user')
 }

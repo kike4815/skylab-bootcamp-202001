@@ -21,7 +21,9 @@ const {
     createProduct,
     registerAdmin,
     deleteProduct,
-    modifyProduct
+    modifyProduct,
+    searchProducts,
+    updateUser
 
 } = require('./routes/handlers')
 
@@ -61,11 +63,15 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.post('/admin/auth', jsonBodyParser, authenticateUser)
 
+        app.post('/products/admin', [jwtVerifierMidWare, jsonBodyParser], createProduct)
+        
         app.get('/users',jwtVerifierMidWare, retrieveUser)
 
-        app.post('/products/admin', [jwtVerifierMidWare, jsonBodyParser], createProduct)
+        app.get('/search', searchProducts)
 
         app.delete('/products/admin', [jwtVerifierMidWare, jsonBodyParser], deleteProduct)
+
+        app.patch('/users/mod',[jwtVerifierMidWare, jsonBodyParser], updateUser)
 
         app.patch('/products/mod/:id/admin', [jwtVerifierMidWare, jsonBodyParser], modifyProduct)
 
