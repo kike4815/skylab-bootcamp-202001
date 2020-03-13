@@ -1,19 +1,19 @@
-const { addForBuy } = require('../../logic')
-const { NotAllowedError, ContentError } = require('badabici-errors')
+const { retrieveShopping } = require('../../logic')
+const { NotFoundError } = require('badabici-errors')
 
 module.exports = (req, res) => {
-    const { payload: { sub: id },body: {idproduct: idproduct} } = req
+    const { payload: { sub: id } } = req
 
     try {
-        
-
-        addForBuy(id, idproduct)
-            .then(() => res.status(201).end())
+        retrieveShopping(id)
+            .then(events =>
+                res.status(200).json(events)
+            )
             .catch(error => {
                 let status = 400
 
-                if (error instanceof NotAllowedError)
-                    status = 409 // conflict
+                if (error instanceof NotFoundError)
+                    status = 404
 
                 const { message } = error
 

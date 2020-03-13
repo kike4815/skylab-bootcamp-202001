@@ -24,7 +24,8 @@ const {
     modifyProduct,
     searchProducts,
     updateUser,
-    addForBuy
+    addForBuy,
+    retrieveShopping
 
 } = require('./routes/handlers')
 
@@ -71,6 +72,8 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
         app.get('/users',jwtVerifierMidWare, retrieveUser)
 
         app.get('/search', searchProducts)
+
+        app.get('/user/retrieve/chart',jwtVerifierMidWare, retrieveShopping)
 
         app.delete('/products/admin', [jwtVerifierMidWare, jsonBodyParser], deleteProduct)
 
