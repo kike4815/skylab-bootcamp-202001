@@ -10,5 +10,6 @@ module.exports = {
     searchProducts : require('./search-products'),
     updateUser: require('./update-user'),
     addForBuy: require('./add-for-buy'),
-    retrieveShopping : require('./retrieve-shopping')
+    retrieveShopping : require('./retrieve-shopping'),
+    discountsProducts : require('./discounts')
 }
