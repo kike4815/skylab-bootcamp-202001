@@ -11,5 +11,6 @@ module.exports = {
     updateUser: require('./update-user'),
     addForBuy : require('./add-for-buy'),
     retrieveShopping : require('./retrieve-shopping'),
-    discounts: require('./discounts')
+    discounts: require('./discounts'),
+    buyit: require('./ordered')
 }

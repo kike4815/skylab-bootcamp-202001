@@ -1,4 +1,5 @@
 const { Schema, Types: { ObjectId } } = require('mongoose')
+const order = require('./order')
 
 module.exports = new Schema({
     name: { type: String, required: true },
@@ -11,7 +12,7 @@ module.exports = new Schema({
     },
     member: { type: Boolean, required: true, default: false },
     role: { type: String, enum: ['client', 'superadmin'], default: 'client' },
-    orders: { type: ObjectId, ref: 'Order' } //history of orders
+    orders: [order] //history of orders
 
     //creditCards: { type: [{ type: CreditCard }] }
     // creditCards: [creditCard]

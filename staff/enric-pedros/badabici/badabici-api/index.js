@@ -26,7 +26,8 @@ const {
     updateUser,
     addForBuy,
     retrieveShopping,
-    discountsProducts
+    discountsProducts,
+    buyit
 
 } = require('./routes/handlers')
 
@@ -77,8 +78,10 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
         app.get('/discounts',discountsProducts)
 
         app.get('/user/retrieve/chart',jwtVerifierMidWare, retrieveShopping)
-
+        
         app.delete('/products/admin', [jwtVerifierMidWare, jsonBodyParser], deleteProduct)
+        
+        app.patch('/users/ordered',[jwtVerifierMidWare, jsonBodyParser], buyit)
 
         app.patch('/users/mod',[jwtVerifierMidWare, jsonBodyParser], updateUser)
 

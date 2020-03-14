@@ -1,13 +1,12 @@
 const { models: { Product } } = require('badabici-data')
-const { validate } = require('badabici-utils')
-const { NotFoundError, NotAllowedError } = require('badabici-errors')
+const { NotFoundError } = require('badabici-errors')
 
 module.exports = async function ()  {
 
-        debugger
-        const productsDiscount = await Product.find({discount: {$gte:10}}).lean()
-        // const products = await Product.find().all('products',[query])
-        debugger
+        const productsDiscount = await Product.find({discount: {$gt:1}}).lean()
+    
+        if (!productsDiscount.length) throw new NotFoundError ('there are not sails by the moment')
+
         return await productsDiscount
         
             
