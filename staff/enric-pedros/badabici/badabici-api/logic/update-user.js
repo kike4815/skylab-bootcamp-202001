@@ -58,7 +58,20 @@ module.exports = (id, body) => {
                         delete newfields.password
                         const newpass = await bcrypt.hash(newfields.newpassword, 10)
 
+/*
+        "_id" : ObjectId("5e6cc45d8a17784608dda324"),
+        "chart" : [ ],
+        "member" : false,
+        "role" : "client",
+        "name" : "rubenrules",
+        "surname" : "ruben",
+        "email" : "ruben@mail.com",
+        "password" : "$2a$10$la39btO.ZHxPXE3SMj6jCOti2v2R.cvqGXv4aZa6ghBLRi9n4n8Ba",
+        "orders" : [ ],
+        "__v" : 0
+*/
 
+debugger
                         return User.findByIdAndUpdate(id, { password: newpass })
                     })
                     .then(() => {

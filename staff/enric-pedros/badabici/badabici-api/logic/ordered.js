@@ -16,6 +16,10 @@ module.exports = async (id) => {
         user: id,
         products : chart
     }) 
+    
+    retrievedUser.chart = []
+
+    retrievedUser.save()
 
     return await Order.create(order)
     
