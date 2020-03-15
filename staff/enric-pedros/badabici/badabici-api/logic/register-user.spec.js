@@ -37,7 +37,6 @@ describe.only('registerUser', () => {
                 expect(user.name).to.equal(name)
                 expect(user.surname).to.equal(surname)
                 expect(user.email).to.equal(email)
-                expect(user.created).to.be.instanceOf(Date)
 
                 return bcrypt.compare(password, user.password)
             })
@@ -46,5 +45,5 @@ describe.only('registerUser', () => {
 
     // TODO unhappy paths and other happies if exist
 
-    //after(() => User.deleteMany().then(() => mongoose.disconnect()))
+    after(() => User.deleteMany().then(() => mongoose.disconnect()))
 })

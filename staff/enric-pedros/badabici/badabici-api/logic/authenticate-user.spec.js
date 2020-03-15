@@ -6,6 +6,8 @@ const { expect } = require('chai')
 const { random } = Math
 const authenticateUser = require('./authenticate-user')
 const bcrypt = require('bcryptjs')
+const { TypeError } = require('badabici-errors')
+
 
 describe('authenticateUser', () => {
     before(() =>
@@ -41,9 +43,86 @@ describe('authenticateUser', () => {
                     expect(id).to.equal(_id)
                 })
         )
+        it('should fail on incorrect email', async () => {
+            email = `email-${random()}@mail.com`
+
+            try {
+                await authenticateUser(email, password)
+
+                throw new Error('you should not reach this point')
+            } catch (error) {
+                expect(error).to.exist
+                expect(error.message).to.equal(`wrong credentials`)
+            }
+        })
+
+        it('should fail on incorrect password', async () => {
+            password = `password-${random()}`
+
+            try {
+                await authenticateUser(email, password)
+
+                throw new Error('you should not reach this point')
+            } catch (error) {
+                expect(error).to.exist
+                expect(error.message).to.equal(`wrong credentials`)
+            }
+        })
+        it('should fail when user does not exist', async () => {
+            email = `email-${random()}@mail.com`
+            password = `password-${random()}`
+    
+                try {
+                    await authenticateUser(email, password)
+    
+                    throw new Error('you should not reach this point')
+                } catch (error) {
+                    expect(error).to.exist
+                    expect(error.message).to.equal(`wrong credentials`)
+                }
+            })
+            
+
+
+    })
+    describe('unhappy paths', () => {
+
+        it('should fail on a non-string and non-valid email', () => {
+            email = 123456
+            expect(() => authenticateUser(email, password)).to.throw(TypeError, `email ${email} is not a string`)
+
+            email = false
+            expect(() => authenticateUser(email, password)).to.throw(TypeError, `email ${email} is not a string`)
+
+            email = undefined
+            expect(() => authenticateUser(email, password)).to.throw(TypeError, `email ${email} is not a string`)
+
+            email = []
+            expect(() => authenticateUser(email, password)).to.throw(TypeError, `email ${email} is not a string`)
+
+            email = 'kfjsnfksdn'
+            expect(() => authenticateUser(email, password)).to.throw(ContentError, `${email} is not an e-mail`)
+
+            email = 'kfjsnfksdn@123'
+            expect(() => authenticateUser(email, password)).to.throw(ContentError, `${email} is not an e-mail`)
+        })
+
+        it('should fail on a non-string password', () => {
+            password = 123456
+            expect(() => authenticateUser(email, password)).to.throw(TypeError, `password ${password} is not a string`)
+
+            password = false
+            expect(() => authenticateUser(email, password)).to.throw(TypeError, `password ${password} is not a string`)
+
+            password = undefined
+            expect(() => authenticateUser(email, password)).to.throw(TypeError, `password ${password} is not a string`)
+
+            password = []
+            expect(() => authenticateUser(email, password)).to.throw(TypeError, `password ${password} is not a string`)
+        })
     })
 
-    // TODO more happies and unhappies
-
-    after(() => User.deleteMany().then(() => mongoose.disconnect()))
-})
+    after(async () => {
+        await Promise.resolve(User.deleteMany())
+        return await mongoose.disconnect()
+    })})
