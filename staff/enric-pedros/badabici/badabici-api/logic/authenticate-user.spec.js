@@ -27,7 +27,7 @@ describe('authenticateUser', () => {
 
     describe('when user already exists', () => {
         let _id
-        debugger
+        
         beforeEach(() =>
             bcrypt.hash(password, 10)
                 .then(password =>
@@ -35,7 +35,7 @@ describe('authenticateUser', () => {
                 )
                 .then(user => _id = user.id)
         )
-debugger
+
         it('should succeed on correct and valid and right credentials', () =>
             authenticateUser(email, password)
                 .then(id => {

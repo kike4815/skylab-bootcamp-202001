@@ -10,4 +10,5 @@ module.exports = new Schema({
     quantity: { type: String, required: true, default: 1},
     discount: {type: Number, required: true, default:1}, //for new discounts 
     created: { type: Date , default: Date.now },
+
 })

@@ -5,6 +5,9 @@ const { NotFoundError } = require('badabici-errors')
 module.exports = (id) => {
     validate.string(id, 'id')
 
+    let productId
+
+
     return (async () => {
 
 
@@ -12,7 +15,7 @@ module.exports = (id) => {
 
         retrievedUser._id = id
 
-        const { chart } = retrievedUser
+        const { chart } = retrievedUser //array de id's del carrito de la compra
 
 
         const order = await new Order({
@@ -21,12 +24,20 @@ module.exports = (id) => {
         })
         const user = await User.findById(id).populate("chart").lean()
 
-
-        const { _id, quantity} = user.chart[0] 
+        for (let i =0; i < user.chart.length; i++){
+            
+            productId = user.chart[i]._id 
+            const product = await Product.findById(productId)
+            product.quantity = product.quantity-1
+            await product.save()
+ 
+    
+        }
         
-        const modproduct = await Product.findById(_id) // como descontamos de la base de datos en funcion de la cantidad del usuario?
+           
+        retrievedUser.save()        
 
-
+            
         retrievedUser.chart = []
 
         retrievedUser.save()
