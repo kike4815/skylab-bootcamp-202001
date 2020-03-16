@@ -63,15 +63,7 @@ describe('createProduct', () => {
     })
     
         it('should fail on incorrect category, subcategory, title, description, or expression type and content', () => {
-            // expect(() => createProduct(1)).to.throw(TypeError, '1 is not a string')
-            // expect(() => createProduct(true)).to.throw(TypeError, 'true is not a string')
-            // expect(() => createProduct([])).to.throw(TypeError, ' is not a string')
-            // expect(() => createProduct({})).to.throw(TypeError, '[object Object] is not a string')
-            // expect(() => createProduct(undefined)).to.throw(TypeError, 'undefined is not a string')
-            // expect(() => createProduct(null)).to.throw(TypeError, 'null is not a string')
-    
-            // expect(() => createProduct('')).to.throw(ContentError, 'category is empty or blank')
-            // expect(() => createProduct(' \t\r')).to.throw(ContentError, 'category is empty or blank')
+   
     
             expect(() => createProduct(category, 1)).to.throw(TypeError, '1 is not a string')
             expect(() => createProduct(category, true)).to.throw(TypeError, 'true is not a string')

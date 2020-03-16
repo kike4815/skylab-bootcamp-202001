@@ -102,32 +102,6 @@ describe('addForBuy', () => {
 
         })
 
-  
-
-    //     it('should fail on incorrect email, password, or expression type and content', () => {
-    //         expect(() => authenticateUser(1)).to.throw(TypeError, '1 is not a string')
-    //         expect(() => authenticateUser(true)).to.throw(TypeError, 'true is not a string')
-    //         expect(() => authenticateUser([])).to.throw(TypeError, ' is not a string')
-    //         expect(() => authenticateUser({})).to.throw(TypeError, '[object Object] is not a string')
-    //         expect(() => authenticateUser(undefined)).to.throw(TypeError, 'undefined is not a string')
-    //         expect(() => authenticateUser(null)).to.throw(TypeError, 'null is not a string')
-
-    //         expect(() => authenticateUser('')).to.throw(ContentError, 'email is empty')
-    //         expect(() => authenticateUser(' \t\r')).to.throw(ContentError, 'email is empty')
-
-    //         expect(() => authenticateUser(email, 1)).to.throw(TypeError, '1 is not a string')
-    //         expect(() => authenticateUser(email, true)).to.throw(TypeError, 'true is not a string')
-    //         expect(() => authenticateUser(email, [])).to.throw(TypeError, ' is not a string')
-    //         expect(() => authenticateUser(email, {})).to.throw(TypeError, '[object Object] is not a string')
-    //         expect(() => authenticateUser(email, undefined)).to.throw(TypeError, 'undefined is not a string')
-    //         expect(() => authenticateUser(email, null)).to.throw(TypeError, 'null is not a string')
-
-    //         expect(() => authenticateUser(email, '')).to.throw(ContentError, 'password is empty')
-    //         expect(() => authenticateUser(email, ' \t\r')).to.throw(ContentError, 'password is empty')
-    //     })
-
-    // })
-
 
 
     after(async () => {

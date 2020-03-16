@@ -4,10 +4,11 @@ const { NotAllowedError, NotFoundError } = require('badabici-errors')
 
 module.exports = (id, productId) => {
     validate.string(productId, 'productId')
+    validate.string(id, 'id')
 
     return User.findById(id)
         .then(user => {
-            
+
             if (!user) throw new NotFoundError('user does not exist')
             if (user.role !== 'superadmin') throw new NotAllowedError(`this user is not the superadmin`)
 
