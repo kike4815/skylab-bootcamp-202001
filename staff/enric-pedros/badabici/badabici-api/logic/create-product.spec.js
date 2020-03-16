@@ -1,60 +1,107 @@
 require('dotenv').config()
 
 const { env: { TEST_MONGODB_URL } } = process
-const { mongoose, models: { User, Event } } = require('badabici-data')
+const { mongoose, models: { User, Product } } = require('badabici-data')
 const { expect } = require('chai')
 const { random } = Math
-const publishEvent = require('./publish-event')
+const createProduct = require('./create-product')
+const bcrypt = require('bcryptjs')
+const { ContentError, NotAllowedError } = require('badabici-errors')
 
-describe('publishEvent', () => {
+describe('createProduct', () => {
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-            .then(() => Promise.all([User.deleteMany(), Event.deleteMany()]))
+            .then(() => Promise.all([User.deleteMany(), Product.deleteMany()]))
     )
 
-    let name, surname, email, password, title, description, date, location
-
+    let category, subcategory, title, description, price, image, quantity, discount, _id
     beforeEach(() => {
         name = `name-${random()}`
         surname = `surname-${random()}`
-        email = `email-${random()}@mail.com`
+        email = `email-${random()}`
         password = `password-${random()}`
-        title = `title-${random()}`
-        description = `description-${random()}`
-        date = new Date
-        location = `location-${random()}`
+        role = 'superadmin'
+
+        category = 'bicicleta'
+        subcategory = 'montaña'
+        title = 'orbea'
+        description = 'de aluminio'
+        price = '1000'
+        image = 'abcd'
+        quantity = '20'
+        discount = 10
+
+        return bcrypt.hash(password, 10)
+            .then((password) => User.create({name, surname, email, password, role }))
+            .then((user) => _id = user.id)
     })
 
-    describe('when user already exists', () => {
-        let _id
+    it('should succeed on correct and valid and right data', async () => {
+        const product = await createProduct(_id, category, subcategory, title, description, price, image, quantity, discount)
+        expect(product).not.to.exist
+        
+        return Product.findOne({ title: 'orbea' })
+            .then((product) => {
+                
+                expect(_id).to.exist
+                expect(_id).to.be.a('string')
 
-        beforeEach(() =>
-            User.create({ name, surname, email, password })
-                .then(({ id }) => _id = id)
-        )
-
-        it('should succeed on correct and valid and right data', () =>
-            publishEvent(_id, title, description, location, date)
-                .then(() =>
-                    Promise.all([
-                        User.findById(_id),
-                        Event.findOne({ title, description, location, date, publisher: _id })
-                    ])
-                )
-                .then(([user, event]) => {
-                    expect(user).to.exist
-                    expect(user.published).to.contain(event._id)
-                    expect(event).to.exist
-                    expect(event.title).to.equal(title)
-                    expect(event.description).to.equal(description)
-                    expect(event.date).to.deep.equal(date)
-                    expect(event.location).to.equal(location)
-                    expect(event.publisher.toString()).to.equal(_id)
-                })
-        )
+                expect(product).to.exist
+                expect(product).to.be.an.instanceof(Object)
+                expect(product.title).to.equal('orbea')
+                expect(product.description).to.equal(description)
+                expect(product.category).to.exist
+                expect(product.subcategory).to.be.a('String')
+                expect(product.price).to.equal('1000')
+                expect(product.image).to.equal('abcd')
+                expect(product.quantity).to.equal(quantity)
+                expect(product.discount).to.equal(discount)
+                
+                
+            })
+            
     })
+    
+        it('should fail on incorrect category, subcategory, title, description, or expression type and content', () => {
+            // expect(() => createProduct(1)).to.throw(TypeError, '1 is not a string')
+            // expect(() => createProduct(true)).to.throw(TypeError, 'true is not a string')
+            // expect(() => createProduct([])).to.throw(TypeError, ' is not a string')
+            // expect(() => createProduct({})).to.throw(TypeError, '[object Object] is not a string')
+            // expect(() => createProduct(undefined)).to.throw(TypeError, 'undefined is not a string')
+            // expect(() => createProduct(null)).to.throw(TypeError, 'null is not a string')
+    
+            // expect(() => createProduct('')).to.throw(ContentError, 'category is empty or blank')
+            // expect(() => createProduct(' \t\r')).to.throw(ContentError, 'category is empty or blank')
+    
+            expect(() => createProduct(category, 1)).to.throw(TypeError, '1 is not a string')
+            expect(() => createProduct(category, true)).to.throw(TypeError, 'true is not a string')
+            expect(() => createProduct(category, [])).to.throw(TypeError, ' is not a string')
+            expect(() => createProduct(category, {})).to.throw(TypeError, '[object Object] is not a string')
+            expect(() => createProduct(category, undefined)).to.throw(TypeError, 'undefined is not a string')
+            expect(() => createProduct(category, null)).to.throw(TypeError, 'null is not a string')
+    
+            expect(() => createProduct(category, '')).to.throw(ContentError, 'category is empty')
+            expect(() => createProduct(category, ' \t\r')).to.throw(ContentError, 'category is empty')
+    
+            expect(() => createProduct(category, subcategory, 1)).to.throw(TypeError, '1 is not a string')
+            expect(() => createProduct(category, subcategory, true)).to.throw(TypeError, 'true is not a string')
+            expect(() => createProduct(category, subcategory, [])).to.throw(TypeError, ' is not a string')
+            expect(() => createProduct(category, subcategory, {})).to.throw(TypeError, '[object Object] is not a string')
+            expect(() => createProduct(category, subcategory, undefined)).to.throw(TypeError, 'undefined is not a string')
+    
+    
+            expect(() => createProduct(category, subcategory, title, 1)).to.throw(TypeError, '1 is not a string')
+            expect(() => createProduct(category, subcategory, title, true)).to.throw(TypeError, 'true is not a string')
+            expect(() => createProduct(category, subcategory, title, [])).to.throw(TypeError, ' is not a string')
+            expect(() => createProduct(category, subcategory, title, {})).to.throw(TypeError, '[object Object] is not a string')
+            expect(() => createProduct(category, subcategory, title, undefined)).to.throw(TypeError, 'undefined is not a string')
+            expect(() => createProduct(category, subcategory, title, null)).to.throw(TypeError, 'null is not a string')
+    
+    
+            expect(() => createProduct(category, subcategory, title, description, '')).to.throw(ContentError, 'description is empty')
+            expect(() => createProduct(category, subcategory, title, description, ' \t\r')).to.throw(ContentError, 'description is empty')
+        })
+    
 
-    // TODO more happies and unhappies
-
-    after(() => Promise.all([User.deleteMany(), Event.deleteMany()]).then(() => mongoose.disconnect()))
+after(() => Promise.all([User.deleteMany(), Product.deleteMany()]).then(() => mongoose.disconnect()))
 })

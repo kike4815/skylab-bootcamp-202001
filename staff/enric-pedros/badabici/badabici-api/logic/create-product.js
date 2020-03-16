@@ -11,6 +11,7 @@ module.exports = (id, category,subcategory,title, description,price,image,quanti
     if(image) validate.string(image, 'image')
     validate.string(quantity,'quantity')
     validate.type(discount,'discount',Number)
+    
     return User.findOne({_id:id, role: 'superadmin'})
         .then(user => {
             

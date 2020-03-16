@@ -14,10 +14,12 @@ const { compare } = require('bcryptjs')
  * @throws {TypeError} if user data does not have the correct type
  * @throws {NotAllowedError} on wrong credentials
  */
-module.exports = async (email, password) => {
+module.exports =  (email, password) => {
     validate.string(email, 'email')
     validate.email(email)
     validate.string(password, 'password')
+
+    return (async () => {
 
     const user = await User.findOne({ email })
     
@@ -30,6 +32,7 @@ module.exports = async (email, password) => {
     const { id } = await user.save()
     
     return id
+})()
 }
 
 

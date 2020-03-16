@@ -16,25 +16,7 @@ const bcrypt = require('bcryptjs')
  * @throws {NotAllowedError} on wrong credentials
  */
 module.exports = (id, body) => {
-    // const { name, surname, email, newpassword, password } = body
-
-    // validate.string(id, 'id')
-    // validate.string(newpassword, 'newpassword')
-    // validate.string(password, 'password')
-
-    // const newfields = {}
-    // if (typeof name !== 'undefined') {
-    //     validate.string(name, 'name')
-    //     newfields['name'] = name
-    // }
-    // if (typeof surname !== 'undefined') {
-    //     validate.string(surname, 'surname')
-    //     newfields['surname'] = surname
-
-    // } if (typeof email !== 'undefined') {
-    //     validate.string(email, 'email')
-    //     newfields['email'] = email
-    // }
+  
 
     validate.type(body, 'body', Object)
 
@@ -44,7 +26,6 @@ module.exports = (id, body) => {
         newfields[key] = body[key]
     }
 
-    // if (newfields.newpassword !== 'undefined')
         
     return User.findById(id)
         .then(user => {
@@ -58,20 +39,8 @@ module.exports = (id, body) => {
                         delete newfields.password
                         const newpass = await bcrypt.hash(newfields.newpassword, 10)
 
-/*
-        "_id" : ObjectId("5e6cc45d8a17784608dda324"),
-        "chart" : [ ],
-        "member" : false,
-        "role" : "client",
-        "name" : "rubenrules",
-        "surname" : "ruben",
-        "email" : "ruben@mail.com",
-        "password" : "$2a$10$la39btO.ZHxPXE3SMj6jCOti2v2R.cvqGXv4aZa6ghBLRi9n4n8Ba",
-        "orders" : [ ],
-        "__v" : 0
-*/
 
-debugger
+
                         return User.findByIdAndUpdate(id, { password: newpass })
                     })
                     .then(() => {

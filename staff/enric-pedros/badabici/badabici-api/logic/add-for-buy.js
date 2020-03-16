@@ -3,26 +3,28 @@ const { mongoose: { Types: { ObjectId } } } = require('badabici-data')
 const { validate } = require('badabici-utils')
 const { NotFoundError } = require('badabici-errors')
 
-module.exports = async (id, idproduct) => {
+module.exports =  (id, idproduct) => {
     validate.string(id, 'id')
     validate.string(idproduct, 'idproduct')
-    
-    const user = await User.findById(id)
 
-    if (!user) throw new NotFoundError('the user does not exists')
+    return (async () => {
+        const user = await User.findById(id)
 
-    const product = await Product.findById(idproduct)
+        if (!user) throw new NotFoundError('the user does not exists')
 
-    if (!product) throw new NotFoundError('product does not exists')
+        const product = await Product.findById(idproduct)
 
-    let usersorder = user.chart
+        if (!product) throw new NotFoundError('product does not exists')
 
-    let indexoforder =  usersorder.indexOf(idproduct)
+        let usersorder = user.chart
 
-    if (indexoforder !== -1) {
-         await User.findByIdAndUpdate(id,{$pull : {chart: idproduct}})
-    } else {
-        await  usersorder.push(idproduct)
-    }
-    user.save()
+        let indexoforder = usersorder.indexOf(idproduct)
+
+        if (indexoforder !== -1) {
+            await User.findByIdAndUpdate(id, { $pull: { chart: idproduct } })
+        } else {
+            await usersorder.push(idproduct)
+        }
+        user.save()
+    })()
 }
