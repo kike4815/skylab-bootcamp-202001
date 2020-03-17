@@ -102,7 +102,7 @@
 
 .register-box {
   width: 320px;
-  height: 420px;
+  height: 575px;
   background: #0000008a;
   color: #fff;
   top: 50%;
@@ -176,6 +176,219 @@
 
 .register-box a:hover {
   color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 10vh;
+  font-family: "Oswald", sans-serif;
+  font-weight: bold;
+  background-color: #222;
+}
+.header__firstcontainer {
+  display: flex;
+  flex-grow: 1;
+  background-color: #222;
+  color: white;
+  font-size: 100%;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 20px;
+}
+.header__firstcontainer a {
+  text-decoration: none;
+  color: white;
+  padding-left: 5px;
+}
+.header__secondcontainer {
+  display: flex;
+  flex-grow: 6;
+  background-color: red;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+}
+.header__thirdcontainer {
+  display: flex;
+  flex-grow: 1;
+  background-color: green;
+  color: #cccccc;
+  font-size: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+}
+.header__thirdcontainer a {
+  text-decoration: none;
+  color: #cccccc;
+}
+.header__loginbutton {
+  border: 2px solid #444444;
+  margin-right: 5px;
+  font-weight: 200;
+  font-size: 14px;
+  color: #cccccc;
+  display: inline-block;
+  padding: 10px 15px 12px;
+  text-align: center;
+  line-height: 0.8;
+}
+.header__registerbutton {
+  border: 2px solid #444444;
+  font-weight: 200;
+  font-size: 14px;
+  color: #cccccc;
+  display: inline-block;
+  padding: 10px 10px 12px;
+  text-align: center;
+  line-height: 0.8;
+}
+.header__registerbutton:hover {
+  background-color: #898b00;
+}
+.header__loginbutton:hover {
+  background-color: #448b00;
+}
+
+.header__form {
+  width: 80%;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+.nav {
+  font-weight: 200;
+  font-size: 14px;
+}
+
+.nav > li {
+  float: left;
+  font-family: "Oswald", sans-serif;
+}
+
+.nav li a {
+  color: #cccccc;
+  text-decoration: none;
+  padding: 10px 12px;
+  display: block;
+  background-color: #222;
+}
+
+.nav li a:hover {
+  background-color: #434343;
+}
+
+.nav li ul {
+  display: none;
+  position: absolute;
+  min-width: 140px;
+  background-color: #222;
+}
+
+.nav li:hover > ul {
+  display: block;
+}
+
+.nav li ul li {
+  position: relative;
+}
+
+.nav li ul li ul {
+  right: -140px;
+  top: 0px;
+}
+
+.header__form {
+  width: 100%;
+  border: 2px solid #444444;
+  background-color: #222;
+}
+.header__form__input {
+  width: 85%;
+  height: 40px;
+  background-color: #222;
+  border: none;
+  color: white;
+  border-left: 1px solid #444444;
+}
+.header__form__button {
+  background: none;
+  border: none;
+  color: #cccccc;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  height: 200px;
+  font-family: "Oswald", sans-serif;
+  background-color: #222;
+  flex-direction: column;
+}
+
+.footer__top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 80%;
+  width: 100%;
+  background: #111111;
+  color: white;
+}
+.footer__top__container {
+  width: 33.3%;
+  padding: 40px;
+}
+.footer__top__container h2 {
+  border-bottom: 1px solid #444444;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+}
+.footer__top__container__social {
+  text-align: center;
+  justify-content: space-evenly;
+  display: flex;
+  padding-top: 15px;
+}
+.footer__top__container__social a {
+  color: #666666;
+}
+.footer__top__container p {
+  font-size: 14px;
+  color: #666666;
+  padding: 10px;
+}
+
+.footer__down {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: #666666;
+  height: 20%;
+  align-items: center;
+  background: #222222;
+}
+.footer__down a {
+  text-decoration: none;
+}
+
+.ttcontactinfo {
+  font-size: 14px;
+}
+
+.toggle-footer {
+  color: #666666;
+  padding: 10px;
+}
+.toggle-footer span a {
+  color: #666666;
+  font-size: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */
