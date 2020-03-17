@@ -3,22 +3,23 @@ const { validate } = require('badabici-utils')
 const { NotFoundError, NotAllowedError } = require('badabici-errors')
 
 module.exports = function (query)  {
+    if (!(query instanceof Object)) throw new NotAllowedError ('the query is not an Object')
 
-        if (!(query instanceof Object)) throw new NotAllowedError ('the query is not an Object')
     return (async () => {
-        // En cas de fer servir req.body
-        // // const product = {}
-        // for (const key in body){
-        //     product[key] = body[key]
-        // }
-
+    const {q} = query 
+    const products = await Product.find({ 
         
-        const products = await Product.find(query).lean()
-        // const products = await Product.find().all('products',[query])
+        $or: [
+            { category: { $regex: q} },
+            { subcategory: { $regex: q} },
+            { description: { $regex: q} },
+            { price: { $regex: q}}
+        ]
+    }).lean()
 
-        return products
-        
-            
+    return products
+    
+       
 
     })()
 }

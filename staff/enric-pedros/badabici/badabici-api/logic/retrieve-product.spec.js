@@ -1,77 +1,82 @@
 require('dotenv').config()
 
 const { env: { TEST_MONGODB_URL } } = process
-const { mongoose, models: { User, Event } } = require('badabici-data')
+const { mongoose, models: { Product,User } } = require('badabici-data')
 const { expect } = require('chai')
-const { random } = Math
-const retrievePublishedEvents = require('./retrieve-published-events')
+const retrieveProduct = require('./retrieve-product')
+const registerAdmin = require('./register-admin')
+const createProduct = require('./create-product')
+const { ContentError, NotAllowedError } = require('badabici-errors')
+const {random} = Math
 
-describe('retrievePublishedEvents', () => {
+describe('createProduct', () => {
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-            .then(() => Promise.all([User.deleteMany(), Event.deleteMany()]))
+            .then(() => Promise.all([Product.deleteMany()]))
     )
 
-    let name, surname, email, password, title, description, date, location
+    let category, subcategory, title, description, price, image, quantity, discount, _id, userId
+    beforeEach(() => {
 
+        category = `bicicleta-${random()}`
+        subcategory = 'montaña'
+        title = 'orbea'
+        description = 'de aluminio'
+        price = '1000'
+        image = 'abcd'
+        quantity = '20'
+        discount = 10
+
+    })
     beforeEach(() => {
         name = `name-${random()}`
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         password = `password-${random()}`
-        title = `title-${random()}`
-        description = `description-${random()}`
-        date = new Date
-        location = `location-${random()}`
+        member = true
+        role = 'superadmin'
+
     })
+    it('should succeed on correct user data', () =>
+    registerAdmin(name, surname, email, password, member,role)
+            .then(() => {
 
-    describe('when user already exists', () => {
-        let _id, _other
+                return User.findOne({ email })
+            })
+            .then(user => {
+                userId = user.id
+            })
 
-        beforeEach(() =>
-            User.insertMany([
-                { name, surname, email, password },
-                { name, surname, email, password }
-            ])
-                .then(([{ id }, { id: other }]) => {
-                    _id = id
-                    _other = other
-                })
-                .then(() => {
-                    const events = []
 
-                    const now = new Date
+    )
 
-                    date = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate())
+    it('should succeed on correct query', async () => {
+        
+         await createProduct(userId,category, subcategory, title, description, price, image, quantity, discount)
+        const productsearch = await Product.findOne( {"category" : category})
+        debugger
+        return retrieveProduct(productsearch.id)
+        .then((product) => {
+            debugger
+            _id = product.id
+            
+                expect(_id).to.exist
+                expect(_id).to.be.a('string')
 
-                    for (let i = 0; i < 20; i++)
-                        events.push({ publisher: i < 10 ? _id : _other, title, description, date, location })
+                expect(product).to.exist
+                expect(product).to.be.an.instanceof(Object)
+                expect(product.title).to.equal('orbea')
+                expect(product.description).to.equal(description)
+                expect(product.category).to.exist
+                expect(product.subcategory).to.be.a('String')
+                expect(product.price).to.equal('1000')
+                expect(product.image).to.equal('abcd')
+                expect(product.quantity).to.equal(quantity)
+                expect(product.discount).to.equal(discount)
 
-                    return Event.insertMany(events)
-                })
-        )
 
-        it('should succeed on correct and valid and right data', () =>
-            retrievePublishedEvents(_id)
-                .then(events => {
-                    expect(events).to.exist
-                    expect(events).to.have.lengthOf(10)
+            })
 
-                    events.forEach(event => {
-                        expect(event.id).to.be.a('string')
-                        expect(event._id).to.be.undefined
-                        expect(event.title).to.equal(title)
-                        expect(event.description).to.equal(description)
-                        expect(event.date).to.deep.equal(date)
-                        expect(event.location).to.equal(location)
-                        expect(event.publisher).to.be.a('string')
-                        expect(event.publisher).to.equal(_id)
-                    })
-                })
-        )
     })
-
-    // TODO more happies and unhappies
-
-    after(() => Promise.all([User.deleteMany(), Event.deleteMany()]).then(() => mongoose.disconnect()))
+    after(() => Product.deleteMany().then(() => mongoose.disconnect()))
 })

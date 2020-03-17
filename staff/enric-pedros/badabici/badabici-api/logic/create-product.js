@@ -9,7 +9,7 @@ module.exports = (id, category,subcategory,title, description,price,image,quanti
     validate.string(description, 'description')
     validate.string(price, 'price')
     if(image) validate.string(image, 'image')
-    validate.string(quantity,'quantity')
+    validate.type(quantity,'quantity',String)
     validate.type(discount,'discount',Number)
     
     return User.findOne({_id:id, role: 'superadmin'})

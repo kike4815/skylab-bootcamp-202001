@@ -5,12 +5,13 @@ const { NotFoundError } = require('badabici-errors')
 
 module.exports = id => {
     validate.string(id, 'id')
-
+    debugger
     return Product.findById(id)
         .then(product => {
+            debugger
             if (!product) throw new NotFoundError(`product with id ${id} not found`)
             // if(product.quantity < 1)throw new Error (`product isn't in stock`)
-            .then(({ category,subcategory,title, description,price,quantity }) => ({ category,subcategory,title, description,price,quantity }))
-    
+            return product
         })
+        .then(({ id, category,subcategory,title, description,price,quantity,discount,image }) => ({ id, category,subcategory,title, description,price,quantity,discount,image }))
 }
