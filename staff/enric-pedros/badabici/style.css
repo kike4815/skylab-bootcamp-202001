@@ -457,4 +457,8 @@ ul, ol {
   color: #c0c0c0;
 }
 
+.body-search {
+  display: flex;
+}
+
 /*# sourceMappingURL=style.css.map */
