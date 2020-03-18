@@ -8,7 +8,8 @@ module.exports = (name, surname, email, password,member,role) => {
     validate.string(surname, 'surname')
     validate.string(email, 'email')
     validate.email(email)
-    validate.string(role, 'role')
+    validate.type(member,'member',Boolean)
+    validate.type(role, 'role',String)
     validate.string(password, 'password')
 
     return User.findOne({ email })

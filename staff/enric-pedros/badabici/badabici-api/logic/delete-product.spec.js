@@ -45,14 +45,14 @@ describe('deleteProduct', () => {
                 )
                 
         
-        it('should fail if the drug does not exist', () => {
+        it('should fail if the product does not exist', () => {
             _idproduct = `${_idproduct}-wrong`
             deleteProduct(_id, _idproduct)
                 .then(()=> {throw new Error ('should not reach this point')})
                 .catch(({message })=> {
                     expect(message).to.exist
                     
-                    expect(message).to.equal(`drug with name ${_idproduct} not found`)
+                    expect(message).to.equal(`product with name ${_idproduct} not found`)
                     
                 })
         })
@@ -82,7 +82,7 @@ describe('deleteProduct', () => {
             
             id = 12345
             expect(() => deleteProduct(id, _idproduct)).to.throw(TypeError, `id ${id} is not a string`)
-            debugger
+            
             id = false
             expect(() => deleteProduct(id, _idproduct)).to.throw(TypeError, `id ${id} is not a string`)
             
