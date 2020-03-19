@@ -8,9 +8,10 @@ const { name, version } = require('./package')
 const morgan = require('morgan')
 const fs = require('fs')
 const path = require('path')
-const { cors,jwtVerifierMidWare } = require('./mid-wares')
+const { jwtVerifierMidWare } = require('./mid-wares')
 const { mongoose } = require('badabici-data')
 const router = require('./routes')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const jsonBodyParser = bodyParser.json()
 
@@ -53,7 +54,9 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         const app = express()
 
-        app.use(cors)
+        // app.use(cors)
+
+        app.use(cors())
 
         app.use(morgan('combined', { stream: accessLogStream }))
 

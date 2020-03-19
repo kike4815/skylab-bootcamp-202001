@@ -4,17 +4,21 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "dependencies": {
-    "badabici-errors": "file:../badabici-errors",
-    "badabici-utils": "file:../badabici-utils",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-scripts": "^3.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2"
+    "@testing-library/user-event": "^7.1.2",
+    "badabici-errors": "file:../badabici-errors",
+    "badabici-utils": "file:../badabici-utils",
+    "dotenv": "^8.2.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.0"
   },
   "devDependencies": {
     "badabici-data": "file:../badabici-data",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.13.1"
   },
   "scripts": {
@@ -23,6 +27,9 @@
     "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "keywords": [],
   "author": "",
