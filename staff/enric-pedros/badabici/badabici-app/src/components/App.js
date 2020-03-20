@@ -1,19 +1,21 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Page from './Page'
 import Register from './Register'
 import Login from './Login'
-import Home from './Home'
-import { registerUser, login, isLoggedIn } from '../logic' 
+import Search from './Search'
+import { registerUser, login, isLoggedIn, retrieveUser } from '../logic' 
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
+import Header from './Header'
 
 export default withRouter(function ({ history }) {
-  const [state, setState] = useContext(Context)
+  const [state, setState] = useContext(Context) //use context és per contexte global
+  const [user, setUser] = useState([]) // aquest hook és per poder-lo utilitzar en tots els components que interesen
 
   useEffect(() => {
     if (isLoggedIn()) {
 
-      history.push('/home')
+      history.push('/search')
     } else {
 
       history.push('/login')
@@ -24,19 +26,32 @@ export default withRouter(function ({ history }) {
     try {
       await registerUser(name, surname, email, password)
 
-      setState({ page: 'login' })
+    history.push('/login')
     } catch ({ message }) {
-      setState({ error: message })
+      
+      history.push('/register')
+      setState({...state, error:message})
+     
+
+      setTimeout(() => {
+        setState({...state, error:undefined})
+      }, 3000)
     }
   }
 
   async function handleLogin(email, password) {
     try {
       await login(email, password)
+      const user = await retrieveUser() 
+      setUser(user)
 
-      history.push('/home')
+      history.push('/search')
     } catch ({ message }) {
       setState({ ...state, error: message })
+
+      setTimeout(() => {
+        setState({...state, error:undefined})
+      }, 3000)
     }
   }
 
@@ -56,17 +71,19 @@ export default withRouter(function ({ history }) {
     setState({ page: 'register' })
   }
 
+  function handleMountSearch() {
+    setState({ page: 'search' })
+  }
+ 
+
   const { page, error } = state
 
   return <div className="app">
     <Page name={page}>
-      <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Redirect to="/login" />} />
-      {/* <Route path="/" render={() => <h1>Hello, All</h1>} /> */}
-      {/* <Route path="/login" render={() => <h1>Hello, Login</h1>} /> */}
-      <Route path="/home/:id" render={props => <h1>{props.match.params.id}</h1>} />
-      <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
-      <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
-      <Route path="/home" render={() => isLoggedIn() ? <Home /> : <Redirect to="/login" />} />
+      <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Redirect to="/login" />} />       {/*esto es para hacer rutas exactas i que no te coja el primer route si se repiten*/}
+      <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
+      <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
+      <Route path="/search" render={() => isLoggedIn() ? <><Header  onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/><Search onMount={handleMountSearch}/></> : <Redirect to="/login" />} />
     </Page>
   </div>
 }) 

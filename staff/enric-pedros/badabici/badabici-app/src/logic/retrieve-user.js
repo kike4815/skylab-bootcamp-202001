@@ -1,19 +1,20 @@
-const { validate } = require('badabici-utils')
+import context from './context'
+// import { validate } from 'badabici-utils'
 const { NotAllowedError } = require('badabici-errors')
 require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
-module.exports = token => {
-    validate.string(token, 'token')
-    validate.token(token)
+export default (function () {
+    // validate.string(token, 'token')
+    // validate.token(token)
 
     return (async () => {
         const response = await fetch(`${API_URL}/users`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${this.token}`
             }
         })
 
@@ -37,4 +38,4 @@ module.exports = token => {
 
         throw new Error('server error')
     })()
-}
+}).bind(context)

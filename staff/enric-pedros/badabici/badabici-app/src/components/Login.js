@@ -42,7 +42,7 @@ export default function ({ onSubmit, onGoToRegister, error, onMount }) {
 
                 <a href="">Lost your password?</a><br/>
                 <a href="" onClick={handleGoToRegister}>Don't have an account?</a>
-                {/* {error && <Feedback message={error} level="warn" />} */}
+                {error && <Feedback message={error} level="warn" />}
 
             </form>
         </div>
