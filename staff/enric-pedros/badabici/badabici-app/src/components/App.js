@@ -3,11 +3,12 @@ import Page from './Page'
 import Register from './Register'
 import Login from './Login'
 import Search from './Search'
-import { registerUser, login, isLoggedIn, retrieveUser } from '../logic' 
+import { registerUser, login, isLoggedIn, retrieveUser,loginAdmin } from '../logic' 
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 import Header from './Header'
 import Navigation from './Navigation'
+import LoginAdmin from './LoginAdmin'
 
 export default withRouter(function ({ history }) {
   const [state, setState] = useContext(Context) //use context és per contexte global
@@ -55,6 +56,21 @@ export default withRouter(function ({ history }) {
       }, 3000)
     }
   }
+  async function handleLoginAdmin(email, password) {
+    try {
+      await loginAdmin(email, password)
+      const user = await retrieveUser() 
+      setUser(user)
+
+      history.push('/search')
+    } catch ({ message }) {
+      setState({ ...state, error: message })
+
+      setTimeout(() => {
+        setState({...state, error:undefined})
+      }, 3000)
+    }
+  }
 
   function handleGoToLogin() {
     history.push('/login')
@@ -62,6 +78,9 @@ export default withRouter(function ({ history }) {
 
   function handleGoToRegister() {
     history.push('/register')
+  }
+  function handleGoToSearch() {
+    history.push('/search')
   }
 
   function handleMountLogin() {
@@ -85,6 +104,8 @@ export default withRouter(function ({ history }) {
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
       <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
       <Route path="/search" render={() => isLoggedIn() ? <><Header  onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/><Navigation/><Search onMount={handleMountSearch}/></> : <Redirect to="/login" />} />
+      <Route path="/loginAdmin" render={() => isLoggedIn() ? <Redirect to="/search" /> : <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSearch} />} />
+
     </Page>
   </div>
 }) 

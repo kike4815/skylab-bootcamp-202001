@@ -3,11 +3,13 @@ import login from './login'
 import retrieveUser from './retrieve-user'
 import isLoggedIn from './is-logged-in'
 import logout from './logout'
+import loginAdmin from './login-admin'
 
 export {
     registerUser,
     login,
     retrieveUser,
     isLoggedIn,
-    logout
+    logout,
+    loginAdmin
 }
