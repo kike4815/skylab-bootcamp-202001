@@ -7,6 +7,7 @@ import { registerUser, login, isLoggedIn, retrieveUser } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 import Header from './Header'
+import Navigation from './Navigation'
 
 export default withRouter(function ({ history }) {
   const [state, setState] = useContext(Context) //use context és per contexte global
@@ -83,7 +84,7 @@ export default withRouter(function ({ history }) {
       <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Redirect to="/login" />} />       {/*esto es para hacer rutas exactas i que no te coja el primer route si se repiten*/}
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
       <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
-      <Route path="/search" render={() => isLoggedIn() ? <><Header  onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/><Search onMount={handleMountSearch}/></> : <Redirect to="/login" />} />
+      <Route path="/search" render={() => isLoggedIn() ? <><Header  onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/><Navigation/><Search onMount={handleMountSearch}/></> : <Redirect to="/login" />} />
     </Page>
   </div>
 }) 

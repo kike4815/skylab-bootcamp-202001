@@ -1,0 +1,39 @@
+.page {
+  background-color: #fff;
+  width: 100%;
+  height: 100vh;
+}
+
+.page__container {
+  display: inline-block;
+  background-color: inherit;
+  width: 100%;
+}
+
+.page--register {
+  background-image: url(../img/bikeregister.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+.page--login {
+  background-image: url("../img/bicycle.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+.page--search {
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+/*# sourceMappingURL=Page.css.map */
