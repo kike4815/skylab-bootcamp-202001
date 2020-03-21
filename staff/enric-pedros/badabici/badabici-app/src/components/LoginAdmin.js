@@ -21,7 +21,7 @@ export default function ({ onSubmit, error, onGoToSearch}) {
     return <>
             <h2>WELCOME ADMIN</h2>
 
-            <form action="" method="" className="formadmin">
+            <form action="" method="" className="formadmin" onSubmit={handleSubmit}>
                 <div className="imgcontainer">
                     <img src={Blogo} alt="Avatar" className="avatar"/>
                 </div>
