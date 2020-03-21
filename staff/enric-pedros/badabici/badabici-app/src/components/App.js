@@ -82,6 +82,9 @@ export default withRouter(function ({ history }) {
   function handleGoToSearch() {
     history.push('/search')
   }
+  function handleGoToAdmin() {
+    history.push('/loginAdmin')
+  }
 
   function handleMountLogin() {
     setState({ page: 'login' })
@@ -103,8 +106,8 @@ export default withRouter(function ({ history }) {
       <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Redirect to="/login" />} />       {/*esto es para hacer rutas exactas i que no te coja el primer route si se repiten*/}
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
       <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
-      <Route path="/search" render={() => isLoggedIn() ? <><Header  onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/><Navigation/><Search onMount={handleMountSearch}/></> : <Redirect to="/login" />} />
-      <Route path="/loginAdmin" render={() => isLoggedIn() ? <Redirect to="/search" /> : <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSearch} />} />
+      <Route path="/search" render={() => isLoggedIn() ? <><Header  onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} handleGoToAdmin={handleGoToAdmin}/><Navigation/><Search onMount={handleMountSearch}/></> : <Redirect to="/login" />} />
+      <Route path="/loginAdmin" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSearch} />} />
 
     </Page>
   </div>
