@@ -4,10 +4,8 @@ import './Login.sass'
 import Blogo from '../img/Blogo.png'
 import Feedback from './Feedback'
 
-export default function ({ onSubmit, error, onGoToSearch }) {
-    useEffect(() => {
-        onMount()
-    }, [])
+export default function ({ onSubmit, error, onGoToSearch}) {
+   
     function handleSubmit(event) {
         event.preventDefault()
 
