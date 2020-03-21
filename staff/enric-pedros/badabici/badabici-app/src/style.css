@@ -494,7 +494,7 @@ ul, ol {
 }
 
 .landing {
-  background-image: url(../img/landingPage.jpg);
+  background-image: url(/img/landingPage.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
