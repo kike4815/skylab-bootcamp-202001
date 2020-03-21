@@ -1,0 +1,32 @@
+.body-search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  argin-right: auto;
+  margin-left: auto;
+}
+
+.future-breadcramp {
+  height: 10vh;
+}
+
+.results-container {
+  padding-left: 70px;
+}
+
+.results-container__sponsor img {
+  height: 60vh;
+  width: 86%;
+}
+
+.results-container__elements {
+  background-color: blue;
+  width: 76%;
+}
+
+.filters {
+  background-color: #eeeeee;
+  margin-left: 100px;
+  width: 300px;
+}
+/*# sourceMappingURL=Search.css.map */

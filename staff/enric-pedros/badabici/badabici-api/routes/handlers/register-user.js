@@ -2,10 +2,10 @@ const { registerUser } = require('../../logic')
 const { NotAllowedError, ContentError } = require('badabici-errors')
 
 module.exports = (req, res) => {
-    const { body: { name, surname, email, password, member } } = req
+    const { body: { name, surname, email, password } } = req
 
     try {
-        registerUser(name, surname, email, password, member)
+        registerUser(name, surname, email, password)
             .then(() => res.status(201).end())
             .catch(error => {
                 let status = 400
