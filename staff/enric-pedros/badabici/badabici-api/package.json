@@ -1,0 +1,34 @@
+{
+  "name": "badabici-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "watch": "nodemon .",
+    "test": "npx mocha logic utils",
+    "test-debug": "npx mocha debug logic utils"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "badabici-data": "file:../badabici-data",
+    "badabici-errors": "file:../badabici-errors",
+    "badabici-utils": "file:../badabici-utils",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "uuid": "^7.0.1",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.0",
+    "nodemon": "^2.0.2"
+  }
+}
