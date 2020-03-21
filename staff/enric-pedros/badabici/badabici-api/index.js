@@ -27,7 +27,8 @@ const {
     addForBuy,
     retrieveShopping,
     discountsProducts,
-    buyit
+    buyit,
+    authenticateAdmin
 
 } = require('./routes/handlers')
 
@@ -63,9 +64,9 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.post('/users/auth', jsonBodyParser, authenticateUser)
 
-        app.post('/admin',jsonBodyParser,registerAdmin) //route only super user
+        app.post('/admin/auth', jsonBodyParser, authenticateAdmin)
 
-        app.post('/admin/auth', jsonBodyParser, authenticateUser)
+        app.post('/admin',jsonBodyParser,registerAdmin) //route only super user
 
         app.post('/products/admin', [jwtVerifierMidWare, jsonBodyParser], createProduct)
 
