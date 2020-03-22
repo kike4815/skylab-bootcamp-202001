@@ -5,12 +5,9 @@ import { withRouter } from 'react-router-dom'
 import { Context } from './ContextProvider'
 
 
-export default function ({ onMount }) {
-    useEffect(() => {
-        onMount()
-    }, [])
+export default function ({ onMount, _sails }) {
 
-
+debugger
     return <>
         <div className="future-breadcramp">Hola</div>
         <div className="body-search">
@@ -203,6 +200,7 @@ export default function ({ onMount }) {
                 </div>
                 <div className="results-container__elements">
                     hola
+                    {_sails && _sails.map((sail, index) => <img key={index} src={sail.image}/>)}
         </div>
             </section>
         </div>

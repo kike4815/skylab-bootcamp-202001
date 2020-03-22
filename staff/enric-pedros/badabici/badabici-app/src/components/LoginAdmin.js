@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react'
-import './Login.sass'
+import './LoginAdmin.sass'
 import Blogo from '../img/Blogo.png'
 import Feedback from './Feedback'
 
@@ -16,28 +16,24 @@ export default function ({ onSubmit, error, onGoToSearch}) {
 
         onSubmit(email, password)
     }
-    function handleGoToSearch(event) {
-        event.preventDefault()
 
-        onGoToSearch()
-    }
 
     return <>
             <h2>WELCOME ADMIN</h2>
 
-            <form action="" method="" className="formadmin">
+            <form action="" method="" className="formadmin" onSubmit={handleSubmit}>
                 <div className="imgcontainer">
                     <img src={Blogo} alt="Avatar" className="avatar"/>
                 </div>
 
                     <div className="container-inputs">
-                        <label for="email"><b>Email</b></label>
+                        <label name="email"><b>Email</b></label>
                         <input type="text" className='container-inputs__text' placeholder="Enter Email" name="email" required/>
 
-                            <label for="password"><b>Password</b></label>
+                            <label name="password"><b>Password</b></label>
                             <input type="password" className='container-inputs__password' placeholder="Enter Password" name="password" required/>
 
-                                <button type="submit" onSubmit={handleSubmit}>Login</button>
+                                <button type="submit" /* onSubmit={handleSubmit} */>Login</button>
 
                     </div>
                     {error && <Feedback message={error} level="warn" />}
@@ -45,7 +41,7 @@ export default function ({ onSubmit, error, onGoToSearch}) {
 
                             <div className="container-links">
                                 <span className="psw">Forgot <a href="#" className="forgot">password?</a></span>
-                                <span className="psw">Forgot <a href="#" className="goBack" onSubmit={handleGoToSearch}>Go Back</a></span>
+                                <span className="psw"><a href="#" className="goBack" onSubmit={onGoToSearch}>Go Back</a></span>
                             </div>
     
             </form>
