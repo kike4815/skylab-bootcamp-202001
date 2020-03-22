@@ -1,13 +1,11 @@
 import context from './context'
-// import { validate } from 'badabici-utils'
 const { NotAllowedError } = require('badabici-errors')
 require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
 export default (function () {
-    // validate.string(token, 'token')
-    // validate.token(token)
+
 
     return (async () => {
         const response = await fetch(`${API_URL}/users`, {

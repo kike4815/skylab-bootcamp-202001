@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import './Landing.sass'
 
 
-export default function ({ onSubmit, onGoToSearch }) {
+export default function ({ onGoToSails, onGoToSearch }) {
 
 
     return <>
@@ -17,8 +17,8 @@ export default function ({ onSubmit, onGoToSearch }) {
                 <h3>Elige tu camino</h3>
                 <h4>Nosotros te ayudamos</h4>
                 <div className="landing__buttons">
-                    <a href="#" className="landing__buttons__sails">Ofertas</a>
-                    <a href="#" className="landing__buttons__start" onSubmit={onGoToSearch}>¿Empezamos?</a>
+                    <a href="#" className="landing__buttons__sails" onClick={onGoToSails}>Ofertas</a>
+                    <a href="#" className="landing__buttons__start" onClick={onGoToSearch}>¿Empezamos?</a>
 
                 </div>
             </div>
