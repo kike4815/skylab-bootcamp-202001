@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
 import BikeExp from '../img/bh_aerolight_disc.jpg'
 import './Search.sass'
+import './Item'
+import './Item.sass'
 import { withRouter } from 'react-router-dom'
 import { Context } from './ContextProvider'
 
 
 export default function ({ onMount, _sails }) {
 
-debugger
+    debugger
     return <>
         <div className="future-breadcramp">Hola</div>
         <div className="body-search">
@@ -200,8 +202,8 @@ debugger
                 </div>
                 <div className="results-container__elements">
                     hola
-                    {_sails && _sails.map((sail, index) => <img key={index} src={sail.image}/>)}
-        </div>
+                    {_sails && _sails.map((sail, index) => <img key={index} src={sail.image} />)}
+                </div>
             </section>
         </div>
     </>

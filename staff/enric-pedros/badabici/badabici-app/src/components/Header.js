@@ -13,11 +13,7 @@ export default function ({ onGoToRegister,onGoToAdmin, onGoToLogin }) {
 
         onGoToLogin()
     }
-    // function handleGoToAdmin(event) {
-    //     event.preventDefault()
 
-    //     onGoToAdmin()
-    // }
     return <header className='header'>
     <div className = 'header__firstcontainer'><a href=""onClick={onGoToAdmin}><i className="fa fa-bicycle" ></i></a><a href="#">BADABICI</a></div>
     <div className = 'header__secondcontainer'>
