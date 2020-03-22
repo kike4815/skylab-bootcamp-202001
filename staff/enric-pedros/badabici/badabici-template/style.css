@@ -489,6 +489,88 @@ ul, ol {
   width: 300px;
 }
 
+.banner-form {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.landing__section {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 9em;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+}
+
+.landing__section h3 {
+  font-size: 4em;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.landing__section h4 {
+  letter-spacing: 2px;
+  line-height: 1.2em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
+  font-size: 2em;
+  font-weight: 100;
+  margin-bottom: 1em;
+  color: #fff;
+}
+
+.landing {
+  background-image: url(../img/landingPage.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.landing__container {
+  font-size: 3em;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.36);
+  color: #fff;
+  margin: 0;
+  font-weight: 700;
+  font-family: "Poppins", sans-seri;
+  padding: 1em 0 0 0;
+  text-align: center;
+}
+.landing__buttons__sails {
+  background-color: #eb2941c2;
+  position: relative;
+  padding: 13px 57px;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 20px;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+  transition: all 1s linear;
+}
+.landing__buttons__sails:hover {
+  background-color: #EB2941;
+}
+.landing__buttons__start {
+  background-color: #72aa3e;
+  position: relative;
+  padding: 13px 35px;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 20px;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+  transition: all 1s linear;
+  margin-left: 40px;
+}
+.landing__buttons__start:hover {
+  background-color: #448b00;
+}
+
 body {
   font-family: "Oswald", sans-serif;
   margin-top: 15vh;
@@ -574,6 +656,47 @@ span.psw {
 
 .container-links a {
   text-decoration: none;
+}
+
+.container-item {
+  background-color: grey;
+  display: flex;
+  width: 700px;
+}
+.container-item__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 15px;
+}
+.container-item__image img {
+  max-width: 400px;
+}
+.container-item__discounted {
+  color: #f47070;
+}
+.container-item__prices {
+  display: flex;
+  justify-content: space-between;
+}
+.container-item__tocart {
+  display: inline-block;
+}
+.container-item__tocart a {
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #fff;
+  text-transform: uppercase;
+  background: #222222;
+  display: inline-block;
+  padding: 10px 33px;
+  height: 30px;
+  text-decoration: none;
+}
+.container-item__tocart a:hover {
+  background: #14cb14;
+  color: #222;
 }
 
 /*# sourceMappingURL=style.css.map */
