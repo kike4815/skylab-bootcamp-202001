@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './Header.sass'
 
-export default function ({ onGoToRegister, onGoToLogin }) {
+export default function ({ onGoToRegister,onGoToAdmin, onGoToLogin }) {
 
     function handleGoToRegister(event) {
         event.preventDefault()
@@ -13,8 +13,13 @@ export default function ({ onGoToRegister, onGoToLogin }) {
 
         onGoToLogin()
     }
+    // function handleGoToAdmin(event) {
+    //     event.preventDefault()
+
+    //     onGoToAdmin()
+    // }
     return <header className='header'>
-    <div className = 'header__firstcontainer'><a href="#"><i className="fa fa-bicycle" ></i></a><a href="#">BADABICI</a></div>
+    <div className = 'header__firstcontainer'><a href=""onClick={onGoToAdmin}><i className="fa fa-bicycle" ></i></a><a href="#">BADABICI</a></div>
     <div className = 'header__secondcontainer'>
     <form className= 'header__form' action="#" method="POST">
 

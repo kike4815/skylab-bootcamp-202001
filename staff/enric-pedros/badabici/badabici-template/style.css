@@ -494,6 +494,9 @@ ul, ol {
   margin: 0 auto;
 }
 
+
+
+
 .landing__section {
   width: 80%;
   margin: 0 auto;
@@ -522,7 +525,8 @@ ul, ol {
 }
 
 .landing {
-  background-image: url(../img/landingPage.jpg);
+
+  background-image: url(./img/landingPage.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -533,7 +537,7 @@ ul, ol {
   color: #fff;
   margin: 0;
   font-weight: 700;
-  font-family: "Poppins", sans-seri;
+  font-family: "Poppins", sans-serif;
   padding: 1em 0 0 0;
   text-align: center;
 }
