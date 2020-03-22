@@ -1,10 +1,11 @@
 import { validate } from 'badabici-utils'
+import context from './context'
 const { NotAllowedError } = require('badabici-errors')
 require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
-export default function (email, password) {
+export default (function (email, password) {
     validate.string(email, 'email')
     validate.email(email)
     validate.string(password, 'password')
@@ -17,11 +18,12 @@ export default function (email, password) {
         })
 
         const { status } = response
-        debugger
+        
         if (status === 200) {
             const { token } = await response.json()
 
-            return token
+            this.token = token
+            return
         }
 
         if (status >= 400 && status < 500) {
@@ -36,4 +38,4 @@ export default function (email, password) {
 
         throw new Error('server error')
     })()
-}
+}).bind(context) 

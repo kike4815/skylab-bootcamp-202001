@@ -33,7 +33,7 @@ export default function ({ onSubmit, error, onGoToSearch}) {
                             <label name="password"><b>Password</b></label>
                             <input type="password" className='container-inputs__password' placeholder="Enter Password" name="password" required/>
 
-                                <button type="submit" onSubmit={handleSubmit}>Login</button>
+                                <button type="submit" /* onSubmit={handleSubmit} */>Login</button>
 
                     </div>
                     {error && <Feedback message={error} level="warn" />}
