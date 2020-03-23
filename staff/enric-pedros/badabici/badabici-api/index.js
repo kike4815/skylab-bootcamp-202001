@@ -29,7 +29,8 @@ const {
     retrieveShopping,
     discountsProducts,
     buyit,
-    authenticateAdmin
+    authenticateAdmin,
+    retrieveImage
 
 } = require('./routes/handlers')
 
@@ -90,6 +91,8 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
         app.patch('/users/mod',[jwtVerifierMidWare, jsonBodyParser], updateUser)
 
         app.patch('/products/mod/:id/admin', [jwtVerifierMidWare, jsonBodyParser], modifyProduct)
+
+        app.get('/imagen/:id', retrieveImage)
 
         app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
 

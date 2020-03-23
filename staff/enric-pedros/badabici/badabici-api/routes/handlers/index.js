@@ -13,7 +13,8 @@ module.exports = {
     retrieveShopping : require('./retrieve-shopping'),
     discountsProducts : require('./discounts'),
     buyit: require('./ordered'),
-    authenticateAdmin : require('./authenticate-admin')
+    authenticateAdmin : require('./authenticate-admin'),
+    retrieveImage : require('./retrieve-image')
 
 
 }

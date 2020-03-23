@@ -17,13 +17,13 @@ export default withRouter(function ({ history }) {
   const [_sails,setSails] = useState([])
 
   useEffect(() => {
-    if (isLoggedIn()) {
+    // if (isLoggedIn()) {
 
-      history.push('/search')
-    } else {
+    //   history.push('/search')
+    // } else {
 
       history.push('/landing')
-    }
+    
   }, [])
 
   async function handleRegister(name, surname, email, password) {
@@ -120,7 +120,7 @@ export default withRouter(function ({ history }) {
       <Route exact path="/" render={() => /* isLoggedIn() ? <Redirect to="/search" /> :  */<Redirect to="/landing" />} />       {/*esto es para hacer rutas exactas i que no te coja el primer route si se repiten*/}
       <Route path="/register" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
       <Route path="/login" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
-      <Route path="/search" render={() =>/*  isLoggedIn() ? */ <><Header  onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} handleGoToAdmin={handleGoToAdmin}/><Navigation/><Search onMount={handleMountSearch} _sails={_sails}/></>/*  : <Redirect to="/login" /> */} />
+      <Route path="/search" render={() =><><Header  onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} handleGoToAdmin={handleGoToAdmin}/><Navigation/><Search onMount={handleMountSearch} _sails={_sails}/></>} />
       <Route path="/loginAdmin" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSearch} />} />
       <Route path="/landing" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <Landing onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} />} />
     </Page>
