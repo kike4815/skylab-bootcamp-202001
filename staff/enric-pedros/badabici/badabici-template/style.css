@@ -494,8 +494,10 @@ ul, ol {
   margin: 0 auto;
 }
 
-
-
+.bodyLand {
+  margin: 0;
+  padding: 0;
+}
 
 .landing__section {
   width: 80%;
@@ -525,7 +527,6 @@ ul, ol {
 }
 
 .landing {
-
   background-image: url(./img/landingPage.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -537,7 +538,7 @@ ul, ol {
   color: #fff;
   margin: 0;
   font-weight: 700;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-seri;
   padding: 1em 0 0 0;
   text-align: center;
 }
@@ -701,6 +702,23 @@ span.psw {
 .container-item__tocart a:hover {
   background: #14cb14;
   color: #222;
+}
+
+.container-contact {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 80px;
+}
+.container-contact__location h3 {
+  width: 50%;
+}
+.container-contact__direction {
+  width: 160px;
+}
+
+.location {
+  text-align: center;
+  margin-right: 63px;
 }
 
 /*# sourceMappingURL=style.css.map */

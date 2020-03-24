@@ -11,8 +11,8 @@ module.exports = id => {
 
             if (!product) throw new NotFoundError(`product with id ${id} does not exist`)
 
-            const { image } = product
-debugger
-            return image
+            const { _id } = product
+
+            return _id
         })
 }

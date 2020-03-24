@@ -10,6 +10,7 @@
     "badabici-errors": "file:../badabici-errors",
     "badabici-utils": "file:../badabici-utils",
     "dotenv": "^8.2.0",
+    "google-maps-react": "^2.0.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",

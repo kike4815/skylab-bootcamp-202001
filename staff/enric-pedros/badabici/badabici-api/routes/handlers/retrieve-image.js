@@ -5,16 +5,16 @@ const path = require('path')
 
 module.exports = (req, res) => {
     const { params: { id } } = req
-    debugger
+    
     try {
         retrieveImage(id)
             .then(file => {
                 debugger
                 res.status(200)
-                res.set('content-type', 'image/jpeg')
+                res.set('content-type', 'image/jpg')
                 res.set('accept-ranges', 'bytes')
 
-                let readStream = fs.createReadStream(path.join(__dirname, `../../../badabici-data/pictures/${file}`)).pipe(res)
+                let readStream = fs.createReadStream(path.join(__dirname, `../../../badabici-data/pictures/${file}.jpg`)).pipe(res)
 
                 readStream.on('close', () => {
                     res.end()

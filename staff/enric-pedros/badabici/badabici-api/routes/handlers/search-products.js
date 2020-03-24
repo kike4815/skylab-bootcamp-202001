@@ -3,12 +3,9 @@ const { ContentError } = require('badabici-errors')
 
 module.exports = (req, res) => {
     const { query } = req
-    // BUSQUEDA PER QUERY SENSE FILTRES //
-    // const product = req.query.q 
-    // console.log('la query es:', product)
-    // const {body} = req
+
     try {
-    
+        
          searchProducts(query)
             .then(products => {
                 res

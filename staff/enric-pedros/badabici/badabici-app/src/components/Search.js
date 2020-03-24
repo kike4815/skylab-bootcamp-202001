@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import BikeExp from '../img/bh_aerolight_disc.jpg'
 import './Search.sass'
 import Item from './Item'
@@ -6,7 +6,8 @@ import './Item.sass'
 
 
 
-export default function ({  _sails }) {
+
+export default function ({  _sails, onGoToCart }) {
 
     
     return <>
@@ -18,7 +19,7 @@ export default function ({  _sails }) {
                     <img src={BikeExp} alt="" />
                 </div> */}
                 <div className="results-container__elements">
-                    {_sails && _sails.map((sail, index) => <Item key={sail.id} _sail={sail}/>)} 
+                    {_sails && _sails.map((sail, index) => <Item key={sail.id} _sail={sail} onGoToCart={onGoToCart}/>)} 
                     
                         
                 </div>
