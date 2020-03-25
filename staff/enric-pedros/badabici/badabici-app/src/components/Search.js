@@ -7,7 +7,7 @@ import './Item.sass'
 
 
 
-export default function ({  _sails, onGoToCart }) {
+export default function ({  _sails, onGoToCart, _mustlogged }) {
 
     
     return <>
@@ -19,7 +19,7 @@ export default function ({  _sails, onGoToCart }) {
                     <img src={BikeExp} alt="" />
                 </div> */}
                 <div className="results-container__elements">
-                    {_sails && _sails.map((sail, index) => <Item key={sail.id} _sail={sail} onGoToCart={onGoToCart}/>)} 
+                    {_sails && _sails.map((sail, index) => <Item key={sail.id} _sail={sail} onGoToCart={onGoToCart} _mustlogged={_mustlogged}/>)} 
                     
                         
                 </div>

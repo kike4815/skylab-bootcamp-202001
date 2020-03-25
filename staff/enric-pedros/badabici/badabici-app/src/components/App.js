@@ -17,6 +17,7 @@ export default withRouter(function ({ history }) {
   const [user, setUser] = useState([]) // aquest hook és per poder-lo utilitzar en tots els components que interesen
   const [_sails,setSails] = useState([])
   const [_search,setSearch] = useState([])
+  const [_mustlogged, setMustlogged]= useState(undefined)
 
 
   // useEffect(() => {
@@ -91,22 +92,29 @@ export default withRouter(function ({ history }) {
 
   async function handleToCart (idproduct){
     try{
-      
+        
     if (isLoggedIn()) {
       debugger
       await addcart(idproduct)
       setUser(user)
+      debugger
     } else {
-      history.push('/login')
+
+      setMustlogged(true)
+      setTimeout(() => {
+        setMustlogged(false)
+        history.push('/login')
+      }, 3000)
     }
 
     }catch({message}){
       setState({ ...state, error: message })
     }
   }
+
   async function handleToSearch (searchinput){
     try{
-      debugger
+      
       const _search = await search(searchinput)
       setSearch(_search)
       history.push('/search')
@@ -156,7 +164,7 @@ export default withRouter(function ({ history }) {
       <Route path="/register" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
       <Route path="/login" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
       <Route path="/search" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate/><Search onMount={handleMountSearch}/></>} />
-      <Route path="/searchSails" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate/><Search onMount={handleMountSearch} _sails={_sails} onGoToCart={handleToCart}/></>} />
+      <Route path="/searchSails" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate/><Search onMount={handleMountSearch} _sails={_sails} onGoToCart={handleToCart} _mustlogged={_mustlogged}/></>} />
       <Route path="/loginAdmin" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSearch} />} />
       <Route path="/landing" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <Landing onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} />} />
       <Route path="/contact" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate/> <Contact onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} /></>} />
