@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker'
 import { Provider } from './components/ContextProvider'
 import { HashRouter as Router } from 'react-router-dom'
 
+
 ReactDOM.render(<Provider><Router><App name={'Badabici'}/></Router></Provider>, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change

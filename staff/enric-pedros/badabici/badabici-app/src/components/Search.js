@@ -7,12 +7,12 @@ import './Item.sass'
 
 
 
-export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onGoToDetail, _detail }) {
+export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onGoToDetail, _detail, _search }) {
     useEffect(() => {
         onMount()
     }, [])
 
-    debugger
+    
     return <>
         {user && <div className="future-breadcramp">BIENVENIDO {user.name}</div>}
         <div className="body-search">
@@ -22,8 +22,8 @@ export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onGoT
                     <img src={BikeExp} alt="" />
                 </div> */}
                 <div className="results-container__elements">
-                    {_sails && _sails.map((sail, index) => <Item key={sail.id} _sail={sail} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail}/>)}
-                    {/* {!_sails && _inputsearch.map((_inputsearch, index) => <Item key={_inputsearch.id} __inputsearch={_inputsearch} onGoToCart={onGoToCart} _mustlogged={_mustlogged}/>)}      */}
+                    {_sails && _sails.map((sail) => <Item key={sail.id} _sail={sail} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail}/>)}
+                    {!_sails && _search.map((_search) => <Item key={_search.id} _search={_search} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail}/>)}
 
                 </div>
             </section>

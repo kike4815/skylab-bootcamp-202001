@@ -6,8 +6,7 @@ module.exports = (req, res) => {
 
     debugger
     try {
-        //console.log(query) // aqui! //{ title: 'orbea' }
-        // console.log(params.searchinput)
+
          searchProducts(query)
             .then(products => {
 

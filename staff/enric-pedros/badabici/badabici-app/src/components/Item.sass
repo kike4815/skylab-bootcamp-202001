@@ -1,16 +1,15 @@
 .container-item
-    background-color: grey
     display: flex
-    width: 456px
+    width: 400px
     &__info
         display: flex
-        flex-direction: column
         justify-content: space-between
         padding-left: 15px
     &__info h3 
         text-transform: uppercase
-    &__image img
-        max-width: 400px
+        text-align: center
+    &__info img
+        width: 50%
 
     &__discounted
         color: #f47070    
@@ -31,9 +30,34 @@
         display: inline-block
         height: 30px
         text-decoration: none
+        margin-top: 6px
 
-    &__tocart a:hover
+    &__buttonmore:hover
         background: #14cb14
         color: #222
 
+    &__container-description
+        display: flex
+        flex-direction: column
+        justify-content: center
 
+    &__container-description p 
+        font-size: xx-small
+        padding: 0px 10px 0px 10px
+
+    &__buttonmore
+        font-family: "Oswald",sans-serif
+        font-weight: 400
+        font-size: 10px
+        color: #fff
+        text-transform: uppercase
+        background: #222222
+        display: inline-block
+        height: 30px
+        border: none
+        width: 75px
+
+    &__buttons
+        display: flex   
+        justify-content: space-around 
+        padding-top: 5px
