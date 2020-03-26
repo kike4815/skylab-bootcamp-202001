@@ -10,10 +10,12 @@
     "badabici-errors": "file:../badabici-errors",
     "badabici-utils": "file:../badabici-utils",
     "dotenv": "^8.2.0",
+    "google-maps-react": "^2.0.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.0"
+    "react-scripts": "^3.4.0",
+    "reactjs-popup": "^1.5.0"
   },
   "devDependencies": {
     "badabici-data": "file:../badabici-data",

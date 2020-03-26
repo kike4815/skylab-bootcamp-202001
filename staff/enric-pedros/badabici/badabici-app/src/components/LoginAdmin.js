@@ -16,7 +16,11 @@ export default function ({ onSubmit, error, onGoToSearch}) {
 
         onSubmit(email, password)
     }
+    function handleGoToSearch(event) {
+        event.preventDefault()
 
+        onGoToSearch()
+    }
 
     return <>
             <h2>WELCOME ADMIN</h2>
@@ -41,7 +45,7 @@ export default function ({ onSubmit, error, onGoToSearch}) {
 
                             <div className="container-links">
                                 <span className="psw">Forgot <a href="#" className="forgot">password?</a></span>
-                                <span className="psw"><a href="#" className="goBack" onSubmit={onGoToSearch}>Go Back</a></span>
+                                <span className="psw"><a href="#" className="goBack" onClick={handleGoToSearch}>Go Back</a></span>
                             </div>
     
             </form>

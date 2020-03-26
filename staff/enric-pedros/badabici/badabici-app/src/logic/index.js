@@ -5,6 +5,9 @@ import isLoggedIn from './is-logged-in'
 import logout from './logout'
 import loginAdmin from './login-admin'
 import sails from './sails'
+import search from './search'
+import addcart from './addcart'
+import details from './details'
 
 export {
     registerUser,
@@ -14,4 +17,7 @@ export {
     logout,
     loginAdmin,
     sails,
+    search,
+    addcart,
+    details
 }

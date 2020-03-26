@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost:27017/badabici', { useNewUrlParser: true, 
                 if (err) throw err;
                 console.log('source.txt was copied to destination.txt');
             });
-            product.image = `${product._id}.jpg`
+            product.image = `http://localhost:8080/imagen/${product._id}`
         })
        
         return Promise.all(Product.create(products).then(() => mongoose.disconnect()))

@@ -12,6 +12,13 @@ module.exports = (id, category,subcategory,title, description,price,image,quanti
     validate.type(quantity,'quantity',String)
     validate.type(discount,'discount',Number)
     
+    category= category.toLowerCase()
+    subcategory = subcategory.toLowerCase()
+    title = title.toLowerCase()
+    description = description.toLowerCase()
+    price = price.toLowerCase()
+    quantity = quantity.toLowerCase()
+
     return User.findOne({_id:id, role: 'superadmin'})
         .then(user => {
             
