@@ -4,7 +4,7 @@ const { env: { TEST_MONGODB_URL } } = process
 const { expect } = require('chai')
 const { random } = Math
 const retrieveUser = require('./retrieve-user')
-const { mongoose, models: { User } } = require('badabici-data')
+const { mongoose, NotFoundError, models: { User } } = require('badabici-data')
 
 describe('retrieveUser', () => {
     before(() =>
@@ -39,6 +39,25 @@ describe('retrieveUser', () => {
                     expect(user.password).to.be.undefined
                 })
         )
+
+        it('should succeed on wrong data', () => {
+
+            const wrongId = 'fhtujyi78uyi'
+
+            retrieveUser(wrongId)
+                .then(user => {
+                    expect(user).to.not.exist
+
+                })
+                .catch((error) => {
+
+                    expect(error).to.exist
+                    expect(error.message).to.exist
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message.length).to.be.greaterThan(0)
+                    expect(error.message).to.equal(`user with email ${email} does not exist`)
+                })
+        })
     })
 
 

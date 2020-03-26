@@ -3,13 +3,14 @@ require('dotenv').config()
 const { expect } = require('chai')
 const { random } = Math
 const { mongoose, models: { User } } = require('badabici-data')
+const { ContentError }  = require ('badabici-data')
 const registerUser = require('./register-user')
 const bcrypt = require('bcryptjs')
 
 const { env: { TEST_MONGODB_URL } } = process
 
 describe('registerUser', () => {
-    let name, surname, email, password
+    let name, surname, email, password, member
 
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -21,6 +22,7 @@ describe('registerUser', () => {
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         password = `password-${random()}`
+        member = false
     })
 
     it('should succeed on correct user data', () =>
@@ -43,11 +45,11 @@ describe('registerUser', () => {
             .then(validPassword => expect(validPassword).to.be.true)
     )
     describe('when user already exists', () => {
-        beforeEach(() => User.create({ name, surname, email, username, password }))
+        beforeEach(() => User.create({ name, surname, email, password, member }))
 
         it('should fail on already existing user', async () => {
             try {
-                await registerUser(name, surname, email, username, password)
+                await registerUser(name, surname, email, password, member)
 
                 throw Error('should not reach this point')
             } catch (error) {
@@ -56,7 +58,7 @@ describe('registerUser', () => {
                 expect(error.message).to.exist
                 expect(typeof error.message).to.equal('string')
                 expect(error.message.length).to.be.greaterThan(0)
-                expect(error.message).to.equal(`user with username ${username} already exists`)
+                expect(error.message).to.equal(`user with email ${email} already exists`)
             }
         })
     })
@@ -69,8 +71,8 @@ describe('registerUser', () => {
         expect(() => registerUser(undefined)).to.throw(TypeError, 'undefined is not a string')
         expect(() => registerUser(null)).to.throw(TypeError, 'null is not a string')
 
-        expect(() => registerUser('')).to.throw(ContentError, 'name is empty or blank')
-        expect(() => registerUser(' \t\r')).to.throw(ContentError, 'name is empty or blank')
+        expect(() => registerUser('')).to.throw(ContentError, 'name is empty')
+        expect(() => registerUser(' \t\r')).to.throw(ContentError, 'name is empty')
 
         expect(() => registerUser(name, 1)).to.throw(TypeError, '1 is not a string')
         expect(() => registerUser(name, true)).to.throw(TypeError, 'true is not a string')
@@ -79,8 +81,8 @@ describe('registerUser', () => {
         expect(() => registerUser(name, undefined)).to.throw(TypeError, 'undefined is not a string')
         expect(() => registerUser(name, null)).to.throw(TypeError, 'null is not a string')
 
-        expect(() => registerUser(name, '')).to.throw(ContentError, 'surname is empty or blank')
-        expect(() => registerUser(name, ' \t\r')).to.throw(ContentError, 'surname is empty or blank')
+        expect(() => registerUser(name, '')).to.throw(ContentError, 'surname is empty')
+        expect(() => registerUser(name, ' \t\r')).to.throw(ContentError, 'surname is empty')
 
         expect(() => registerUser(name, surname, 1)).to.throw(TypeError, '1 is not a string')
         expect(() => registerUser(name, surname, true)).to.throw(TypeError, 'true is not a string')
@@ -89,8 +91,8 @@ describe('registerUser', () => {
         expect(() => registerUser(name, surname, undefined)).to.throw(TypeError, 'undefined is not a string')
         expect(() => registerUser(name, surname, null)).to.throw(TypeError, 'null is not a string')
 
-        expect(() => registerUser(name, surname, '')).to.throw(ContentError, 'e-mail is empty or blank')
-        expect(() => registerUser(name, surname, ' \t\r')).to.throw(ContentError, 'e-mail is empty or blank')
+        expect(() => registerUser(name, surname, '')).to.throw(ContentError, 'email is empty')
+        expect(() => registerUser(name, surname, ' \t\r')).to.throw(ContentError, 'email is empty')
 
         expect(() => registerUser(name, surname, email, 1)).to.throw(TypeError, '1 is not a string')
         expect(() => registerUser(name, surname, email, true)).to.throw(TypeError, 'true is not a string')
@@ -99,11 +101,10 @@ describe('registerUser', () => {
         expect(() => registerUser(name, surname, email, undefined)).to.throw(TypeError, 'undefined is not a string')
         expect(() => registerUser(name, surname, email, null)).to.throw(TypeError, 'null is not a string')
 
-        expect(() => registerUser(name, surname, email, '')).to.throw(ContentError, 'username is empty or blank')
-        expect(() => registerUser(name, surname, email, ' \t\r')).to.throw(ContentError, 'username is empty or blank')
+        expect(() => registerUser(name, surname, email, '')).to.throw(ContentError, 'password is empty')
+        expect(() => registerUser(name, surname, email, ' \t\r')).to.throw(ContentError, 'password is empty')
 
-        expect(() => registerUser(name, surname, email, username, '')).to.throw(ContentError, 'password is empty or blank')
-        expect(() => registerUser(name, surname, email, username, ' \t\r')).to.throw(ContentError, 'password is empty or blank')
+     
     })
 
 

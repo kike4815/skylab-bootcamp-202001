@@ -18,7 +18,7 @@ module.exports = (id, productId, data) => {
 
         const product = await Product.findByIdAndUpdate(productId, data)
 
-        if (!product) throw new NotFoundError(`this product doesn't exist`)
+        if (!product) throw new NotFoundError(`product with id ${productId} not found`)
 
         return
     })()
