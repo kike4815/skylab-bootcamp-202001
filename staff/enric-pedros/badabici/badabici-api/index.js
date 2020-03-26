@@ -30,8 +30,8 @@ const {
     discountsProducts,
     buyit,
     authenticateAdmin,
-    retrieveImage
-
+    retrieveImage,
+    retrieveProduct
 } = require('./routes/handlers')
 
 
@@ -62,7 +62,8 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.use(morgan('combined', { stream: accessLogStream }))
 
-        app.use('/api', router)
+        // app.use('/api', router)
+        app.get('/detail/:id', retrieveProduct)
 
         app.post('/users', jsonBodyParser, registerUser)
 

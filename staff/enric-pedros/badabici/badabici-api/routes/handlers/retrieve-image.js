@@ -9,7 +9,7 @@ module.exports = (req, res) => {
     try {
         retrieveImage(id)
             .then(file => {
-                debugger
+                
                 res.status(200)
                 res.set('content-type', 'image/jpg')
                 res.set('accept-ranges', 'bytes')

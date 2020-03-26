@@ -21,12 +21,9 @@ export default function ({ onSubmit, onGoToRegister, onGoToAdmin, onGoToLogin })
     }
     function handleSubmit(event) {
         event.preventDefault()
-        const { target: {
-            searchinput: { value: searchinput },
-        } } = event
-
-            onSubmit(searchinput)
-        }
+        const {value} = event.target.title
+        onSubmit(`query=${value}`)
+    }
         
     
 
@@ -52,7 +49,7 @@ return <header className='header'>
                     </ul>
                 </li>
             </ul>
-            <input type="search" name="searchinput" className='header__form__input' placeholder="  Search" />
+            <input type="search" id="title" name="title" className='header__form__input' placeholder="  Search" />
             <div className='header__form__button'><i className="fa fa-search"></i></div>
 
         </form>

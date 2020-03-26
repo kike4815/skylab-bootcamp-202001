@@ -7,6 +7,7 @@ import loginAdmin from './login-admin'
 import sails from './sails'
 import search from './search'
 import addcart from './addcart'
+import details from './details'
 
 export {
     registerUser,
@@ -17,5 +18,6 @@ export {
     loginAdmin,
     sails,
     search,
-    addcart
+    addcart,
+    details
 }

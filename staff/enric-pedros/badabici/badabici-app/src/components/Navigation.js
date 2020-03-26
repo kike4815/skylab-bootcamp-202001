@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './Navigation.sass'
 
-export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate}) {
+export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout}) {
     
     function handleGoToContact(event) {
         event.preventDefault()
@@ -23,6 +23,11 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
 
         onGoToUpdate()
     }
+    function handleGoToOut(event){
+        event.preventDefault()
+
+        onGoToLogout()
+    }
     
     
     return <> 
@@ -43,7 +48,7 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
 
     <div className="righticon">
         <div className="righticonin">
-        <a href="javascript:void('0')" className="miniCartbtn"><i className="fa fa-archive"></i></a>
+        <a href="javascript:void('0')" className="miniCartbtn" onClick = {handleGoToOut}><i className="fas fa-power-off"></i></a>
         </div>
     </div>
     </>

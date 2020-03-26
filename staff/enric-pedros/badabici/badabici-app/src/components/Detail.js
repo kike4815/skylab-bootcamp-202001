@@ -1,12 +1,13 @@
 import React from 'react'
 import './detail.css'
 
-export default ({message, close}) => {
+export default ({message, close,_detail}) => {
+
 
   return (
     <div className="bg-modal-alert" onClick={close} >
       <div className="modal-content-alert" >
-  <div className="nav-modal-alert" >ERROR</div>
+  <div className="nav-modal-alert" >{_detail.title}</div>
     
         <div>
           <br />
