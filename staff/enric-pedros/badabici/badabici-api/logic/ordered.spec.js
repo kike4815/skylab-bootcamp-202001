@@ -7,7 +7,7 @@ const buyit = require('./ordered')
 const { ContentError, NotAllowedError } = require('badabici-errors')
 const { env: { TEST_MONGODB_URL } } = process
 
-describe('ordered', () => {
+describe.only('ordered', () => {
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => Promise.all([User.deleteMany(), Product.deleteMany()]))
@@ -43,6 +43,8 @@ describe('ordered', () => {
                     })
                     .then(() => { })
             )
+
+            
 
         })
         after(() => Promise.all([User.deleteMany(), Product.deleteMany()]).then(() => mongoose.disconnect()))

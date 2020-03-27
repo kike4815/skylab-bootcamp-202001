@@ -34,10 +34,9 @@ describe('updateUser', () => {
                 )
                 .then(user => _id = user.id)
         )
-    })
-    
-    it('happy path with user exists', () =>{
-        User.find(_id)
+        
+        it('should update existing user', () =>{debugger
+            User.find(_id)
             .then(user =>{
                 expect(user).not.to.be.undefined
                 expect(user.name).to.equal(name)
@@ -45,7 +44,7 @@ describe('updateUser', () => {
                 expect(user.email).to.equal(name)
             })
             .then(()=>
-                updateUser(_id,{name:`${name}-up`,surname:`${surname}-up`,email:`${email}-up`})
+            updateUser(_id,{name:`${name}-up`,surname:`${surname}-up`,email:`${email}-up`})
             )
             .then(()=>{
                 User.findById(_id).lean()
@@ -56,6 +55,57 @@ describe('updateUser', () => {
                 expect(newuser.surname).to.equal(name)
                 expect(newuser.email).to.equal(name)
             })
+        })
+
+        it('should fail when wrong data', () =>{debugger
+            User.find(_id)
+            .then(user =>{
+                expect(user).not.to.be.undefined
+                expect(user.name).to.equal(name)
+                expect(user.surname).to.equal(name)
+                expect(user.email).to.equal(name)
+            })
+            .then(()=>
+            updateUser(_id,{name:`${name}-up`,surname:`${surname}-up`,email:`${email}-up`})
+            )
+            .then(()=>{
+                User.findById(_id).lean()
+            })
+            .then((newuser)=>{
+                expect(newuser).to.exist
+                expect(newuser.name).to.equal(name)
+                expect(newuser.surname).to.equal(name)
+                expect(newuser.email).to.equal(name)
+            })
+        })
+        
+    })
+    describe('when user already exists', () => {
+    
+        beforeEach(() =>
+            bcrypt.hash(password, 10)
+                .then(password =>
+                    User.create({ name, surname, email, password })
+                )
+                .then(user => _id = user.id)
+        )
+        
+        it('should fail when user does not exist', () =>{debugger
+
+            const wrongId = 'shuji876yhyu'
+
+            updateUser(wrongId,{name:`${name}-up`,surname:`${surname}-up`,email:`${email}-up`})
+            
+            .then(()=>{
+                User.findById(_id).lean()
+            })
+            .catch((error)=>{
+                expect(error).to.exist
+                expect(error).to.be.instanceOf(NotAllowedError)
+                expect(error.message).to.equal(`the user with id ${wrongId} does not exist`)
+            })
+        })
+        
     })
 
     after(async () => {

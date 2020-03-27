@@ -49,11 +49,7 @@ describe('retrieve product', () => {
         idProduct = product.id
 
     })
-    it('should succeed on correct user data', () =>
-    registerAdmin(name, surname, email, password, member,role)
-            .then(() => {
-
-
+    
     it('should succeed retrieving a single product', async ()=> {
         const product = await retrieveProduct(idProduct)
             expect(product).to.exist
