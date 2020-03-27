@@ -1,18 +1,15 @@
 import React from 'react'
-import './detail.css'
+import './Mustlogged.sass'
 
-export default ({message, close}) => {
+export default ({close}) => {
 
   return (
-    <div className="bg-modal-alert" onClick={close} >
-      <div className="modal-content-alert" >
-  <div className="nav-modal-alert" >ERROR</div>
+    <div className="bg-modal-alert-logged">
+      <div className="modal-content-alert-logged" >
+  <div className="nav-modal-alert-logged" >Debe estar registrado para poder añadir a la lista de la compra</div>
     
         <div>
-          <br />
-          <h3 className="h3-content">{message}</h3>
-
-          <button  className='button-ok-alert' onClick={close}>OK</button>
+           <button  className='button-ok-alert-logged' onClick={close}>volver</button>
         </div>
 
       </div>

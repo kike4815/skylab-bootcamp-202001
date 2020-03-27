@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Item.sass'
 import Mustlogged from './Mustlogged'
 import Detail from './Detail'
@@ -6,13 +6,17 @@ import Detail from './Detail'
 
 export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail }) {
     const [openModal, setOpenModal] = useState(false)
+    const [modalLogin, setModalLogin] = useState(false)
 
-
+    debugger
     function handleToCart(event) {
         event.preventDefault()
 
-
-        onGoToCart(_sail._id.toString())
+        if (_mustlogged){
+            onGoToCart(_sail._id.toString())
+        } else {
+            setModalLogin(true)
+        }
     }
 
     function handleToDetail(event) {
@@ -22,9 +26,11 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
         onGoToDetail(_sail._id)
         setOpenModal(true)
     }
- 
+    
 
     const handleModal = () => setOpenModal(!openModal)
+    const handleModalLogin = () => setModalLogin(!modalLogin)
+
 
     if (_sail) {
 
@@ -36,22 +42,23 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
 
                 <div className="container-item__info">
                     <img src={_sail.image} />
-                    <h3>{_sail.title}</h3>
-                    <p>{_sail.description}</p>
-                    <div className="container-item__prices">
+                    <div className='container-item__container-description'>  
+                        <h3>{_sail.title}</h3>
+                        <p>{_sail.description}</p>
+                        <div className="container-item__prices">
 
-                        <p className="container-item__price">{_sail.price}</p>
-                        <p className="container-item__discounted">{_sail.price} </p>
-                    </div>
-
-                    <div className="container-item__tocart"><a href="" onClick={handleToCart}>Add To Cart</a></div>
-                    <div className="container-item__details"><button className="container-item__butonmore"onClick={handleToDetail} >DETALLES</button></div>
-                    <div>
-                        {_mustlogged && <Mustlogged message="detail component" close={handleModal} />}
+                            <p className="container-item__price">{_sail.price}</p>
+                            <p className="container-item__discounted">{_sail.price} </p>
+                        </div>
+                        <div className='container-item__buttons'>
+                        <div className="container-item__tocart"><button className='container-item__buttonmore' onClick={handleToCart}>Add To Cart</button></div>
+                        <div className="container-item__details"><button className="container-item__buttonmore"onClick={handleToDetail} >DETALLES</button></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            {modalLogin && <Mustlogged message="detail component" close={handleModalLogin} />} 
             {openModal && <Detail message="detail component" close={handleModal}  _detail={_detail}/>}
         </>
     }

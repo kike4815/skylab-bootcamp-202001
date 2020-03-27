@@ -8,7 +8,7 @@ module.exports = function (query)  {
 
     const {query: _query} = query
 
-    console.log(_query)
+   
     if(_query) {
         validate.string(_query, 'query')
         filter={
