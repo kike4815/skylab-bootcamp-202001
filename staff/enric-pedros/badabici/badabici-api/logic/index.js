@@ -12,5 +12,7 @@ module.exports = {
     addForBuy : require('./add-for-buy'),
     retrieveShopping : require('./retrieve-shopping'),
     discounts: require('./discounts'),
-    buyit: require('./ordered')
+    buyit: require('./ordered'),
+    authenticateAdmin : require('./authenticate-admin'),
+    retrieveImage : require ('./retrieve-image')
 }

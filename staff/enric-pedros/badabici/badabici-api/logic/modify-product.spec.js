@@ -4,6 +4,7 @@ const { env: { TEST_MONGODB_URL } } = process
 const { mongoose, models: { User, Product } } = require('badabici-data')
 const { expect } = require('chai')
 const { random } = Math
+
 const { NotFoundError } = require('badabici-errors')
 const modifyProduct = require('./modify-product')
 
@@ -49,12 +50,14 @@ describe('modify product', () => {
         beforeEach(() => {
             
             return Promise.all([User.create({ name, surname, email, password, role }), Product.create({ category, subcategory, title, description, price, image, quantity, discount })])
+
                 .then(([user, product]) => {
                     _id = user.id
                     _idproduct = product.id
                     user.save()
                     return product.save()
                 })
+
                 
             })
 
@@ -134,6 +137,7 @@ describe('modify product', () => {
             expect(() => modifyProduct(_id, _idproduct, data)).to.throw(TypeError, `productId ${_idproduct} is not a string`)
         })
     })
+
 
 
     after(() => Promise.all([User.deleteMany(), Product.deleteMany()]).then(() => mongoose.disconnect()))

@@ -42,6 +42,7 @@ describe('deleteProduct', () => {
                     user.save()
                     return product.save()
                 })
+
                 .then(() => { })
         )
 
@@ -60,6 +61,7 @@ describe('deleteProduct', () => {
                 expect(error).to.be.instanceof(NotFoundError)
                 expect(error.message).to.equal(`product with id ${wrongIdProduct} not found`)
             }
+
 
         })
 

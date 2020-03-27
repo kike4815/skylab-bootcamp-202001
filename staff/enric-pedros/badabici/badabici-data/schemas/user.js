@@ -10,7 +10,7 @@ module.exports = new Schema({
     chart: {
         type: [{ type: ObjectId, ref: 'Product' }]
     },
-    member: { type: Boolean, required: true, default: false },
+    member: { type: Boolean, default: false },
     role: { type: String, enum: ['client', 'superadmin'], default: 'client' },
     orders: [order] //history of orders
 

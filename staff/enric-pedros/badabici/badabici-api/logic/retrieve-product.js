@@ -6,10 +6,11 @@ const { NotFoundError } = require('badabici-errors')
 module.exports = id => {
     
     validate.string(id, 'id')
-
+    debugger
     return Product.findById(id)
 
         .then(product => {
+
 
             if (!product) throw new NotFoundError(`product with id ${id} not found`)
            
@@ -32,3 +33,4 @@ module.exports = id => {
     
 //         })
 // }
+

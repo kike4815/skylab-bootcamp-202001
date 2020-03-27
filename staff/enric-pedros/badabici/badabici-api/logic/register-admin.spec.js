@@ -2,7 +2,9 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const { random } = Math
+
 const { mongoose, models: { User }, ContentError } = require('badabici-data')
+
 const registerAdmin = require('./register-admin')
 const bcrypt = require('bcryptjs')
 
@@ -10,6 +12,7 @@ const { env: { TEST_MONGODB_URL } } = process
 
 describe('registerUser', () => {debugger
     
+
     before(() =>
     mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => User.deleteMany())
@@ -21,6 +24,7 @@ describe('registerUser', () => {debugger
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         password = `password-${random()}`
+
         member = false
         role = 'superadmin'
     })
@@ -55,6 +59,7 @@ describe('registerUser', () => {debugger
             try {
                 await registerAdmin(name, surname, email, password, member, role)
 
+
                 throw Error('should not reach this point')
             } catch (error) {
                 expect(error).to.exist
@@ -62,7 +67,9 @@ describe('registerUser', () => {debugger
                 expect(error.message).to.exist
                 expect(typeof error.message).to.equal('string')
                 expect(error.message.length).to.be.greaterThan(0)
+
                 expect(error.message).to.equal(`user with email ${email} already exists`)
+
             }
         })
     })
@@ -98,6 +105,7 @@ describe('registerUser', () => {debugger
         expect(() => registerAdmin(name, surname, '')).to.throw(ContentError, 'email is empty')
         expect(() => registerAdmin(name, surname, ' \t\r')).to.throw(ContentError, 'email is empty')
 
+
         // expect(() => registerAdmin(name, surname, email, password, 1, role)).to.throw(TypeError, '1 is not a string')
         // expect(() => registerAdmin(name, surname, email, true)).to.throw(TypeError, 'true is not a string')
         // expect(() => registerAdmin(name, surname, email, [])).to.throw(TypeError, ' is not a string')
@@ -109,7 +117,7 @@ describe('registerUser', () => {debugger
         expect(() => registerAdmin(name, surname, email, ' \t\r', member, role)).to.throw(ContentError, 'password is empty')
 
         expect(() => registerAdmin(name, surname, email, '', member, role)).to.throw(ContentError, 'password is empty')
-       
+   
     })
 
 

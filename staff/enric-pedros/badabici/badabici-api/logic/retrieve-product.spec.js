@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const { env: { TEST_MONGODB_URL } } = process
+
 const { mongoose, models: { User, Product} } = require('badabici-data')
 const { expect } = require('chai')
 const { random } = Math
@@ -18,10 +19,12 @@ describe('retrieve product', () => {
     beforeEach( async () => {
 
         //data to create user
+
         name = `name-${random()}`
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         password = `password-${random()}`
+
         role = 'superadmin'
 
         //data to create product
@@ -44,7 +47,12 @@ describe('retrieve product', () => {
         const product = await Product.create( { category, subcategory, title, description, price, image, quantity, discount} )
 
         idProduct = product.id
+
     })
+    it('should succeed on correct user data', () =>
+    registerAdmin(name, surname, email, password, member,role)
+            .then(() => {
+
 
     it('should succeed retrieving a single product', async ()=> {
         const product = await retrieveProduct(idProduct)
@@ -53,12 +61,7 @@ describe('retrieve product', () => {
             expect(product.subcategory).to.equal(subcategory)
             expect(product.title).to.equal(title)
             expect(product.description).to.equal(description)
-            expect(product.price).to.equal(price)
-            
-
-            
-           
-                
+            expect(product.price).to.equal(price)      
     
     })
 
@@ -81,4 +84,5 @@ describe('retrieve product', () => {
     })
 
     after(() => Promise.all([User.deleteMany(), Product.deleteMany()]).then(() => mongoose.disconnect()))
+
 })

@@ -8,9 +8,10 @@ const { name, version } = require('./package')
 const morgan = require('morgan')
 const fs = require('fs')
 const path = require('path')
-const { cors,jwtVerifierMidWare } = require('./mid-wares')
+const { jwtVerifierMidWare } = require('./mid-wares')
 const { mongoose } = require('badabici-data')
 const router = require('./routes')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const jsonBodyParser = bodyParser.json()
 
@@ -27,8 +28,10 @@ const {
     addForBuy,
     retrieveShopping,
     discountsProducts,
-    buyit
-
+    buyit,
+    authenticateAdmin,
+    retrieveImage,
+    retrieveProduct
 } = require('./routes/handlers')
 
 
@@ -53,19 +56,22 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         const app = express()
 
-        app.use(cors)
+        // app.use(cors)
+
+        app.use(cors())
 
         app.use(morgan('combined', { stream: accessLogStream }))
 
-        app.use('/api', router)
+        // app.use('/api', router)
+        app.get('/detail/:id', retrieveProduct)
 
         app.post('/users', jsonBodyParser, registerUser)
 
         app.post('/users/auth', jsonBodyParser, authenticateUser)
 
-        app.post('/admin',jsonBodyParser,registerAdmin) //route only super user
+        app.post('/admin/auth', jsonBodyParser, authenticateAdmin)
 
-        app.post('/admin/auth', jsonBodyParser, authenticateUser)
+        app.post('/admin',jsonBodyParser,registerAdmin) //route only super user
 
         app.post('/products/admin', [jwtVerifierMidWare, jsonBodyParser], createProduct)
 
@@ -86,6 +92,8 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
         app.patch('/users/mod',[jwtVerifierMidWare, jsonBodyParser], updateUser)
 
         app.patch('/products/mod/:id/admin', [jwtVerifierMidWare, jsonBodyParser], modifyProduct)
+
+        app.get('/imagen/:id', retrieveImage)
 
         app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
 

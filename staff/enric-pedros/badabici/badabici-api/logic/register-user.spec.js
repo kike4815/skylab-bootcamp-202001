@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const { ContentError } = require('badabici-errors')
 const { expect } = require('chai')
 const { random } = Math
 const { mongoose, models: { User } } = require('badabici-data')
@@ -45,11 +45,13 @@ describe('registerUser', () => {
             .then(validPassword => expect(validPassword).to.be.true)
     )
     describe('when user already exists', () => {
+
         beforeEach(() => User.create({ name, surname, email, password, member }))
 
         it('should fail on already existing user', async () => {
             try {
                 await registerUser(name, surname, email, password, member)
+
 
                 throw Error('should not reach this point')
             } catch (error) {
@@ -105,6 +107,7 @@ describe('registerUser', () => {
         expect(() => registerUser(name, surname, email, ' \t\r')).to.throw(ContentError, 'password is empty')
 
      
+
     })
 
 

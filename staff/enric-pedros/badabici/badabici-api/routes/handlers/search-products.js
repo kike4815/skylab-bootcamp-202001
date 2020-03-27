@@ -2,18 +2,16 @@ const { searchProducts } =require('../../logic')
 const { ContentError } = require('badabici-errors')
 
 module.exports = (req, res) => {
-    const { query } = req
-    // BUSQUEDA PER QUERY SENSE FILTRES //
-    // const product = req.query.q 
-    // console.log('la query es:', product)
-    // const {body} = req
+    const { query } = req 
+
+    debugger
     try {
-    
+        //console.log(query) // aqui! //{ title: 'orbea' }
+        // console.log(params.searchinput)
          searchProducts(query)
             .then(products => {
-                res
-                .status(201)
-                .json(products)
+
+                res.status(201).json(products)
             }) 
             .catch(error => {
                 let status = 400
