@@ -8,6 +8,7 @@ import Navigation from './Navigation'
 import LoginAdmin from './LoginAdmin'
 import Landing from './Landing'
 import Contact from './Contact'
+import Listshopping from './Listshopping'
 import { registerUser, login, isLoggedIn, retrieveUser,loginAdmin, sails, search, addcart, logout, details } from '../logic' 
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
@@ -173,6 +174,9 @@ export default withRouter(function ({ history }) {
   function handleGoToContact() {
     history.push('/Contact')
   }
+  function handleGoToListShopping() {
+    history.push('/listshopping')
+  }
 
   function handleMountLogin() {
     setState({ page: 'login' })
@@ -196,12 +200,12 @@ export default withRouter(function ({ history }) {
       <Route exact path="/" render={() => /* isLoggedIn() ? <Redirect to="/search" /> :  */<Redirect to="/landing" />} />       {/*esto es para hacer rutas exactas i que no te coja el primer route si se repiten*/}
       <Route exact path="/register" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
       <Route exact path="/login" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
-      <Route exact path="/search" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate/><Search onMount={handleMountSearch} user={user} _search={_search} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail}/></>} />
-      <Route exact path="/searchSails" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate/><Search onMount={handleMountSearchSails} _sails={_sails} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail}/></>} />
+      <Route exact path="/search" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onMount={handleMountSearch} user={user} _search={_search} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail}/></>} />
+      <Route exact path="/searchSails" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onMount={handleMountSearchSails} _sails={_sails} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail}/></>} />
       <Route path="/loginAdmin" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSearch} />} />
       <Route path="/landing" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <Landing onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} />} />
-      <Route path="/contact" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate/> <Contact onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} /></>} />
-
+      <Route path="/contact" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/> <Contact onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} /></>} />
+      <Route path="/listshopping" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/> <Listshopping  _mustlogged={_mustlogged} user={user}/></>} />
     </Page>
   </div>
 }) 

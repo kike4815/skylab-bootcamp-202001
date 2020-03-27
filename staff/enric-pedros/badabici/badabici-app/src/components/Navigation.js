@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './Navigation.sass'
 
-export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout}) {
+export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout, onGoToShopping}) {
     
     function handleGoToContact(event) {
         event.preventDefault()
@@ -28,6 +28,11 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
 
         onGoToLogout()
     }
+    function handleGoToShopping(event){
+        event.preventDefault()
+
+        onGoToShopping()
+    }
     
     
     return <> 
@@ -37,7 +42,7 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
             </li>
             <li className="leftIcon__users"><a href="" onClick = {handleGoToUpdate}><i className="fa fa-users"></i></a>
             </li>
-            <li className="leftIcon__shopping"><a href=""><i className="fa fa-shopping-cart"></i></a>
+            <li className="leftIcon__shopping"><a href="" onClick={handleGoToShopping}><i className="fa fa-shopping-cart"></i></a>
             </li>
             <li className="leftIcon__discount"><a href="" onClick = {handleGoToSails}><i className="fa fa-percent"></i></a>
             </li>

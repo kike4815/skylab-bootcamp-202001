@@ -1,0 +1,98 @@
+.mainContainer
+   
+    width: 80%
+    margin: auto
+    
+    
+.containerlistHeader
+    display: flex
+    justify-content: space-between
+    border-bottom: 2px solid #80808082
+    width: 100%
+    margin: auto
+
+    &__buyit
+        width: 150px
+
+    &__title
+        font-size: 30px    
+
+.containertypes
+    display: flex
+    justify-content: space-around
+    margin-top: 20px
+    border-bottom: 1px solid #80808082
+    padding-right: 80px
+
+.containerbody
+    display: grid
+    grid-template-columns: 3fr 1fr 1fr
+    height:  15vh
+    width: 100%
+    border-bottom: 1px solid #80808082
+
+    &___item
+        display: grid
+        grid-template-columns: 1fr 2fr
+        background-color: blue
+        width: 100%
+    &__image
+        width: 100%
+    &__price
+        border-left: 1px solid #80808082
+        border-right: 1px solid #80808082    
+        
+
+    &__trash
+        background-color: #80808029
+        color: #a1a0a0    
+        display: flex
+        justify-content: center
+        align-items: center
+
+.containerfollow
+    display: flex   
+    justify-content: space-between
+    border-bottom: 1px solid #80808082
+
+    &__buttonfollow
+        width: 130px
+        border-radius: inherit
+        background-color: black
+        font-size: 10px
+
+    &__buttonempty
+        width: 130px    
+        background-color: transparent
+        border: 1px solid #80808082   
+        font-size: 10px 
+        color: grey
+        border-radius: inherit
+.containertotal
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr  
+
+    &__discounts
+        display: flex
+        flex-direction: column
+    &____input
+        border: 1px solid black
+         
+    &__button
+        width: 130px    
+        background-color: transparent
+        border: 1px solid #80808082   
+        font-size: 10px 
+        color: grey
+        border-radius: inherit
+    &__pricetotal
+        display: flex
+        flex-direction: column
+        
+    &__pricetotal h3 
+        text-align: center
+        border-bottom: 2px solid #80808082
+.containerbutton
+    display: flex
+    place-content: flex-end
+    margin-bottom: 20px
