@@ -8,7 +8,7 @@ module.exports = function (query)  {
 
     const {query: _query} = query
 
-   
+   debugger
     if(_query) {
         validate.string(_query, 'query')
         filter={
@@ -45,7 +45,7 @@ module.exports = function (query)  {
         return (async () => {
             
             const products = await Product.find(filter).lean()
-        
+            debugger
             return products
         })()
         

@@ -3,7 +3,7 @@ import './detail.css'
 
 export default ({close,_detail}) => {
 
-
+  debugger
   return (
     <div className="bg-modal-alert" >
       <div className="modal-content-alert" >

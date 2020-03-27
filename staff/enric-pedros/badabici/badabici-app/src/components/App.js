@@ -96,7 +96,7 @@ export default withRouter(function ({ history }) {
       
       const _detail = await details(detail)
       Setdetail(_detail)
-     debugger
+     
 
     }catch({message}){
       setState({ ...state, error: message })
@@ -131,9 +131,11 @@ export default withRouter(function ({ history }) {
     try{
       
       searchinput = searchinput.toLowerCase()
+      
       const _search = await search(searchinput)
       setSearch(_search)
-      debugger
+      setSails([])
+      
       history.push('/search')
 
     }catch({message}){
