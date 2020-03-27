@@ -12,7 +12,9 @@ describe('search', () => {
     mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => Product.deleteMany())
     )
-    let category, subcategory, title, description, price, image, quantity, discount
+
+    let category, subcategory, title, description, price, image, quantity, discount, _id, _id2
+    let category2, subcategory2, title2, description2, price2, image2, quantity2, discount2
 
     beforeEach(() => {
         
@@ -36,15 +38,18 @@ describe('search', () => {
 
     })
     beforeEach(() => {
+
         Product.create({ category, subcategory, title, description, price, image, quantity, discount })
         .then(({ id }) => _id = id)
 
         Product.create({ category: category2, subcategory: subcategory2, title: title2, description: description2, price: price2, image: image2, quantity: quantity2, discount: discount2 })
-        .then(({ id }) => _id = id)
+
+        .then(({ id }) => _id2 = id)
 
     })
-    it('should return a list of products',  () => {
-        let query = {q: 'montaña' }
+
+    it('should return a list of products',  () => {debugger
+        let query = {query: 'montaña' }
  
             return searchProducts(query)
             .then((results) =>{
@@ -58,9 +63,10 @@ describe('search', () => {
                 })
                
             })
-    });      
+    })
+
     it('should return a list of products',  () => {
-        let query2 = {q: 'aluminio' }
+        let query2 = {query: 'aluminio' }
  
             return searchProducts(query2)
             .then((results2) =>{
@@ -74,14 +80,19 @@ describe('search', () => {
                 })
                
             })
-    });      
-    it('should return a list of products',  () => {
-        const query = {q: '' }
+    })
+
+    it('should return a list of products',  () => {debugger
+        const query = {query: '' }
  
-            return searchProducts(query)
+            return searchProducts({})
             .then((results) =>{
-              
+
+                              
                 expect(results).not.to.be.undefined
+
+                //products.length???
+
                 expect(results.length).to.equal(6) 
 
              
@@ -90,15 +101,13 @@ describe('search', () => {
                 })
                
             })
-    })          
-    it('shold fail when the query is not an object', () =>{
+    })
+
+    it('should fail when the query is not an object', () =>{
         let query3 = '12345'
 
          searchProducts(query3 =>  expect(query3).to.throw(NotAllowedError, `the query is not an Object`))
     })
    
-    after(async () => {
-        await Promise.resolve(Product.deleteMany())
-        return await mongoose.disconnect()
-    })
+    after(() => Promise.all([Product.deleteMany()]).then(() => mongoose.disconnect()))
 })
