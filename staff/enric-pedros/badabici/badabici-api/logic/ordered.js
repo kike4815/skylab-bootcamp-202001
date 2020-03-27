@@ -12,6 +12,7 @@ module.exports = (id) => {
 
 
         const retrievedUser = await User.findById(id)
+        if(!user) throw new NotFoundError(`user with id ${id} not found`)
 
         retrievedUser._id = id
 

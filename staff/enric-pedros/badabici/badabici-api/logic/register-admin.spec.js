@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs')
 
 const { env: { TEST_MONGODB_URL } } = process
 
-describe('registerUser', () => {debugger
+describe('registerUser', () => {
     
 
     before(() =>

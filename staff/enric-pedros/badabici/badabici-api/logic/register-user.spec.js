@@ -3,7 +3,7 @@ const { ContentError } = require('badabici-errors')
 const { expect } = require('chai')
 const { random } = Math
 const { mongoose, models: { User } } = require('badabici-data')
-const { ContentError }  = require ('badabici-data')
+
 const registerUser = require('./register-user')
 const bcrypt = require('bcryptjs')
 

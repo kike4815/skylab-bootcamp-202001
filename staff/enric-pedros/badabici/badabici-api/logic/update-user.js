@@ -30,27 +30,39 @@ module.exports = (id, body) => {
     return User.findById(id)
         .then(user => {
             if (!user) throw new NotAllowedError(`the user does not exists`)
-            if (newfields.newpassword) {
-                
-                return bcrypt.compare(newfields.password, user.password)
-                    .then(async (validPassword) => {
-                        if (!validPassword) throw new NotAllowedError(`wrong credentials`)
-                        
-                        delete newfields.password
-                        const newpass = await bcrypt.hash(newfields.newpassword, 10)
 
+            else {
 
-
-                        return User.findByIdAndUpdate(id, { password: newpass })
-                    })
-                    .then(() => {
-                        
-                        return User.findByIdAndUpdate(id, { $set: newfields })
-                            .then(() => { })
-                    })
-            } else {
-                return User.findByIdAndUpdate(id, { $set: newfields })
-                    .then(() => { })
+                if (newfields.newpassword) {
+                    
+                    return bcrypt.compare(newfields.password, user.password)
+                        .then(async (validPassword) => {
+                            if (!validPassword) throw new NotAllowedError(`wrong credentials`)
+                            
+                            delete newfields.password
+                            const newpass = await bcrypt.hash(newfields.newpassword, 10)
+    
+    
+    
+                            return User.findByIdAndUpdate(id, { password: newpass })
+                        })
+                        .then(() => {
+                            
+                            return User.findByIdAndUpdate(id, { $set: newfields })
+                                .then(() => { })
+                                .catch((error) => {
+                                    throw new NotFoundError(error.message)
+                                    
+                                })
+                        })
+                } else {
+                    return User.findByIdAndUpdate(id, { $set: newfields })
+                        .then(() => { })
+                        .catch((error) => {
+                            throw new NotFoundError(error.message)
+                            
+                        })
+                }
             }
         })
     
