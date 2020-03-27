@@ -6,15 +6,26 @@ module.exports = (id, productId) => {
     validate.string(productId, 'productId')
     validate.string(id, 'id')
 
+
+
     return User.findById(id)
         .then(user => {
 
             if (!user) throw new NotFoundError('user does not exist')
             if (user.role !== 'superadmin') throw new NotAllowedError(`this user is not the superadmin`)
 
+
             return Product.findByIdAndRemove(productId)
+
+                .then(() => { })
+
+                .catch(error => {
+                    if (error) throw new NotFoundError(`product with id ${productId} not found`)
+                })
+
+
+
         })
 
-        .then(() => { })
 
 }

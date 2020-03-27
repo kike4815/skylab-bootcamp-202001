@@ -22,7 +22,7 @@ module.exports = (id, category,subcategory,title, description,price,image,quanti
     return User.findOne({_id:id, role: 'superadmin'})
         .then(user => {
             
-            if (!user) throw new NotAllowedError(`this user is not the superadmin`)
+            if (!user) throw new NotAllowedError(`this user ${id} is not the superadmin`)
 
             const product = new Product({ category,subcategory,title,description,price,image,quantity,discount })
 

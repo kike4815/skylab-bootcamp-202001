@@ -3,7 +3,7 @@ const { models: { User } } = require('badabici-data')
 const { NotAllowedError } = require('badabici-errors')
 const bcrypt = require('bcryptjs')
 
-module.exports = (name, surname, email, password,member) => {
+module.exports = (name, surname, email, password, member) => {
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(email, 'email')

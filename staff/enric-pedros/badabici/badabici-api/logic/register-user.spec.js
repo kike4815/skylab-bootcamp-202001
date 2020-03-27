@@ -3,13 +3,14 @@ const { ContentError } = require('badabici-errors')
 const { expect } = require('chai')
 const { random } = Math
 const { mongoose, models: { User } } = require('badabici-data')
+const { ContentError }  = require ('badabici-data')
 const registerUser = require('./register-user')
 const bcrypt = require('bcryptjs')
 
 const { env: { TEST_MONGODB_URL } } = process
 
 describe('registerUser', () => {
-    let name, surname, email, password
+    let name, surname, email, password, member
 
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -21,6 +22,7 @@ describe('registerUser', () => {
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         password = `password-${random()}`
+        member = false
     })
 
     it('should succeed on correct user data', () =>
@@ -43,11 +45,13 @@ describe('registerUser', () => {
             .then(validPassword => expect(validPassword).to.be.true)
     )
     describe('when user already exists', () => {
-        beforeEach(() => User.create({ name, surname, email, password }))
+
+        beforeEach(() => User.create({ name, surname, email, password, member }))
 
         it('should fail on already existing user', async () => {
             try {
-                await registerUser(name, surname, email, password)
+                await registerUser(name, surname, email, password, member)
+
 
                 throw Error('should not reach this point')
             } catch (error) {
@@ -102,8 +106,8 @@ describe('registerUser', () => {
         expect(() => registerUser(name, surname, email, '')).to.throw(ContentError, 'password is empty')
         expect(() => registerUser(name, surname, email, ' \t\r')).to.throw(ContentError, 'password is empty')
 
-        expect(() => registerUser(name, surname, email, '')).to.throw(ContentError, 'password is empty')
-        expect(() => registerUser(name, surname, email, ' \t\r')).to.throw(ContentError, 'password is empty')
+     
+
     })
 
 

@@ -4,20 +4,17 @@ const { env: { TEST_MONGODB_URL } } = process
 const { mongoose, models: { User, Product } } = require('badabici-data')
 const { expect } = require('chai')
 const { random } = Math
+
+const { NotFoundError } = require('badabici-errors')
 const modifyProduct = require('./modify-product')
-const bcrypt = require('bcryptjs')
-const { ContentError, NotAllowedError } = require('badabici-errors')
 
-
-
-describe('modifyProduct', () => {
+describe('modify product', () => {
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-            .then(() => User.deleteMany())
-            .then(() => Product.deleteMany())
+            .then(() => Promise.all([User.deleteMany(), Product.deleteMany()]))
     )
 
-    let name, surname, email, password, category, subcategory, title, description, price, image, quantity, discount
+    let name, surname, email, password, category, subcategory, title, description, price, image, quantity, discount, data
 
     beforeEach(() => {
         name = `name-${random()}`
@@ -34,40 +31,114 @@ describe('modifyProduct', () => {
         image = `orbea.es`
         quantity = `20*${random()}`
         discount = 20
+
+        data = {
+
+            category : `newCategory`,
+            subcategory : `newSubcategory`,
+            title : `newTitle`,
+            description : `newDescription`,
+            price : `newPrice`,
+            image : `newImage`,
+            quantity : `newQuantity`,
+            
+        }
     })
+
     describe('when user already exists', () => {
 
-        beforeEach(() =>
-            Promise.all([User.create({ name, surname, email, password, role }), Product.create({ category, subcategory, title, description, price, image, quantity, discount })])
+        beforeEach(() => {
+            
+            return Promise.all([User.create({ name, surname, email, password, role }), Product.create({ category, subcategory, title, description, price, image, quantity, discount })])
+
                 .then(([user, product]) => {
                     _id = user.id
                     _idproduct = product.id
                     user.save()
                     return product.save()
                 })
-                .then(() => { })
+
+                
+            })
+
+        it('should succeed on correct and valid and right data', () =>
+            User.findById(_id).lean()
+                .then((user) => {
+                    expect(user._id).to.exist
+                })
+
+                .then(() => modifyProduct(_id, _idproduct, data )
+                    .then(() => Product.findById(_idproduct).lean())
+                    .then((product) => {
+                        expect(product).to.exist
+                        
+                        expect(product.category).to.equal(data.category)
+                        expect(product.subcategory).to.equal(data.subcategory)
+                        expect(product.title).to.equal(data.title)
+                        expect(product.price).to.equal(data.price)
+                        expect(product.quantity).to.equal(data.quantity)
+                    })
+                )
         )
 
+        it('should fail if the product does not exist', async () => {
+            const wrongIdProduct = `4956yjugjy78`
 
-        it('should fail if the product does not exist', () => {
-            _idproduct = `${_idproduct}-wrong`
-            modifyProduct(_id, _idproduct)
-                .then(() => { throw new Error('should not reach this point') })
-                .catch(({ message }) => {
-                    expect(message).to.exist
+            try {
 
-                    expect(message).to.equal(`product with name ${_idproduct} not found`)
+                await modifyProduct(_id, wrongIdProduct, data)
+                throw new Error('should not reach this point')
 
-                })
+            } catch (error) {
+               
+
+                expect(error).to.exist
+                expect(error).to.be.instanceof(NotFoundError)
+                expect(error.message).to.equal(`product with id ${wrongIdProduct} not found`)
+            }
+
         })
-        it('should not return nothing if the product does exists', () => {
 
-            modifyProduct(_id, _idproduct)
-                .then(() => { throw new Error('should not reach this point') })
-                .catch(({ message }) => {
-                    expect(message).to.exist
-                })
+
+
+
+    })
+
+    describe('unhappy path', () => {
+
+        it('should fail on a non-string id', () => {
+            let id
+
+            id = 12345
+            expect(() => modifyProduct(id, _idproduct, data)).to.throw(TypeError, `id ${id} is not a string`)
+            
+            id = false
+            expect(() => modifyProduct(id, _idproduct, data)).to.throw(TypeError, `id ${id} is not a string`)
+
+            id = undefined
+            expect(() => modifyProduct(id, _idproduct, data)).to.throw(TypeError, `id ${id} is not a string`)
+
+            id = []
+            expect(() => modifyProduct(id, _idproduct, data)).to.throw(TypeError, `id ${id} is not a string`)
+
+        })
+
+        it('should fail on a non-string idproduct', () => {
+            _idproduct = 12345
+            expect(() => modifyProduct(_id, _idproduct, data)).to.throw(TypeError, `productId ${_idproduct} is not a string`)
+
+            _idproduct = false
+            expect(() => modifyProduct(_id, _idproduct, data)).to.throw(TypeError, `productId ${_idproduct} is not a string`)
+
+            _idproduct = undefined
+            expect(() => modifyProduct(_id, _idproduct, data)).to.throw(TypeError, `productId ${_idproduct} is not a string`)
+
+            _idproduct = []
+            expect(() => modifyProduct(_id, _idproduct, data)).to.throw(TypeError, `productId ${_idproduct} is not a string`)
         })
     })
+
+
+
     after(() => Promise.all([User.deleteMany(), Product.deleteMany()]).then(() => mongoose.disconnect()))
 })
