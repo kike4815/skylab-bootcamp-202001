@@ -8,11 +8,11 @@ module.exports = (id) => {
     let productId
 
 
-    return (async () => {
+    return (async () => {debugger
 
 
         const retrievedUser = await User.findById(id)
-        if(!user) throw new NotFoundError(`user with id ${id} not found`)
+        if(!retrievedUser) throw new NotFoundError(`user with id ${id} not found`)
 
         retrievedUser._id = id
 
