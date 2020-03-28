@@ -14,7 +14,6 @@ export default (function (detail) {
             headers: { 
                     'Content-Type': 'application/json' 
             },
-            // body: JSON.stringify({ idproduct })
 
         })
 

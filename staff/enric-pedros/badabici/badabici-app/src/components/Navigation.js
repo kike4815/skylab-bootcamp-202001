@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState} from 'react'
 import './Navigation.sass'
+import Confirmout from './Confirmout'
 
-export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout}) {
-    
+export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout, onGoToShopping,user}) {
+    const [openModal, setOpenModal] = useState(false)
+   
     function handleGoToContact(event) {
         event.preventDefault()
 
@@ -23,13 +25,22 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
 
         onGoToUpdate()
     }
-    function handleGoToOut(event){
+
+
+    function handleGoToShopping(event){
         event.preventDefault()
 
-        onGoToLogout()
+        onGoToShopping()
     }
     
+
     
+
+    const handleModalLogout = (e) =>{
+        e.preventDefault() 
+        setOpenModal(!openModal)
+    }
+
     return <> 
     <div className="leftIcon">
         <ul>
@@ -37,7 +48,7 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
             </li>
             <li className="leftIcon__users"><a href="" onClick = {handleGoToUpdate}><i className="fa fa-users"></i></a>
             </li>
-            <li className="leftIcon__shopping"><a href=""><i className="fa fa-shopping-cart"></i></a>
+            <li className="leftIcon__shopping"><a href="" onClick={handleGoToShopping}><i className="fa fa-shopping-cart"></i></a>
             </li>
             <li className="leftIcon__discount"><a href="" onClick = {handleGoToSails}><i className="fa fa-percent"></i></a>
             </li>
@@ -48,8 +59,9 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
 
     <div className="righticon">
         <div className="righticonin">
-        <a href="javascript:void('0')" className="miniCartbtn" onClick = {handleGoToOut}><i className="fas fa-power-off"></i></a>
+        {user && <a href="#" className="miniCartbtn" onClick = {handleModalLogout}><i className="fas fa-power-off"></i></a>}
         </div>
     </div>
+    {openModal && <Confirmout message="detail component"onGoToLogout={onGoToLogout} close={handleModalLogout}/>}
     </>
 }
