@@ -12,7 +12,7 @@ export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onGoT
         onMount()
     }, [])
 
-    debugger
+    
     return <>
         {user && <div className="future-breadcramp">BIENVENIDO {user.name}</div>}
         <div className="body-search">

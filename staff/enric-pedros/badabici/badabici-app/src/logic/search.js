@@ -1,4 +1,4 @@
-import { NotAllowedError,ContentError } from 'badabici-errors'
+import { ContentError } from 'badabici-errors'
 
 require('dotenv').config()
 

@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState} from 'react'
 import './Navigation.sass'
+import Confirmout from './Confirmout'
 
-export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout, onGoToShopping}) {
-    
+export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout, onGoToShopping,user}) {
+    const [openModal, setOpenModal] = useState(false)
+   
     function handleGoToContact(event) {
         event.preventDefault()
 
@@ -23,18 +25,22 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
 
         onGoToUpdate()
     }
-    function handleGoToOut(event){
-        event.preventDefault()
 
-        onGoToLogout()
-    }
+
     function handleGoToShopping(event){
         event.preventDefault()
 
         onGoToShopping()
     }
     
+
     
+
+    const handleModalLogout = (e) =>{
+        e.preventDefault() 
+        setOpenModal(!openModal)
+    }
+
     return <> 
     <div className="leftIcon">
         <ul>
@@ -53,8 +59,9 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
 
     <div className="righticon">
         <div className="righticonin">
-        <a href="javascript:void('0')" className="miniCartbtn" onClick = {handleGoToOut}><i className="fas fa-power-off"></i></a>
+        {user && <a href="#" className="miniCartbtn" onClick = {handleModalLogout}><i className="fas fa-power-off"></i></a>}
         </div>
     </div>
+    {openModal && <Confirmout message="detail component"onGoToLogout={onGoToLogout} close={handleModalLogout}/>}
     </>
 }

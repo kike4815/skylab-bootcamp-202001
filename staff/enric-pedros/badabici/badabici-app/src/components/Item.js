@@ -8,7 +8,7 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
     const [openModal, setOpenModal] = useState(false)
     const [modalLogin, setModalLogin] = useState(false)
 
-    debugger
+    
     function handleToCart(event) {
         event.preventDefault()
 
@@ -23,7 +23,7 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
         event.preventDefault()
 
 
-        onGoToDetail(_sail._id)
+        onGoToDetail(_sail._id.toString())
         setOpenModal(true)
     }
     

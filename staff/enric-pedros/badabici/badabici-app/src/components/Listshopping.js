@@ -1,27 +1,19 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './Listshopping.sass'
-import Mustlogged from './Mustlogged'
 
 
 
-export default function ({user, _mustlogged}) {
-    const [modalLogin, setModalLogin] = useState(false)
- 
 
+export default function ({user, onGoToBack}) {
 
-        if (_mustlogged){
-            setModalLogin(false)
-        } else {
-            setModalLogin(true)
-        }
-    
+function handleGoToBack (event){
+    event.preventDefault()
 
-    const handleModalLogin = () => setModalLogin(!modalLogin)
-
-    debugger
+    onGoToBack()
+}
+        
     return <>
 
-        {modalLogin && <Mustlogged message="detail component" close={handleModalLogin} />} 
 
         {user && <div className="future-breadcramp">BIENVENIDO {user.name}</div>}
         <div className="mainContainer">
@@ -31,7 +23,7 @@ export default function ({user, _mustlogged}) {
                         <h3>Carrito de Compra</h3>
                     </div>
                 </div>
-                <button className='containerlistHeader__buyit'>Realizar Pedido</button>
+                <a href='#' className='containerlistHeader__buyit'>Realizar Pedido</a>
             </div>
             <div className="containertypes">
                 <div className="container__name">
@@ -59,15 +51,15 @@ export default function ({user, _mustlogged}) {
                 </div>
             </div>
             <div className="containerfollow">
-                <button className="containerfollow__buttonfollow">seguir comprando</button>
-                <button className="containerfollow__buttonempty">vaciar lista</button>
+                <a a href='#' className="containerfollow__buttonfollow" onClick={handleGoToBack}>seguir comprando</a>
+                <a a href='#' className="containerfollow__buttonempty">vaciar lista</a>
             </div>
             <div className="containertotal">
                 <div className="containertotal__discounts">
                     <h3>CÓDIGOS DE DESCUENTO</h3>
                     <p>ingrese su código de cupón si tiene</p>
                     <input type="text" className="containertotal__input" />
-                    <button className="containertotal__button">aplicar descuento</button>
+                    <a href='#' className="containertotal__button">aplicar descuento</a>
                 </div>
                 <div></div>
                 <div className="containertotal__pricetotal">
@@ -78,7 +70,7 @@ export default function ({user, _mustlogged}) {
                 </div>
             </div>
             <div className="containerbutton">
-                <button className='containerlistHeader__buyit'>Realizar Pedido</button>
+                <a href='#' className='containerlistHeader__buyit'>Realizar Pedido</a>
             </div>
         </div>
     </>
