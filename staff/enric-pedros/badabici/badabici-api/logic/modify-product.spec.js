@@ -34,21 +34,21 @@ describe('modify product', () => {
 
         data = {
 
-            category : `newCategory`,
-            subcategory : `newSubcategory`,
-            title : `newTitle`,
-            description : `newDescription`,
-            price : `newPrice`,
-            image : `newImage`,
-            quantity : `newQuantity`,
-            
+            category: `newCategory`,
+            subcategory: `newSubcategory`,
+            title: `newTitle`,
+            description: `newDescription`,
+            price: `newPrice`,
+            image: `newImage`,
+            quantity: `newQuantity`,
+
         }
     })
 
     describe('when user already exists', () => {
 
         beforeEach(() => {
-            
+
             return Promise.all([User.create({ name, surname, email, password, role }), Product.create({ category, subcategory, title, description, price, image, quantity, discount })])
 
                 .then(([user, product]) => {
@@ -58,8 +58,8 @@ describe('modify product', () => {
                     return product.save()
                 })
 
-                
-            })
+
+        })
 
         it('should succeed on correct and valid and right data', () =>
             User.findById(_id).lean()
@@ -67,11 +67,11 @@ describe('modify product', () => {
                     expect(user._id).to.exist
                 })
 
-                .then(() => modifyProduct(_id, _idproduct, data )
+                .then(() => modifyProduct(_id, _idproduct, data)
                     .then(() => Product.findById(_idproduct).lean())
                     .then((product) => {
                         expect(product).to.exist
-                        
+
                         expect(product.category).to.equal(data.category)
                         expect(product.subcategory).to.equal(data.subcategory)
                         expect(product.title).to.equal(data.title)
@@ -90,7 +90,7 @@ describe('modify product', () => {
                 throw new Error('should not reach this point')
 
             } catch (error) {
-               
+
 
                 expect(error).to.exist
                 expect(error).to.be.instanceof(NotFoundError)
@@ -111,7 +111,7 @@ describe('modify product', () => {
 
             id = 12345
             expect(() => modifyProduct(id, _idproduct, data)).to.throw(TypeError, `id ${id} is not a string`)
-            
+
             id = false
             expect(() => modifyProduct(id, _idproduct, data)).to.throw(TypeError, `id ${id} is not a string`)
 

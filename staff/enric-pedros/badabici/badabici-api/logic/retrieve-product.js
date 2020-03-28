@@ -14,9 +14,9 @@ module.exports = id => {
 
             if (!product) throw new NotFoundError(`product with id ${id} not found`)
            
-            const { category,subcategory,title, description,price,quantity } = product
+            const { category,subcategory,title, description,price,quantity, image } = product
 
-            return { category,subcategory,title, description,price,quantity }
+            return { category,subcategory,title, description,price,quantity, image }
     
         })
 }

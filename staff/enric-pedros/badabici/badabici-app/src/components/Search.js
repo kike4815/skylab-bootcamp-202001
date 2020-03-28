@@ -23,7 +23,7 @@ export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onGoT
                 </div> */}
                 <div className="results-container__elements">
                     {_sails && _sails.map((sail) => <Item key={sail.id} _sail={sail} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail}/>)}
-                    {!_sails && _search.map((_search) => <Item key={_search.id} _search={_search} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail}/>)}
+                    {_search && _search.map((search) => <Item key={search.id} _search={search} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail}/>)}
 
                 </div>
             </section>

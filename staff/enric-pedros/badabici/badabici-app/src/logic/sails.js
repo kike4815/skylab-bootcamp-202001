@@ -1,5 +1,4 @@
-import { NotAllowedError,ContentError } from 'badabici-errors'
-import context from './context'
+import { ContentError } from 'badabici-errors'
 
 
 const API_URL = process.env.REACT_APP_API_URL

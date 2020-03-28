@@ -45,7 +45,6 @@ module.exports = function (query) {
         return (async () => {
 
             const products = await Product.find(filter).lean()
-
             return products
         })()
 

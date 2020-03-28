@@ -6,10 +6,10 @@ module.exports = (req, res) => {
 
     debugger
     try {
-
-         searchProducts(query)
+       
+         return searchProducts(query)
             .then(products => {
-
+                debugger
                 res.status(201).json(products)
             }) 
             .catch(error => {

@@ -16,8 +16,8 @@ const bcrypt = require('bcryptjs')
  * @throws {NotAllowedError} on wrong credentials
  */
 module.exports = (id, body) => {
-  
 
+    validate.string(id, 'id')
     validate.type(body, 'body', Object)
 
     const newfields = {}
@@ -26,44 +26,43 @@ module.exports = (id, body) => {
         newfields[key] = body[key]
     }
 
-        
+
     return User.findById(id)
         .then(user => {
             if (!user) throw new NotAllowedError(`the user does not exists`)
+            if (!body) throw new ContentError(`no modifications have been indicated for user ${id}`)
 
-            else {
+            if (newfields.newpassword) {
 
-                if (newfields.newpassword) {
-                    
-                    return bcrypt.compare(newfields.password, user.password)
-                        .then(async (validPassword) => {
-                            if (!validPassword) throw new NotAllowedError(`wrong credentials`)
-                            
-                            delete newfields.password
-                            const newpass = await bcrypt.hash(newfields.newpassword, 10)
-    
-    
-    
-                            return User.findByIdAndUpdate(id, { password: newpass })
-                        })
-                        .then(() => {
-                            
-                            return User.findByIdAndUpdate(id, { $set: newfields })
-                                .then(() => { })
-                                .catch((error) => {
-                                    throw new NotFoundError(error.message)
-                                    
-                                })
-                        })
-                } else {
-                    return User.findByIdAndUpdate(id, { $set: newfields })
-                        .then(() => { })
-                        .catch((error) => {
-                            throw new NotFoundError(error.message)
-                            
-                        })
-                }
+                return bcrypt.compare(newfields.password, user.password)
+                    .then(async (validPassword) => {
+                        if (!validPassword) throw new NotAllowedError(`wrong credentials`)
+
+                        delete newfields.password
+                        const newpass = await bcrypt.hash(newfields.newpassword, 10)
+
+
+
+                        return User.findByIdAndUpdate(id, { password: newpass })
+                    })
+                    .then(() => {
+
+                        return User.findByIdAndUpdate(id, { $set: newfields })
+                            .then(() => { })
+                            .catch((error) => {
+                                throw new NotFoundError(error.message)
+
+                            })
+                    })
+            } else {
+                return User.findByIdAndUpdate(id, { $set: newfields })
+                    .then(() => { })
+                    .catch((error) => {
+                        throw new NotFoundError(error.message)
+
+                    })
             }
+
         })
-    
+
 }

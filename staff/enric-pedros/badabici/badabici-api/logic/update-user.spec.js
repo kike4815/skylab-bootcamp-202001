@@ -36,7 +36,9 @@ describe('updateUser', () => {
         )
         
         it('should update existing user', () =>{debugger
-            User.find(_id)
+
+            User.findById(_id)
+
             .then(user =>{
                 expect(user).not.to.be.undefined
                 expect(user.name).to.equal(name)
@@ -57,30 +59,10 @@ describe('updateUser', () => {
             })
         })
 
-        it('should fail when wrong data', () =>{debugger
-            User.find(_id)
-            .then(user =>{
-                expect(user).not.to.be.undefined
-                expect(user.name).to.equal(name)
-                expect(user.surname).to.equal(name)
-                expect(user.email).to.equal(name)
-            })
-            .then(()=>
-            updateUser(_id,{name:`${name}-up`,surname:`${surname}-up`,email:`${email}-up`})
-            )
-            .then(()=>{
-                User.findById(_id).lean()
-            })
-            .then((newuser)=>{
-                expect(newuser).to.exist
-                expect(newuser.name).to.equal(name)
-                expect(newuser.surname).to.equal(name)
-                expect(newuser.email).to.equal(name)
-            })
-        })
+       
         
     })
-    describe('when user already exists', () => {
+    describe('when user does not exist', () => {
     
         beforeEach(() =>
             bcrypt.hash(password, 10)
