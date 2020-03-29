@@ -7,7 +7,7 @@ import './Item.sass'
 
 
 
-export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onGoToDetail, _detail, _search }) {
+export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onGoToDetail, _detail, _search, searchsale }) {
     useEffect(() => {
         onMount()
     }, [])
@@ -22,7 +22,7 @@ export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onGoT
                     <img src={BikeExp} alt="" />
                 </div> */}
                 <div className="results-container__elements">
-                    {_sails && _sails.map((sail) => <Item key={sail.id} _sail={sail} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail}/>)}
+                    {_sails && _sails.map((sail) => <Item key={sail.id} _sail={sail} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail} searchsale={searchsale}/>)}
                     {_search && _search.map((search) => <Item key={search.id} _search={search} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail}/>)}
 
                 </div>

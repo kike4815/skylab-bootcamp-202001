@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import './Navigation.sass'
 import Confirmout from './Confirmout'
 
-export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout, onGoToShopping,user}) {
+export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout, onGoToShopping, user}) {
     const [openModal, setOpenModal] = useState(false)
    
     function handleGoToContact(event) {

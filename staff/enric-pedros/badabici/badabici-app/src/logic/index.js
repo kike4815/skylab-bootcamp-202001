@@ -8,6 +8,7 @@ import sails from './sails'
 import search from './search'
 import addcart from './addcart'
 import details from './details'
+import shoppinglist from './shoppinglist'
 
 export {
     registerUser,
@@ -19,5 +20,6 @@ export {
     sails,
     search,
     addcart,
-    details
+    details,
+    shoppinglist
 }

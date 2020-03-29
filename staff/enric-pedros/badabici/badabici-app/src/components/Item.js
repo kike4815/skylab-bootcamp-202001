@@ -4,9 +4,10 @@ import Mustlogged from './Mustlogged'
 import Detail from './Detail'
 
 
-export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail, _search }) {
+export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail, _search, searchsale }) {
     const [openModal, setOpenModal] = useState(false)
     const [modalLogin, setModalLogin] = useState(false)
+    // let [color, setColor] = useState("");
 
     
     function handleToCart(event) {
@@ -33,13 +34,23 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
 
 
     if (_sail) {
-
+        searchsale=true
         return <>
+{/* 
+        <div className={ color === "r" ? "game__board__container__red red_active"
+                : "game__board__container__red"
+                .game__board__container__red
+                    width:50
+                    background:blue
+                .red_active
+                background:red    
+            }></div> */}
+
             <div className="container-item">
                 <div className="container-item__image">
                     <img src="img/bh_aerolight_disc.jpg" alt="" />
                 </div>
-
+ 
                 <div className="container-item__info">
                     <img src={_sail.image} />
                     <div className='container-item__container-description'>  

@@ -1,17 +1,34 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import Itemshopping from './Itemshopping'
 import './Listshopping.sass'
 
 
 
+export default function ({ user, onGoToBack, _shoppinglist }) {
+console.log(_shoppinglist.chart)
+useEffect(()=> {
+//como hago el useEffect???? pierdo los datos cuando F5
+},[])
 
-export default function ({user, onGoToBack}) {
+    function handleGoToBack(event) {
+        event.preventDefault()
+        onGoToBack()
+    }
 
-function handleGoToBack (event){
-    event.preventDefault()
 
-    onGoToBack()
-}
-        
+    // let _shoppingChart = []
+
+
+    // for (let key in _shoppinglist) {
+    //     if (_shoppinglist[key] === _shoppinglist.chart) {
+    //         _shoppingChart[key] = _shoppinglist[key]
+    //     }
+    // }
+
+    
+
+
+    debugger
     return <>
 
 
@@ -34,25 +51,14 @@ function handleGoToBack (event){
 
                 </div>
             </div>
+
             <div className="containerbody">
-                <div className="containerbody__item">
-                    <div className="containerbody__image">
-
-                    </div>
-                    <div className="containerbody__description">
-
-                    </div>
-                </div>
-                <div className="containerbody__price">
-
-                </div>
-                <div className="containerbody__trash">
-                    <i className="fa fa-trash fa-3x"></i>
-                </div>
+                { _shoppinglist.chart.map((shop) => <Itemshopping key={shop.id} shop={shop} />)} 
             </div>
+
             <div className="containerfollow">
-                <a a href='#' className="containerfollow__buttonfollow" onClick={handleGoToBack}>seguir comprando</a>
-                <a a href='#' className="containerfollow__buttonempty">vaciar lista</a>
+                <a href='#' className="containerfollow__buttonfollow" onClick={handleGoToBack}>seguir comprando</a>
+                <a href='#' className="containerfollow__buttonempty">vaciar lista</a>
             </div>
             <div className="containertotal">
                 <div className="containertotal__discounts">

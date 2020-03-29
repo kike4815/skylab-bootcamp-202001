@@ -1,29 +1,27 @@
 import context from './context'
 const { NotAllowedError } = require('badabici-errors')
-
 require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
-export default (function (idproduct) {
+export default (function () {
 
 
     return (async () => {
-        const response = await fetch(`${API_URL}/shopcard`, {
-            method: 'POST',
-            headers: { 
-                    'Content-Type': 'application/json' ,
-                    'Authorization': `Bearer ${this.token}`
-            },
-            body: JSON.stringify({ idproduct })
-
+        const response = await fetch(`${API_URL}/user/retrieve/chart`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            }
         })
 
-        const { status } = response
+        const { status } = await response
+    
+        if (status === 200) {
+            const user = await response.json()
 
-        if (status === 201) {
-
-            return 
+            return user
         }
 
         if (status >= 400 && status < 500) {
