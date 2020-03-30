@@ -46,7 +46,7 @@ export default function ({ onSubmit, onGoToLogin, error, onMount }) {
             <input type="submit" value="Register"/>
 
             <a href="">Lost your password?</a><br/>
-            <a href="" onSubmit={handleGoToLogin}>go to Login?</a>
+            <a href="" onClick={handleGoToLogin}>go to Login?</a>
         </form>
         {error && <Feedback message={error} />}
     </div>

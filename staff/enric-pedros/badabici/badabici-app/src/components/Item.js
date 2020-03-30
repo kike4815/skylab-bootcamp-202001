@@ -7,6 +7,8 @@ import Detail from './Detail'
 export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail, _search, searchsale }) {
     const [openModal, setOpenModal] = useState(false)
     const [modalLogin, setModalLogin] = useState(false)
+    const [__sail, setSail] = useState()
+
     // let [color, setColor] = useState("");
 
     
@@ -37,7 +39,7 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
         searchsale=true
         return <>
 {/* 
-        <div className={ color === "r" ? "game__board__container__red red_active"
+        <div className={ color === "r" ? "game__board__container__red  red_active"
                 : "game__board__container__red"
                 .game__board__container__red
                     width:50

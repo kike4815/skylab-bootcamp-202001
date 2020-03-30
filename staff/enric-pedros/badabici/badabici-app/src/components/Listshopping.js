@@ -1,14 +1,49 @@
-import React, {useEffect} from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Itemshopping from './Itemshopping'
 import './Listshopping.sass'
+import { isLoggedIn, retrieveUser, shoppinglist } from '../logic'
+import { Context } from './ContextProvider'
+
+export default function ({onGoToBack,goToOrdered,onGoToCart }) {
 
 
+    const [state, setState] = useContext(Context)
+    const [_shoppinglist, setShoppinglist] = useState()
+    const [_user, setUser] = useState()
+    const [total, setTotal] = useState()
 
-export default function ({ user, onGoToBack, _shoppinglist }) {
-console.log(_shoppinglist.chart)
-useEffect(()=> {
-//como hago el useEffect???? pierdo los datos cuando F5
-},[])
+    let prices = []
+    
+    let totaldiscounted = total +  (total * (21/100))
+    
+    useEffect(() => {
+        if (isLoggedIn()){
+
+            (async () => {
+                try {
+
+                    const __user = await retrieveUser()
+                    
+                    setUser(__user)
+                    const shoppingList = await shoppinglist()
+                    setShoppinglist(shoppingList)
+                    
+                    shoppingList.chart.forEach(item => {
+                        prices.push(Number(item.price))
+                    })
+                   
+                     setTotal(prices.reduce(function(acc, val) { return acc + val; }, 0))
+                    
+                } catch ({ message }) {
+                    setState({ ...state, error: message })
+                    setTimeout(() => setState({ ...state, error: undefined }), 3000)
+                }
+            })()
+        }
+        else {
+            onGoToBack()
+        }
+    }, [])
 
     function handleGoToBack(event) {
         event.preventDefault()
@@ -16,23 +51,18 @@ useEffect(()=> {
     }
 
 
-    // let _shoppingChart = []
 
+    function handlegoToOrdered(e) {
+        e.preventDefault()
+        goToOrdered()
+    }
 
-    // for (let key in _shoppinglist) {
-    //     if (_shoppinglist[key] === _shoppinglist.chart) {
-    //         _shoppingChart[key] = _shoppinglist[key]
-    //     }
-    // }
 
     
-
-
-    debugger
     return <>
 
 
-        {user && <div className="future-breadcramp">BIENVENIDO {user.name}</div>}
+        {_user && <div className="future-breadcramp">Bienvenido {_user.name}</div>}
         <div className="mainContainer">
             <div className="containerlistHeader">
                 <div className="containerlistHeader__container-title">
@@ -40,7 +70,7 @@ useEffect(()=> {
                         <h3>Carrito de Compra</h3>
                     </div>
                 </div>
-                <a href='#' className='containerlistHeader__buyit'>Realizar Pedido</a>
+                <a href='#' className='containerlistHeader__buyit' onClick={goToOrdered}>Realizar Pedido</a>
             </div>
             <div className="containertypes">
                 <div className="container__name">
@@ -53,7 +83,7 @@ useEffect(()=> {
             </div>
 
             <div className="containerbody">
-                { _shoppinglist.chart.map((shop) => <Itemshopping key={shop.id} shop={shop} />)} 
+                {_shoppinglist && _shoppinglist.chart.map((shop) => <Itemshopping key={shop.id} shop={shop} onGoToCart={onGoToCart}/>)}
             </div>
 
             <div className="containerfollow">
@@ -69,14 +99,19 @@ useEffect(()=> {
                 </div>
                 <div></div>
                 <div className="containertotal__pricetotal">
-                    <h3>TOTAL</h3>
-                    <p>subtotal</p>
-                    <p>impuestos</p>
-                    <p>total general</p>
-                </div>
+                <h3>TOTAL </h3>
+                    <div className='containertotal__subtotal'>
+                    <p>subtotal </p>
+                    <span>{total} €</span>
+                    <p>impuestos</p> 
+                    <span>21%</span>
+                    <p>total general</p> 
+                    <span> {totaldiscounted} €</span>
+                    </div>
+                </div>  
             </div>
             <div className="containerbutton">
-                <a href='#' className='containerlistHeader__buyit'>Realizar Pedido</a>
+                <a href='#' className='containerlistHeader__buyit' onClick={handlegoToOrdered}>Realizar Pedido</a>
             </div>
         </div>
     </>

@@ -1,10 +1,41 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect,useContext} from 'react'
 import './Navigation.sass'
 import Confirmout from './Confirmout'
+import { Context } from './ContextProvider'
+import { isLoggedIn,shoppinglist } from '../logic'
+
 
 export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout, onGoToShopping, user}) {
+    const [state, setState] = useContext(Context)
     const [openModal, setOpenModal] = useState(false)
-   
+    const [addshopped, setAddshopped] = useState()
+    // let addshop = []
+    // console.log(addshop)
+    
+    useEffect(() => {
+        if (isLoggedIn()){
+
+            (async () => {
+                try {
+                    
+                    const shop = await shoppinglist()
+                    setAddshopped(shop)
+                    
+                    shop.chart.forEach(item => {
+                        // addshop.push(item.quantity)
+                        console.log(item.chart)
+                    })
+                     
+                } catch ({ message }) {
+                    setState({ ...state, error: message })
+                    setTimeout(() => setState({ ...state, error: undefined }), 3000)
+                }
+            })()
+        }
+
+    }, [])
+
+
     function handleGoToContact(event) {
         event.preventDefault()
 
@@ -36,8 +67,8 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
 
     
 
-    const handleModalLogout = (e) =>{
-        e.preventDefault() 
+    const handleModalLogout = (event) =>{
+        event.preventDefault() 
         setOpenModal(!openModal)
     }
 
@@ -48,7 +79,7 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
             </li>
             <li className="leftIcon__users"><a href="" onClick = {handleGoToUpdate}><i className="fa fa-users"></i></a>
             </li>
-            <li className="leftIcon__shopping"><a href="" onClick={handleGoToShopping}><i className="fa fa-shopping-cart"></i></a>
+            <li className="leftIcon__shopping active"><a href="" onClick={handleGoToShopping}><i className="fa fa-shopping-cart"></i></a>
             </li>
             <li className="leftIcon__discount"><a href="" onClick = {handleGoToSails}><i className="fa fa-percent"></i></a>
             </li>
@@ -62,6 +93,6 @@ export default function ({onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate
         {user && <a href="#" className="miniCartbtn" onClick = {handleModalLogout}><i className="fas fa-power-off"></i></a>}
         </div>
     </div>
-    {openModal && <Confirmout message="detail component"onGoToLogout={onGoToLogout} close={handleModalLogout}/>}
+    {openModal && <Confirmout message="detail component" close={handleModalLogout} onGoToLogout={onGoToLogout} />}
     </>
 }

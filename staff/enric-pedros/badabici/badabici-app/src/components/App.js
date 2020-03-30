@@ -8,8 +8,9 @@ import Navigation from './Navigation'
 import LoginAdmin from './LoginAdmin'
 import Landing from './Landing'
 import Contact from './Contact'
+import Footer from './Footer'
 import Listshopping from './Listshopping'
-import { registerUser, login, isLoggedIn, retrieveUser,loginAdmin, sails, search, addcart, logout, details,shoppinglist } from '../logic' 
+import { registerUser, login, isLoggedIn, retrieveUser,loginAdmin, sails, search, addcart, logout, details,shoppinglist, ordered } from '../logic' 
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 
@@ -64,7 +65,7 @@ export default withRouter(function ({ history }) {
       setUser(user)
       setMustlogged(true)
       
-      searchsale ? history.push('/searchSails'): history.push('/search')
+      searchsale ? history.push('/searchSails'): history.push('/searchSails')
     } catch ({ message }) {
       setState({ ...state, error: message })
 
@@ -171,14 +172,29 @@ export default withRouter(function ({ history }) {
       setState({ ...state, error: message })
     }
   }
+  async function goToOrdered (){
+    try{
+          
+          if (user){
+            const _order = await ordered()
+            
+            
+            history.push('./listshopping')
+          }
+      
+    }catch({message}){
+      setState({ ...state, error: message })
+    }
+  }  
 
-   function onGoToLogout (){
+  async function onGoToLogout (){
     
       if(user){
         
         logout()
         setUser(undefined)
         setMustlogged(false)
+        await handleGoToSails()
         history.push('/searchSails')
       }
       
@@ -205,9 +221,6 @@ export default withRouter(function ({ history }) {
     function handleGoToSails() {
       history.push('/searchSails')
   }
-  // function handleGoToListShopping() {
-  //   history.push('/listshopping')
-  // }
 
   function handleMountLogin() {
     setState({ page: 'login' })
@@ -229,14 +242,14 @@ export default withRouter(function ({ history }) {
   return <div className="app">
     <Page name={page}>
       <Route exact path="/" render={() => /* isLoggedIn() ? <Redirect to="/search" /> :  */<Redirect to="/landing" />} />       {/*esto es para hacer rutas exactas i que no te coja el primer route si se repiten*/}
-      <Route exact path="/register" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
-      <Route exact path="/login" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
+      <Route exact path="/register" render={() =>  isLoggedIn() ?   <Redirect to="/searchSails" /> :  <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
+      <Route exact path="/login" render={() =>  isLoggedIn() ?   <Redirect to="/searchSails" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
       <Route exact path="/search" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onMount={handleMountSearch} user={user} _search={_search} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail}/></>} />
       <Route exact path="/searchSails" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onMount={handleMountSearchSails} user={user} _sails={_sails} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail} searchsale={searchsale}/></>} />
       <Route path="/loginAdmin" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSails} />} />
       <Route path="/landing" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <Landing onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} />} />
       <Route path="/contact" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/> <Contact onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} /></>} />
-      <Route path="/listshopping" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/> <Listshopping onGoToBack = {handleGoToSails} user={user} _shoppinglist ={_shoppinglist}/></>} />
+      <Route path="/listshopping" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/> <Listshopping onGoToBack = {handleGoToSails}  goToOrdered={goToOrdered} onGoToCart={handleToCart}/><Footer/></>} />
     </Page>
   </div>
 }) 

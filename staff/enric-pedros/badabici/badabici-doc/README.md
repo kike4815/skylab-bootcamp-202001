@@ -1,6 +1,6 @@
 #                               BADABICI
 
-![](https://media.giphy.com/media/BRhHqAA4gF62Q/giphy.gif)
+![](https://gifsanimados.de/img-gifsanimados.de/b/bicicletas/bicicleta-en-la-oficina.gif)
 
 ## INTRODUCTION
 

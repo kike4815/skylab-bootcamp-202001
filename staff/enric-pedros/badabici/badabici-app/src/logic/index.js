@@ -9,6 +9,7 @@ import search from './search'
 import addcart from './addcart'
 import details from './details'
 import shoppinglist from './shoppinglist'
+import ordered from './ordered'
 
 export {
     registerUser,
@@ -21,5 +22,6 @@ export {
     search,
     addcart,
     details,
-    shoppinglist
+    shoppinglist,
+    ordered
 }

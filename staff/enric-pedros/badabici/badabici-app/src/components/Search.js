@@ -14,7 +14,7 @@ export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onGoT
 
     
     return <>
-        {user && <div className="future-breadcramp">BIENVENIDO {user.name}</div>}
+        {user && <div className="future-breadcramp"><i className="fa fa-bicycle"></i> Bienvenido {user.name} <i className="fa fa-bicycle"></i></div>}
         <div className="body-search">
 
             <section className='results-container'>

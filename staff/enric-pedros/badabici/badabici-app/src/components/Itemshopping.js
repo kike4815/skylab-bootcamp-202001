@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Itemshopping.sass'
+import { Redirect } from 'react-router-dom'
 
 
-export default ({ shop }) => {
+export default ({ shop,onGoToCart }) => {
+const [redirect,setRedirect]=useState(false)
 
-  debugger
+
+    function handleGoToCart(event){
+        event.preventDefault()
+        setRedirect(true)
+        onGoToCart(shop._id.toString())
+        
+    }
+    
+ if(redirect)return <Redirect to = '/listshopping'/> 
+
   return (
        <>         
     <div className="containerbody__item">
@@ -21,7 +32,7 @@ export default ({ shop }) => {
             {shop.price}
     </div>
     <div className="containerbody__trash">
-        <i className="fa fa-trash fa-2x"></i>
+        <a href='#'><i className="fa fa-trash fa-2x" onClick={handleGoToCart}></i></a>
     </div>
     </>
   )
