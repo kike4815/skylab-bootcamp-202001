@@ -10,6 +10,8 @@ import addcart from './addcart'
 import details from './details'
 import shoppinglist from './shoppinglist'
 import ordered from './ordered'
+import createproduct from './create-product'
+import saveImage from './save-product-image'
 
 export {
     registerUser,
@@ -23,5 +25,7 @@ export {
     addcart,
     details,
     shoppinglist,
-    ordered
+    ordered,
+    createproduct,
+    saveImage
 }

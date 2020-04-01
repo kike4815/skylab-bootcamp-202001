@@ -4,7 +4,7 @@ const { NotFoundError } = require('badabici-errors')
 
 module.exports = id => {
     validate.string(id, 'id')
-debugger
+
     return User.findById(id)
         .then(user => {
             if (!user) throw new NotFoundError(`user with id ${id} does not exist`)

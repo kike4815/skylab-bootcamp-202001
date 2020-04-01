@@ -15,7 +15,7 @@ export default (function () {
                 'Authorization': `Bearer ${this.token}`
             }
         })
-debugger
+
         const { status } = await response
     
         if (status === 201) {

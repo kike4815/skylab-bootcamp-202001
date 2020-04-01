@@ -10,13 +10,14 @@ import Landing from './Landing'
 import Contact from './Contact'
 import Footer from './Footer'
 import Listshopping from './Listshopping'
-import { registerUser, login, isLoggedIn, retrieveUser,loginAdmin, sails, search, addcart, logout, details,shoppinglist, ordered } from '../logic' 
+import Addproduct from './Addproduct'
+import { registerUser, saveImage, login, isLoggedIn, retrieveUser,loginAdmin, sails, search, addcart, logout, details,shoppinglist, ordered,createproduct } from '../logic' 
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 
 export default withRouter(function ({ history }) {
   const [state, setState] = useContext(Context) //use context és per contexte global
-  const [user, setUser] = useState() // aquest hook és per poder-lo utilitzar en tots els components que interesen
+  const [user, setUser] = useState() 
   const [_sails,setSails] = useState([])
   const [_search,setSearch] = useState([])
   const [_mustlogged, setMustlogged]= useState(false)
@@ -24,22 +25,22 @@ export default withRouter(function ({ history }) {
   const [_detail, Setdetail] = useState([])
   const [_shoppinglist, SetShoppinglist]= useState([])
   
-  useEffect(() => {
-    if (isLoggedIn())
-        (async () => {
-            try {
-              const user = await retrieveUser() 
-              setUser(user)
-              setMustlogged(true)
-            } catch ({ message }) {
-              setState({ ...state, error: message })
-              setTimeout(() => setState({...state, error:undefined}), 3000)            
-            }
-        })()
-    else {
-     history.push('./landing')
-    }
-  },[])
+  // useEffect(() => {
+  //   if (isLoggedIn())
+  //       (async () => {
+  //           try {
+  //             const user = await retrieveUser() 
+  //             setUser(user)
+  //             setMustlogged(true)
+  //           } catch ({ message }) {
+  //             setState({ ...state, error: message })
+  //             setTimeout(() => setState({...state, error:undefined}), 3000)            
+  //           }
+  //       })()
+  //   else {
+  //   //  history.push('./landing')
+  //   }
+  // },[])
 
   async function handleRegister(name, surname, email, password) {
     try {
@@ -75,12 +76,13 @@ export default withRouter(function ({ history }) {
     }
   }
   async function handleLoginAdmin(email, password) {
+    
     try {
       await loginAdmin(email, password)
       const user = await retrieveUser() 
       setUser(user)
       
-      history.push('/search')
+      history.push('/addproduct')
     } catch ({ message }) {
       setState({ ...state, error: message })
 
@@ -190,17 +192,36 @@ export default withRouter(function ({ history }) {
   async function onGoToLogout (){
     
       if(user){
-        
         logout()
         setUser(undefined)
         setMustlogged(false)
-        await handleGoToSails()
+        debugger
+        const _sails = await sails()
+        setSails(_sails)
+        debugger
         history.push('/searchSails')
       }
-      
+ }
+ async function handleToCreated (category,subcategory,title,description,price,image,quantity,discount){
+  try{
+        
+        if (user){
+          
+           const productId = await createproduct(category,subcategory,title,description,price,quantity,discount)
+          debugger
+           if (image) {
+            await saveImage(productId, image)
+          }
 
+  
+          debugger
+          history.push('./searchSails')
+        }
+    
+  }catch({message}){
+    setState({ ...state, error: message })
   }
-
+}
 
   function handleGoToLogin() {
     history.push('/login')
@@ -233,9 +254,7 @@ export default withRouter(function ({ history }) {
   function handleMountSearch() {
     setState({ page: 'search' })
   }
-  function handleMountSearchSails() {
-    setState({ page: 'searchSails' })
-  }
+
 
   const { page, error } = state
 
@@ -245,11 +264,13 @@ export default withRouter(function ({ history }) {
       <Route exact path="/register" render={() =>  isLoggedIn() ?   <Redirect to="/searchSails" /> :  <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
       <Route exact path="/login" render={() =>  isLoggedIn() ?   <Redirect to="/searchSails" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
       <Route exact path="/search" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onMount={handleMountSearch} user={user} _search={_search} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail}/></>} />
-      <Route exact path="/searchSails" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onMount={handleMountSearchSails} user={user} _sails={_sails} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail} searchsale={searchsale}/></>} />
+      <Route exact path="/searchSails" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onToSails={handleGoToSails} onMount={handleMountSearch} user={user} _sails={_sails} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail} searchsale={searchsale}/></>} />
       <Route path="/loginAdmin" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSails} />} />
-      <Route path="/landing" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <Landing onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} />} />
-      <Route path="/contact" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/> <Contact onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} /></>} />
+      <Route path="/landing" render={() => /* /* isLoggedIn() ? <Redirect to="/search" /> : */  <Landing onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} />} />
+      <Route path="/contact" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping} onMount={handleGoToSails}/> <Contact onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} /></>} />
       <Route path="/listshopping" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/> <Listshopping onGoToBack = {handleGoToSails}  goToOrdered={goToOrdered} onGoToCart={handleToCart}/><Footer/></>} />
+      <Route path="/addproduct" render={() =><><Addproduct onGoToBack = {handleGoToSails}  goToCreate={handleToCreated}/></>} />
+
     </Page>
   </div>
 }) 

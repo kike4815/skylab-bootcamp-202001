@@ -1,21 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import './Item.sass'
 import Mustlogged from './Mustlogged'
 import Detail from './Detail'
-
+import { Context } from './ContextProvider'
+import {retrieveUser,isLoggedIn} from '../logic'
 
 export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail, _search, searchsale }) {
     const [openModal, setOpenModal] = useState(false)
     const [modalLogin, setModalLogin] = useState(false)
-    const [__sail, setSail] = useState()
+    const [user, setUser] = useState()
+    const [state, setState] = useContext(Context)
 
-    // let [color, setColor] = useState("");
+
+    useEffect(() => {
+        if (isLoggedIn()){
+        (async () => {
+            try {
+              const _user = await retrieveUser() //si este si, para diferenciar el state...mira abajo
+              setUser(_user)
+            } catch ({ message }) {
+              setState({ ...state, error: message })
+              setTimeout(() => setState({...state, error:undefined}), 3000)            
+            }
+        })()
+        }else setUser(undefined)
+    }, [])
+
 
     
     function handleToCart(event) {
         event.preventDefault()
 
-        if (_mustlogged){
+        if (user){ 
             onGoToCart(_sail._id.toString())
         } else {
             setModalLogin(true)
@@ -29,7 +45,13 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
         onGoToDetail(_sail._id.toString())
         setOpenModal(true)
     }
-    
+    function handleToDetailofSearch(event) {
+        event.preventDefault()
+
+
+        onGoToDetail(_search._id.toString())
+        setOpenModal(true)
+    }
 
     const handleModal = () => setOpenModal(!openModal)
     const handleModalLogin = () => setModalLogin(!modalLogin)
@@ -38,15 +60,7 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
     if (_sail) {
         searchsale=true
         return <>
-{/* 
-        <div className={ color === "r" ? "game__board__container__red  red_active"
-                : "game__board__container__red"
-                .game__board__container__red
-                    width:50
-                    background:blue
-                .red_active
-                background:red    
-            }></div> */}
+
 
             <div className="container-item">
                 <div className="container-item__image">
@@ -94,7 +108,7 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
                         </div>
                         <div className='container-item__buttons'>
                         <div className="container-item__tocart"><button className='container-item__buttonmore' onClick={handleToCart}>Add To Cart</button></div>
-                        <div className="container-item__details"><button className="container-item__buttonmore"onClick={handleToDetail} >DETALLES</button></div>
+                        <div className="container-item__details"><button className="container-item__buttonmore"onClick={handleToDetailofSearch} >DETALLES</button></div>
                         </div>
                     </div>
                 </div>

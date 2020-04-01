@@ -4,7 +4,7 @@ const { NotFoundError } = require('badabici-errors')
 module.exports = (req, res) => {
     // const { payload: { sub: id } } = req
     const { params: { id } } = req
-    debugger
+    
     try {
         retrieveProduct(id)
             .then(events =>

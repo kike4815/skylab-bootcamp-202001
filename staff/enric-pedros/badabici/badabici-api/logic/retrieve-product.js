@@ -6,7 +6,7 @@ const { NotFoundError } = require('badabici-errors')
 module.exports = id => {
     
     validate.string(id, 'id')
-    debugger
+    
     return Product.findById(id)
 
         .then(product => {

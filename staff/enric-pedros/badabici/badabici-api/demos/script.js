@@ -50,11 +50,11 @@ mongoose.connect('mongodb://localhost:27017/badabici', { useNewUrlParser: true, 
         // })
         )
         products.forEach(product => {
-            fs.copyFile(path.join(__dirname,`/pictures/${product.image}`, ), path.join(__dirname, `../../badabici-data/pictures/${product._id}.jpg`), (err) => {
+            fs.copyFile(path.join(__dirname,`/pictures/${product.image}`, ), path.join(__dirname, `../data/products/${product._id}.jpg`), (err) => {
                 if (err) throw err;
                 console.log('source.txt was copied to destination.txt');
             });
-            product.image = `http://localhost:8080/imagen/${product._id}`
+            product.image = `http://localhost:8080/product/${product._id}/image`
         })
        
         return Promise.all(Product.create(products).then(() => mongoose.disconnect()))
