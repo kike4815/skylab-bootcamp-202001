@@ -130,13 +130,7 @@ export default withRouter(function ({ history }) {
       setSearchSale(true)
       
      } 
-    //  else {
-           
-    //   // setTimeout(() => {
-    //   //   setMustlogged(false)
-    //   //   history.push('/login')
-    //   // }, 3000)
-    // }
+
 
     }catch({message}){
       setState({ ...state, error: message })

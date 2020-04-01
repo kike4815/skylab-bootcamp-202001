@@ -13,10 +13,13 @@ Actually the store master have all data in the database with MySQL and, the firs
 
 
 ### FUNCTIONAL DESCRIPTION
-
+--------------------------
 Admin can:
 
-* Register, Login , add products, search products, and look details (after first version, the admin will can delete and update products )
+* Login 
+* add products
+* search products
+* look details 
 
 User can:
 * Register, Login , add products, search products, and look details.
@@ -31,4 +34,9 @@ User can:
 
 
 
+### Technical Description
+--------------------------
 
+
+### API coverage
+------------------
