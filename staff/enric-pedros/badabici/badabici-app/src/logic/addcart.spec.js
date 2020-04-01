@@ -15,7 +15,7 @@ const { env: {
 } } = process
 
 
-describe.only('addcart', () => {
+describe('addcart', () => {
     beforeAll(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => User.deleteMany())

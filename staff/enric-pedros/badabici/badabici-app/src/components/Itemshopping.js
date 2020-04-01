@@ -13,7 +13,7 @@ const [redirect,setRedirect]=useState(false)
         onGoToCart(shop._id.toString())
         
     }
-    
+    debugger
  if(redirect)return <Redirect to = '/listshopping'/> 
 
   return (

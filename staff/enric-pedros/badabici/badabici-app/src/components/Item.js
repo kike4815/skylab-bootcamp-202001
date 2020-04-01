@@ -4,6 +4,8 @@ import Mustlogged from './Mustlogged'
 import Detail from './Detail'
 import { Context } from './ContextProvider'
 import {retrieveUser,isLoggedIn} from '../logic'
+const API_URL = process.env.REACT_APP_API_URL
+
 
 export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail, _search, searchsale }) {
     const [openModal, setOpenModal] = useState(false)
@@ -68,7 +70,7 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
                 </div>
  
                 <div className="container-item__info">
-                    <img src={_sail.image} />
+                    <img src={`${API_URL}/product/${_sail._id}/image`} />
                     <div className='container-item__container-description'>  
                         <h3>{_sail.title}</h3>
                         <p>{_sail.description}</p>

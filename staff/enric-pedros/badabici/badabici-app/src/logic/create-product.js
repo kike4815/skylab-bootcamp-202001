@@ -12,7 +12,7 @@ export default (function (category,subcategory,title,description,quantity,price,
     validate.string(description,'description')
     validate.string(quantity,'quantity')
     validate.string(price, 'price')
-    // validate.type(discount,'discount', Number)
+    validate.type(discount,'discount', Number)
 
     return (async () => {
         debugger

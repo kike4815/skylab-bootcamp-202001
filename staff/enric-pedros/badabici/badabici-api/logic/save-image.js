@@ -20,7 +20,7 @@ const path = require('path')
 module.exports = function (userId, productId, file, filename) {
     validate.string(userId, 'userId')
     validate.string(productId, 'productId')
-    validate.string(filename, 'filename')
+    // validate.string(filename, 'filename')
 debugger
     return (async () => {
         const user = await User.findById(userId)
@@ -32,7 +32,11 @@ debugger
         const dir = `./data/products/${productId}`
         if (!fs.existsSync(dir)) throw new NotFoundError(`folder in ${dir} hasn't been created yet`)
 
-        let saveTo = path.join(__dirname, `../data/products/${productId}/${filename}.jpg`)
+        product.image = filename
+        await product.save()
+
+        let saveTo = path.join(__dirname, `../data/products/${productId}/${filename}`)
+
         return file.pipe(fs.createWriteStream(saveTo))
     })()
 }

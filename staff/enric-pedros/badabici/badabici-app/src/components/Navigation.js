@@ -12,9 +12,8 @@ export default function ({ onGoToContact, onGoToSearch, onGoToSails, onGoToUpdat
     const [_user, setUser] = useState()
 
 
-
     useEffect(() => {
-        let interval = setInterval(() => {
+       
             if (isLoggedIn()) {
 
                 (async () => {
@@ -23,7 +22,7 @@ export default function ({ onGoToContact, onGoToSearch, onGoToSails, onGoToUpdat
                         setUser(_user)
                         const shop = await shoppinglist()
                         setAddshopped(shop.chart)
-                        clearInterval(interval)
+                  
 
                     } catch ({ message }) {
                         setState({ ...state, error: message })
@@ -31,7 +30,7 @@ export default function ({ onGoToContact, onGoToSearch, onGoToSails, onGoToUpdat
                     }
                 })()
             }else setUser(undefined)
-        }, 100)
+      
     }, [])
 
 
@@ -78,7 +77,7 @@ export default function ({ onGoToContact, onGoToSearch, onGoToSails, onGoToUpdat
                 </li>
                 <li className="leftIcon__users"><a href="" onClick={handleGoToUpdate}><i className="fa fa-users"></i></a>
                 </li>
-                <li className="leftIcon__shopping"><a href="" onClick={handleGoToShopping}>{addshopped.length ? <i id='red' className="fa fa-shopping-cart"></i> : <i className="fa fa-shopping-cart"></i>}</a>
+                <li className="leftIcon__shopping"><a href="" onClick={handleGoToShopping}> <i className="fa fa-shopping-cart"></i>}</a>
                 </li>
                 <li className="leftIcon__discount"><a href="" onClick={handleGoToSails}><i className="fa fa-percent"></i></a>
                 </li>

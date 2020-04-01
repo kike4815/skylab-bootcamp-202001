@@ -13,7 +13,7 @@ export default (function (productId, image) {
 
     let formData = new FormData()
     formData.append('image', image)
-debugger
+    debugger
     return (async () => {
         
             const response = await fetch(`${API_URL}/products/${productId}/images`, {

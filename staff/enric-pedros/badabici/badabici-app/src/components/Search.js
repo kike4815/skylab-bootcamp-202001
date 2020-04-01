@@ -14,30 +14,35 @@ export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onToS
     const [_user, setUser] = useState()
     const [state, setState] = useContext(Context) 
 
-    useEffect(() => {
+    useEffect(()=>{
+
         onMount()
-    },[])
+
+    }, [])
+
+
     useEffect(() => {
         if (isLoggedIn()){
         (async () => {
             try {
               const _user = await retrieveUser() 
               setUser(_user)
+           
             } catch ({ message }) {
               setState({ ...state, error: message })
               setTimeout(() => setState({...state, error:undefined}), 3000)            
             }
         })()
         }else { 
-            setUser(undefined)}
+            setUser(undefined)
+        }
     }, [])
 
     useEffect(() => { 
         if (_sails) setNewsails(_sails) 
         else if (_search) setNewsearch(_search) 
-    },[])
+    },[_sails, _search])
     
-
     return <>
         {_user && <div className="future-breadcramp"><i className="fa fa-bicycle"></i> Bienvenido {_user.name} <i className="fa fa-bicycle"></i></div>}
         <div className="body-search">

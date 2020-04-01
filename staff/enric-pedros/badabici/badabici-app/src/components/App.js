@@ -65,8 +65,8 @@ export default withRouter(function ({ history }) {
       const user = await retrieveUser() 
       setUser(user)
       setMustlogged(true)
-      
-      searchsale ? history.push('/searchSails'): history.push('/searchSails')
+    
+      history.push('/searchSails')
     } catch ({ message }) {
       setState({ ...state, error: message })
 
@@ -96,6 +96,7 @@ export default withRouter(function ({ history }) {
     try{
       
       const _sails = await sails()
+      
       setSails(_sails)
       history.push('/searchSails')
 
@@ -185,23 +186,23 @@ export default withRouter(function ({ history }) {
 
   async function onGoToLogout (){
     
-      if(user){
+      
         logout()
         setUser(undefined)
         setMustlogged(false)
-        debugger
+        
         const _sails = await sails()
         setSails(_sails)
-        debugger
+        
         history.push('/searchSails')
-      }
+        // window.location.reload()
  }
  async function handleToCreated (category,subcategory,title,description,price,image,quantity,discount){
   try{
         
         if (user){
           
-           const productId = await createproduct(category,subcategory,title,description,price,quantity,discount)
+           const productId = await createproduct(category,subcategory,title,description,price,quantity,Number(discount))
           debugger
            if (image) {
             await saveImage(productId, image)
@@ -238,6 +239,7 @@ export default withRouter(function ({ history }) {
   }
 
   function handleMountLogin() {
+    debugger
     setState({ page: 'login' })
   }
 
@@ -246,8 +248,10 @@ export default withRouter(function ({ history }) {
   }
 
   function handleMountSearch() {
+    debugger
     setState({ page: 'search' })
   }
+
 
 
   const { page, error } = state
@@ -256,7 +260,7 @@ export default withRouter(function ({ history }) {
     <Page name={page}>
       <Route exact path="/" render={() => /* isLoggedIn() ? <Redirect to="/search" /> :  */<Redirect to="/landing" />} />       {/*esto es para hacer rutas exactas i que no te coja el primer route si se repiten*/}
       <Route exact path="/register" render={() =>  isLoggedIn() ?   <Redirect to="/searchSails" /> :  <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
-      <Route exact path="/login" render={() =>  isLoggedIn() ?   <Redirect to="/searchSails" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
+      <Route exact path="/login" render={() =>  isLoggedIn() ?  <Redirect to="/searchSails" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
       <Route exact path="/search" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onMount={handleMountSearch} user={user} _search={_search} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail}/></>} />
       <Route exact path="/searchSails" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onToSails={handleGoToSails} onMount={handleMountSearch} user={user} _sails={_sails} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail} searchsale={searchsale}/></>} />
       <Route path="/loginAdmin" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSails} />} />

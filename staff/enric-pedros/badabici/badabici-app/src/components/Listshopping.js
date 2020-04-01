@@ -57,7 +57,7 @@ export default function ({onGoToBack,goToOrdered,onGoToCart }) {
         goToOrdered()
     }
 
-
+debugger
     
     return <>
 

@@ -15,13 +15,13 @@ export default function ({ goToCreate, onGoToSearch}) {
             title: { value: title },
             description: { value: description },
             price: { value: price },
-            image: { files: image },
+            // image: { files: image },
             quantity: { value: quantity },
             discount: { value: discount }
-
-
-
+            
+            
         } } = event
+        const [image] = event.target.image.files
 
         goToCreate(category,subcategory,title,description,price,image,quantity,discount)
     }
@@ -62,7 +62,7 @@ export default function ({ goToCreate, onGoToSearch}) {
                         <input type="text" className='container-inputs__password' placeholder="Enter quantity" name="quantity" required/>
 
                         <label name="descuento"><b>discount</b></label>
-                        <input type='number' className='container-inputs__password' placeholder="Enter Password" name="discount" required/>
+                        <input type='text' className='container-inputs__password' placeholder="Enter Password" name="discount" required/>
 
 
                             <input type ='submit' className='button-login'value ='crear'/>
