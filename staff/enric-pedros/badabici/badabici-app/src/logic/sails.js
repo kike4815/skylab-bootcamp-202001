@@ -12,7 +12,7 @@ export default function () {
         })
 
         const { status } = response
-debugger
+
         if (status === 201) { 
             const sails = await response.json() //response.json = recibe datos json i los transforma  //JSON.parse(response.content) los converite a JSON i los envia
             sails.forEach(element => {

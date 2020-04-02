@@ -7,17 +7,17 @@ import {faSkype,faFacebook,faTwitter, faPinterest, faVine} from '@fortawesome/fr
 export default function () {
 
 
-    return <footer class='footer'>
-        <div class="footer__top">
-            <div class="footer__top__container">
-                <h2 class="title_block">Sobre Nosotros</h2>
+    return <footer className='footer'>
+        <div className="footer__top">
+            <div className="footer__top__container">
+                <h2 className="title_block">Sobre Nosotros</h2>
                 <p>Especialidad en carretera de alta competición - MTB - Asesoramiento técnico - mantenimiento y reparación.</p>
             </div>
-            <div class="footer__top__container">
+            <div className="footer__top__container">
                 <h2>Información sobre la tienda</h2>
-                <ul class="toggle-footer">
+                <ul className="toggle-footer">
                     <li>
-                        <div class="ttcontactinfo">Badabici Sport, Av. Juan XXIII, 4 08930, Sant Adria del Besos Barcelona, ESPAÑA</div>
+                        <div className="ttcontactinfo">Badabici Sport, Av. Juan XXIII, 4 08930, Sant Adria del Besos Barcelona, ESPAÑA</div>
                     </li>
                     <li>
                         <span>93 381 19 43</span></li>
@@ -26,8 +26,8 @@ export default function () {
                     </li>
                 </ul>
             </div>
-            <div class="footer__top__container"><h2>Conectate a través de</h2>
-                <div class="footer__top__container__social">
+            <div className="footer__top__container"><h2>Conectate a través de</h2>
+                <div className="footer__top__container__social">
                     <a href="#">
                         <FontAwesomeIcon icon={ faTwitter}/>
                     </a>
@@ -44,14 +44,14 @@ export default function () {
                     <FontAwesomeIcon icon={ faPinterest}/>
                     </a>
                     <a href="#">
-                        <i class="fa fa-rss"></i>
+                        <i className="fa fa-rss"></i>
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="footer__down">
-            <p class="copyText">Copyright © 2015 by <a href="https://github.com/kike4815">Enric Pedrós</a>. All Rights Reserved.</p>
+        <div className="footer__down">
+            <p className="copyText">Copyright © 2015 by <a href="https://github.com/kike4815">Enric Pedrós</a>. All Rights Reserved.</p>
         </div>
     </footer>
 

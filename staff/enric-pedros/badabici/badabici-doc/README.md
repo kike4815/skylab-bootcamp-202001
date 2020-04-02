@@ -27,16 +27,28 @@ User can:
 * buy products 
 * contact with the commerce and look for the shop in the map
 
-### USE CASES
-
-![](../badabici-doc/Use-cases-diagrams/UseCaseAdmin.png)
-
+### Use cases
+--------
 
 
+
+![](./use-cases-diagrams/usecaseadmin.png) 
+![](./use-cases-diagrams/usecaseuser.png)
+
+### Flow
+![](./use-cases-diagrams/flow-chart.png)
 
 ### Technical Description
 --------------------------
+![](./use-cases-diagrams/blockcase.png)
 
+![](./use-cases-diagrams/modalclases.png)
 
 ### API coverage
 ------------------
+
+![](./use-cases-diagrams/codecoverage.png)
+
+### Trello
+
+![](https://trello.com/b/upNSKRZq/badabici)

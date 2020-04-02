@@ -1,9 +1,9 @@
-import React, { useState,useEffect,useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './Item.sass'
 import Mustlogged from './Mustlogged'
 import Detail from './Detail'
 import { Context } from './ContextProvider'
-import {retrieveUser,isLoggedIn} from '../logic'
+import { retrieveUser, isLoggedIn } from '../logic'
 const API_URL = process.env.REACT_APP_API_URL
 
 
@@ -12,28 +12,28 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
     const [modalLogin, setModalLogin] = useState(false)
     const [user, setUser] = useState()
     const [state, setState] = useContext(Context)
-
-
-    useEffect(() => {
-        if (isLoggedIn()){
-        (async () => {
-            try {
-              const _user = await retrieveUser() //si este si, para diferenciar el state...mira abajo
-              setUser(_user)
-            } catch ({ message }) {
-              setState({ ...state, error: message })
-              setTimeout(() => setState({...state, error:undefined}), 3000)            
-            }
-        })()
-        }else setUser(undefined)
-    }, [])
-
-
+    let prices = []
     
+    useEffect(() => {
+        if (isLoggedIn()) {
+            (async () => {
+                try {
+                    const _user = await retrieveUser() 
+                    setUser(_user)
+                } catch ({ message }) {
+                    setState({ ...state, error: message })
+                    setTimeout(() => setState({ ...state, error: undefined }), 3000)
+                }
+            })()
+        } else setUser(undefined)
+    }, [])
+    
+  
+    console.log(prices)
     function handleToCart(event) {
         event.preventDefault()
 
-        if (user){ 
+        if (_mustlogged) {
             onGoToCart(_sail._id.toString())
         } else {
             setModalLogin(true)
@@ -60,7 +60,11 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
 
 
     if (_sail) {
-        searchsale=true
+        searchsale = true
+debugger
+        _sail.price = Number(_sail.price).toFixed(2)
+        _sail.discount = Number(_sail.discount).toFixed(2)
+
         return <>
 
 
@@ -68,57 +72,59 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
                 <div className="container-item__image">
                     <img src="img/bh_aerolight_disc.jpg" alt="" />
                 </div>
- 
+
                 <div className="container-item__info">
                     <img src={`${API_URL}/product/${_sail._id}/image`} />
-                    <div className='container-item__container-description'>  
+                    <div className='container-item__container-description'>
                         <h3>{_sail.title}</h3>
                         <p>{_sail.description}</p>
                         <div className="container-item__prices">
 
-                            <p className="container-item__price">{_sail.price}</p>
-                            <p className="container-item__discounted">{_sail.price} </p>
+                            <p className="container-item__price">{_sail.price} EUR</p>
+                            <p className="container-item__discounted">{_sail.price} EUR </p>
                         </div>
                         <div className='container-item__buttons'>
-                        <div className="container-item__tocart"><button className='container-item__buttonmore' onClick={handleToCart}>Add To Cart</button></div>
-                        <div className="container-item__details"><button className="container-item__buttonmore"onClick={handleToDetail} >DETALLES</button></div>
+                            <div className="container-item__tocart"><button className='container-item__buttonmore' onClick={handleToCart}>Add To Cart</button></div>
+                            <div className="container-item__details"><button className="container-item__buttonmore" onClick={handleToDetail} >DETAILS</button></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {modalLogin && <Mustlogged message="detail component" close={handleModalLogin} />} 
-            {openModal && <Detail message="detail component" close={handleModal}  _detail={_detail}/>}
+            {modalLogin && <Mustlogged message="detail component" close={handleModalLogin} />}
+            {openModal && <Detail message="detail component" close={handleModal} _detail={_detail} />}
         </>
     }
     else {
+        _search.price = Number(_search.price).toFixed(2)
+        _search.discount = Number(_search.discount).toFixed(2)
         return <>
-        <div className="container-item">
+            <div className="container-item">
                 <div className="container-item__image">
                     <img src="img/bh_aerolight_disc.jpg" alt="" />
                 </div>
 
                 <div className="container-item__info">
                     <img src={_search.image} />
-                    <div className='container-item__container-description'>  
+                    <div className='container-item__container-description'>
                         <h3>{_search.title}</h3>
                         <p>{_search.description}</p>
                         <div className="container-item__prices">
 
-                            <p className="container-item__price">{_search.price}</p>
-                            <p className="container-item__discounted">{_search.price} </p>
+                            <p className="container-item__price">{_search.price} EUR</p>
+                            <p className="container-item__discounted">{_search.price} EUR </p>
                         </div>
                         <div className='container-item__buttons'>
-                        <div className="container-item__tocart"><button className='container-item__buttonmore' onClick={handleToCart}>Add To Cart</button></div>
-                        <div className="container-item__details"><button className="container-item__buttonmore"onClick={handleToDetailofSearch} >DETALLES</button></div>
+                            <div className="container-item__tocart"><button className='container-item__buttonmore' onClick={handleToCart}>Add To Cart</button></div>
+                            <div className="container-item__details"><button className="container-item__buttonmore" onClick={handleToDetailofSearch} >DETALLES</button></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {modalLogin && <Mustlogged message="detail component" close={handleModalLogin} />} 
-            {openModal && <Detail message="detail component" close={handleModal}  _detail={_detail}/>}
-            </>
+            {modalLogin && <Mustlogged message="detail component" close={handleModalLogin} />}
+            {openModal && <Detail message="detail component" close={handleModal} _detail={_detail} />}
+        </>
     }
 
 }

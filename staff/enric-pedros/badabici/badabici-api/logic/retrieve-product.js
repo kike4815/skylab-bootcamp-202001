@@ -22,15 +22,3 @@ module.exports = id => {
 }
 
 
-// module.exports = id => {
-//     validate.string(id, 'id')
-
-//     return Product.findById(id)
-//         .then(product => {
-//             if (!product) throw new NotFoundError(`product with id ${id} not found`)
-//             // if(product.quantity < 1)throw new Error (`product isn't in stock`)
-//             .then(({ category,subcategory,title, description,price,quantity }) => ({ category,subcategory,title, description,price,quantity }))
-    
-//         })
-// }
-

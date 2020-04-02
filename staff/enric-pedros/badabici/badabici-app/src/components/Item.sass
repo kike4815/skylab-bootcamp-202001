@@ -1,6 +1,7 @@
 .container-item
     display: flex
     width: 400px
+    margin: 5%
     &__info
         display: flex
         justify-content: space-between
@@ -10,13 +11,18 @@
         text-align: center
     &__info img
         width: 50%
+        height: auto
+        margin-right: 1rem
 
     &__discounted
         color: #f47070    
-
+    &__price
+        font-size: 0.8rem
     &__prices
         display: flex
         justify-content: space-between
+        margin: 4%
+
     &__tocart
          display: inline-block
 
@@ -42,8 +48,14 @@
         justify-content: center
 
     &__container-description p 
-        font-size: xx-small
+        font-size: 0.7rem
         padding: 0px 10px 0px 10px
+
+    &__container-description h3
+        margin-bottom: 3%
+        color: #448b00
+        font-weight: bold
+            
 
     &__buttonmore
         font-family: "Oswald",sans-serif

@@ -62,7 +62,7 @@ export default function ({ goToCreate, onGoToSearch}) {
                         <input type="text" className='container-inputs__password' placeholder="Enter quantity" name="quantity" required/>
 
                         <label name="descuento"><b>discount</b></label>
-                        <input type='text' className='container-inputs__password' placeholder="Enter Password" name="discount" required/>
+                        <input type='text' className='container-inputs__password' placeholder="Enter Discount" name="discount" required/>
 
 
                             <input type ='submit' className='button-login'value ='crear'/>

@@ -5,33 +5,12 @@ import { Context } from './ContextProvider'
 import { isLoggedIn, shoppinglist,retrieveUser } from '../logic'
 
 
-export default function ({ onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout, onGoToShopping, user }) {
+export default function ({user, onGoToContact, onGoToSearch, onGoToSails, onGoToUpdate, onGoToLogout, onGoToShopping,onGoToLanding }) {
     const [state, setState] = useContext(Context)
     const [openModal, setOpenModal] = useState(false)
     const [addshopped, setAddshopped] = useState([])
     const [_user, setUser] = useState()
 
-
-    useEffect(() => {
-       
-            if (isLoggedIn()) {
-
-                (async () => {
-                    try {
-                        const _user = await retrieveUser() 
-                        setUser(_user)
-                        const shop = await shoppinglist()
-                        setAddshopped(shop.chart)
-                  
-
-                    } catch ({ message }) {
-                        setState({ ...state, error: message })
-                        setTimeout(() => setState({ ...state, error: undefined }), 3000)
-                    }
-                })()
-            }else setUser(undefined)
-      
-    }, [])
 
 
     function handleGoToContact(event) {
@@ -39,10 +18,10 @@ export default function ({ onGoToContact, onGoToSearch, onGoToSails, onGoToUpdat
 
         onGoToContact()
     }
-    function handleGoToSearch(event) {
+    function handleGoToLanding(event) {
         event.preventDefault()
 
-        onGoToSearch()
+        onGoToLanding()
     }
     function handleGoToSails(event) {
         event.preventDefault()
@@ -73,11 +52,11 @@ export default function ({ onGoToContact, onGoToSearch, onGoToSails, onGoToUpdat
     return <>
         <div className="leftIcon">
             <ul>
-                <li className="leftIcon__home"><a href="" onClick={handleGoToSearch}><i className="fa fa-home"></i></a>
+                <li className="leftIcon__home"><a href="" onClick={handleGoToLanding}><i className="fa fa-home"></i></a>
                 </li>
                 <li className="leftIcon__users"><a href="" onClick={handleGoToUpdate}><i className="fa fa-users"></i></a>
                 </li>
-                <li className="leftIcon__shopping"><a href="" onClick={handleGoToShopping}> <i className="fa fa-shopping-cart"></i>}</a>
+                <li className="leftIcon__shopping"><a href="" onClick={handleGoToShopping}> <i className="fa fa-shopping-cart"></i></a>
                 </li>
                 <li className="leftIcon__discount"><a href="" onClick={handleGoToSails}><i className="fa fa-percent"></i></a>
                 </li>
@@ -88,7 +67,7 @@ export default function ({ onGoToContact, onGoToSearch, onGoToSails, onGoToUpdat
 
         <div className="righticon">
             <div className="righticonin">
-                {_user && <a href="#" className="miniCartbtn" onClick={handleModalLogout}><i className="fas fa-power-off"></i></a>}
+                {user && <a href="#" className="miniCartbtn" onClick={handleModalLogout}><i className="fas fa-power-off"></i></a>}
             </div>
         </div>
         {openModal && <Confirmout message="detail component" close={handleModalLogout} onGoToLogout={onGoToLogout} />}

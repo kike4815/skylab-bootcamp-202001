@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React from 'react'
 import './Confirmout.sass'
-import { isLoggedIn, retrieveUser } from '../logic'
-import { Context } from './ContextProvider'
+
 
 
 

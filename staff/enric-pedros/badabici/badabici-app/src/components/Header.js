@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.sass'
 
-export default function ({ onSubmit, onGoToRegister, onGoToAdmin, onGoToLogin }) {
+export default function ({ user, onSubmit, onGoToRegister, onGoToAdmin, onGoToLogin }) {
 
     function handleGoToRegister(event) {
         event.preventDefault()
@@ -62,8 +62,8 @@ return <header className='header'>
 
     </div>
     <div className='header__thirdcontainer'>
-        <a className='header__loginbutton' href="" onClick={handleGoToLogin}>Login </a>
-        <a className='header__registerbutton' href="" onClick={handleGoToRegister}> Register</a>
+       { !user && <a className='header__loginbutton' href="" onClick={handleGoToLogin}>Login </a>}
+       { !user && <a className='header__registerbutton' href="" onClick={handleGoToRegister}> Register</a>}
     </div>
 </header>
 

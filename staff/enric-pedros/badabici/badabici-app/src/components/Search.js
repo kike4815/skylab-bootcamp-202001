@@ -1,50 +1,17 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import BikeExp from '../img/bh_aerolight_disc.jpg'
 import './Search.sass'
 import Item from './Item'
 import './Item.sass'
-import {  isLoggedIn, retrieveUser } from '../logic' 
+import { isLoggedIn, retrieveUser } from '../logic'
 import { Context } from './ContextProvider'
 
 
 
-export default function ({ _sails, onGoToCart, _mustlogged, onMount, user, onToSails, onGoToDetail, _detail, _search, searchsale }) {
-    const [newsails, setNewsails] = useState(_sails)
-    const [newsearch, setNewsearch] = useState(_search)
-    const [_user, setUser] = useState()
-    const [state, setState] = useContext(Context) 
+export default function ({ _sails, onGoToCart, _mustlogged, /* onMount */ user, onToSails, onGoToDetail, _detail, _search, searchsale }) {
 
-    useEffect(()=>{
-
-        onMount()
-
-    }, [])
-
-
-    useEffect(() => {
-        if (isLoggedIn()){
-        (async () => {
-            try {
-              const _user = await retrieveUser() 
-              setUser(_user)
-           
-            } catch ({ message }) {
-              setState({ ...state, error: message })
-              setTimeout(() => setState({...state, error:undefined}), 3000)            
-            }
-        })()
-        }else { 
-            setUser(undefined)
-        }
-    }, [])
-
-    useEffect(() => { 
-        if (_sails) setNewsails(_sails) 
-        else if (_search) setNewsearch(_search) 
-    },[_sails, _search])
-    
     return <>
-        {_user && <div className="future-breadcramp"><i className="fa fa-bicycle"></i> Bienvenido {_user.name} <i className="fa fa-bicycle"></i></div>}
+        {user && <div className="future-breadcramp"><i className="fa fa-bicycle"></i> Bienvenido {user.name} <i className="fa fa-bicycle"></i></div>}
         <div className="body-search">
 
             <section className='results-container'>

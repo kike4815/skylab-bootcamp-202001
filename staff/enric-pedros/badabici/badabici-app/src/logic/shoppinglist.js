@@ -20,10 +20,12 @@ export default (function () {
     
         if (status === 200) {
             const user = await response.json()
-
-            user.forEach(element => {
-                element.chart.image = `${API_URL}/product/${element.chart._id}/image`
-            });
+        
+            user.chart.forEach(element => {
+                element.image = `${API_URL}/product/${element._id}/image`
+               
+            })
+            
             return user
         }
 

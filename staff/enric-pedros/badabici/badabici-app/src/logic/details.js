@@ -22,7 +22,7 @@ export default (function (detail) {
         if (status === 200) {
             
             const user = await response.json()
-            debugger
+            
             user.image = `${API_URL}/product/${user._id}/image`
 
             return user

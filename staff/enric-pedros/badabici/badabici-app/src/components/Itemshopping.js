@@ -16,6 +16,9 @@ const [redirect,setRedirect]=useState(false)
     debugger
  if(redirect)return <Redirect to = '/listshopping'/> 
 
+    shop.price = Number(shop.price).toFixed(2)
+    
+
   return (
        <>         
     <div className="containerbody__item">
@@ -29,7 +32,7 @@ const [redirect,setRedirect]=useState(false)
     </div>
     
     <div className="containerbody__price">
-            {shop.price}
+            {shop.price} €
     </div>
     <div className="containerbody__trash">
         <a href='#'><i className="fa fa-trash fa-2x" onClick={handleGoToCart}></i></a>
