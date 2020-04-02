@@ -25,22 +25,19 @@ export default withRouter(function ({ history }) {
   const [_detail, Setdetail] = useState([])
   const [_shoppinglist, SetShoppinglist] = useState([])
 
-  // useEffect(() => {
-  //   if (isLoggedIn())
-  //       (async () => {
-  //           try {
-  //             const user = await retrieveUser() 
-  //             setUser(user)
-  //             setMustlogged(true)
-  //           } catch ({ message }) {
-  //             setState({ ...state, error: message })
-  //             setTimeout(() => setState({...state, error:undefined}), 3000)            
-  //           }
-  //       })()
-  //   else {
-  //   //  history.push('./landing')
-  //   }
-  // },[])
+  useEffect(() => {
+    if (isLoggedIn())
+        (async () => {
+            try {
+              const user = await retrieveUser() 
+              setUser(user)
+              setMustlogged(true)
+            } catch ({ message }) {
+              setState({ ...state, error: message })
+              setTimeout(() => setState({...state, error:undefined}), 3000)            
+            }
+        })()
+  },[])
 
   async function handleRegister(name, surname, email, password) {
     try {
@@ -99,7 +96,7 @@ export default withRouter(function ({ history }) {
 
       const _sails = await sails()
       debugger
-      setSails(_sails)
+      setSails(true)
       history.push('/search-sales')
 
     } catch ({ message }) {
@@ -144,12 +141,18 @@ export default withRouter(function ({ history }) {
     try {
 
       searchinput = searchinput.toLowerCase()
-
+      debugger
       const _search = await search(searchinput)
+      debugger
+      setSails(false)
       setSearch(_search)
-      setSails([])
 
-      history.push('/search')
+      // setTimeout(()=>{
+        
+        history.push('/search')
+
+      // }, 500)
+
 
     } catch ({ message }) {
       setState({ ...state, error: message })

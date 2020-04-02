@@ -12,7 +12,7 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
     const [modalLogin, setModalLogin] = useState(false)
     const [user, setUser] = useState()
     const [state, setState] = useContext(Context)
-    let prices = []
+    
     
     useEffect(() => {
         if (isLoggedIn()) {
@@ -28,8 +28,7 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
         } else setUser(undefined)
     }, [])
     
-  
-    console.log(prices)
+    
     function handleToCart(event) {
         event.preventDefault()
 
@@ -61,10 +60,11 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
 
     if (_sail) {
         searchsale = true
-debugger
+
         _sail.price = Number(_sail.price).toFixed(2)
         _sail.discount = Number(_sail.discount).toFixed(2)
-
+        let totaldiscounted = _sail.price-((_sail.discount/100)*(_sail.price))
+        debugger
         return <>
 
 
@@ -81,7 +81,7 @@ debugger
                         <div className="container-item__prices">
 
                             <p className="container-item__price">{_sail.price} EUR</p>
-                            <p className="container-item__discounted">{_sail.price} EUR </p>
+                            <p className="container-item__discounted">{totaldiscounted} EUR </p>
                         </div>
                         <div className='container-item__buttons'>
                             <div className="container-item__tocart"><button className='container-item__buttonmore' onClick={handleToCart}>Add To Cart</button></div>
@@ -96,8 +96,11 @@ debugger
         </>
     }
     else {
+        debugger
         _search.price = Number(_search.price).toFixed(2)
         _search.discount = Number(_search.discount).toFixed(2)
+        let totaldiscountedsearch = _search.price-((_search.discount/100)*(_search.price))
+
         return <>
             <div className="container-item">
                 <div className="container-item__image">
@@ -112,7 +115,7 @@ debugger
                         <div className="container-item__prices">
 
                             <p className="container-item__price">{_search.price} EUR</p>
-                            <p className="container-item__discounted">{_search.price} EUR </p>
+                            <p className="container-item__discounted">{totaldiscountedsearch} EUR </p>
                         </div>
                         <div className='container-item__buttons'>
                             <div className="container-item__tocart"><button className='container-item__buttonmore' onClick={handleToCart}>Add To Cart</button></div>

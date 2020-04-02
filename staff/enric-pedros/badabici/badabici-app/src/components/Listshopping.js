@@ -5,6 +5,7 @@ import { isLoggedIn, retrieveUser, shoppinglist } from '../logic'
 import { Context } from './ContextProvider'
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Buyit from './Buyit'
 
 export default function ({ onGoToBack, goToOrdered, onGoToCart }) {
 
@@ -13,6 +14,8 @@ export default function ({ onGoToBack, goToOrdered, onGoToCart }) {
     const [_shoppinglist, setShoppinglist] = useState()
     const [_user, setUser] = useState()
     const [total, setTotal] = useState()
+    const [openModal, setOpenModal] = useState(false)
+
 
     let prices = []
     
@@ -32,7 +35,7 @@ debugger
                     
                     shoppingList.chart.forEach(item => {
                         prices.push(Number(item.price)) 
-                            
+
                     })
 
                     setTotal(prices.reduce(function (acc, val) { return acc + val; }, 0))
@@ -59,12 +62,13 @@ debugger
         e.preventDefault()
      
             setSpinner(true)
-
+           setTimeout(()=> setOpenModal(true),2500)
         
-        goToOrdered()
+         goToOrdered()
     }
 
-    debugger
+    const handleModal = () => setOpenModal(!openModal)
+
 
     return <>
 
@@ -119,7 +123,8 @@ debugger
                 </div>
             </div>
             <div className="containerbutton">
-                {spinner && <Loader type="Watch"color="#00BFFF" height={50} width={100} timeout={3000} />}
+                {spinner && <Loader type="Watch"color="#00BFFF" height={50} width={100} timeout={2000} />}
+                {openModal && <Buyit close={handleModal}/>}
                 <a href='#' className='containerlistHeader__buyit' onClick={handlegoToOrdered}>Realizar Pedido</a>
             </div>
            

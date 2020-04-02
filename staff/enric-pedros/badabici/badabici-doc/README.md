@@ -42,7 +42,7 @@ User can:
 --------------------------
 ![](./use-cases-diagrams/blockcase.png)
 
-![](./use-cases-diagrams/modalclases.png)
+![](./use-cases-diagrams/datamodel.png)
 
 ### API coverage
 ------------------
