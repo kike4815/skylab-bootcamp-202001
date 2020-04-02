@@ -21,10 +21,9 @@ export default (function (idproduct) {
 
         const { status } = response
 
-        if (status === 200) {
-            const user = await response.json()
+        if (status === 201) {
 
-            return user
+            return 
         }
 
         if (status >= 400 && status < 500) {

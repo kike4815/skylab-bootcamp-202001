@@ -20,7 +20,10 @@ export default (function (detail) {
         const { status } = response
 
         if (status === 200) {
+            
             const user = await response.json()
+            
+            user.image = `${API_URL}/product/${user._id}/image`
 
             return user
         }

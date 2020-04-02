@@ -18,6 +18,11 @@ export default function (query) {
 
         if (status === 201) {
             const search = await response.json() //response.json = recibe datos json i los transforma  //JSON.parse(response.content) los converite a JSON i los envia
+            search.forEach(element => {
+                element.image = `${API_URL}/product/${element._id}/image`
+            })
+
+
 
             return search
         }

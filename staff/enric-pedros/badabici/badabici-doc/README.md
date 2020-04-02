@@ -1,6 +1,6 @@
 #                               BADABICI
 
-![](https://media.giphy.com/media/BRhHqAA4gF62Q/giphy.gif)
+![](https://gifsanimados.de/img-gifsanimados.de/b/bicicletas/bicicleta-en-la-oficina.gif)
 
 ## INTRODUCTION
 
@@ -9,4 +9,46 @@ this project it's a ecommerce based, thought and done for help a friend on his b
 
 the first approach was make it with a framework or React ,aka NextJS, but to the server side oriented is a matter of study at the moment, and, in the future, will be changed for others query language (like GraphQL) and getting better the website.
 
-Actually the store master have all data in the database with MySQL and, for the moment, i will use some data demo to present the project and show how a client can search, register, login, look detail, add to the shopping list and buy a product (we will need payment gateway in the next version) and save the history of orders   
+Actually the store master have all data in the database with MySQL and, the first approach,the admin will create data in the webside  and show how a client can search, register, login, look detail, add to the shopping list and buy a product (we will need payment gateway in the next version) and save the history of orders   
+
+
+### FUNCTIONAL DESCRIPTION
+--------------------------
+Admin can:
+
+* Login 
+* add products
+* search products
+* look details 
+
+User can:
+* Register, Login , add products, search products, and look details.
+* add and delete products to the shopping list
+* buy products 
+* contact with the commerce and look for the shop in the map
+
+### Use cases
+--------
+
+
+
+![](./use-cases-diagrams/usecaseadmin.png) 
+![](./use-cases-diagrams/usecaseuser.png)
+
+### Flow
+![](./use-cases-diagrams/flow-chart.png)
+
+### Technical Description
+--------------------------
+![](./use-cases-diagrams/blockcase.png)
+
+![](./use-cases-diagrams/datamodel.png)
+
+### API coverage
+------------------
+
+![](./use-cases-diagrams/codecoverage.png)
+
+### Trello
+
+![](https://trello.com/b/upNSKRZq/badabici)

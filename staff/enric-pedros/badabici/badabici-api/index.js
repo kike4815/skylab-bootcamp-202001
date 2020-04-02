@@ -31,7 +31,8 @@ const {
     buyit,
     authenticateAdmin,
     retrieveImage,
-    retrieveProduct
+    retrieveProduct,
+    saveImage
 } = require('./routes/handlers')
 
 
@@ -75,6 +76,8 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.post('/products/admin', [jwtVerifierMidWare, jsonBodyParser], createProduct)
 
+        app.post('/products/:id/images', jwtVerifierMidWare, saveImage)
+
         app.post('/shopcard',[jwtVerifierMidWare, jsonBodyParser],addForBuy)
         
         app.get('/users',jwtVerifierMidWare, retrieveUser)
@@ -93,7 +96,7 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.patch('/products/mod/:id/admin', [jwtVerifierMidWare, jsonBodyParser], modifyProduct)
 
-        app.get('/imagen/:id', retrieveImage)
+        app.get('/product/:id/image', retrieveImage)
 
         app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
 

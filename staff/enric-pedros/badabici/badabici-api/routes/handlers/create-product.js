@@ -2,12 +2,13 @@ const { createProduct } = require('../../logic')
 const { ContentError } = require('badabici-errors')
 
 module.exports = (req, res) => {
-    const { payload:{sub:id}, body: { category,subcategory,title, description,price,image,quantity,discount } } = req
+    const { payload:{sub:userId}, body: { category,subcategory,title, description,price,quantity,discount } } = req
 
     try {
-        
-        createProduct(id, category,subcategory,title, description,price,image,quantity,discount)
-            .then(() => res.status(201).end())
+         
+        debugger
+        createProduct(userId, category,subcategory,title, description,price,quantity,discount) //prueba
+            .then(id => res.status(201).json({id})) //aki undefined le pasa
             .catch(error => {
                 let status = 400
 
@@ -20,6 +21,7 @@ module.exports = (req, res) => {
                     })
             })
     } catch (error) {
+        
         let status = 400
 
         if (error instanceof TypeError || error instanceof ContentError)
@@ -34,3 +36,4 @@ module.exports = (req, res) => {
             })
     }
 }
+

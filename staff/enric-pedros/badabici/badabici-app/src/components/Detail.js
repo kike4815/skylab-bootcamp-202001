@@ -4,7 +4,7 @@ import './detail.css'
 
 export default ({ close, _detail }) => {
 
-  debugger
+  
   return (
     <div className="bg-modal-alert" >
       <div className="modal-content-alert" >
@@ -14,7 +14,7 @@ export default ({ close, _detail }) => {
           <br />
           <h3 className="h3-content">{_detail.description}</h3>
 
-          <button className='button-ok-alert' onClick={close}>volver</button>
+          <button className='button-ok-alert' onClick={close}>volver</button> 
         </div>
 
       </div>

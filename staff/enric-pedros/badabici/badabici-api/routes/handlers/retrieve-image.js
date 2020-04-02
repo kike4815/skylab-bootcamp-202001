@@ -14,7 +14,7 @@ module.exports = (req, res) => {
                 res.set('content-type', 'image/jpg')
                 res.set('accept-ranges', 'bytes')
 
-                let readStream = fs.createReadStream(path.join(__dirname, `../../../badabici-data/pictures/${file}.jpg`)).pipe(res)
+                let readStream = fs.createReadStream(path.join(__dirname, `../../data/products/${file}`)).pipe(res)
 
                 readStream.on('close', () => {
                     res.end()

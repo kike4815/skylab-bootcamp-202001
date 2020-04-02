@@ -34,31 +34,31 @@
     border-bottom: 1px solid #80808082
     padding-right: 80px
 
-.containerbody
-    display: grid
-    grid-template-columns: 3fr 1fr 1fr
-    height:  15vh
-    width: 100%
-    border-bottom: 1px solid #80808082
+// .containerbody
+//     display: grid
+//     grid-template-columns: 3fr 1fr 1fr
+//     height:  15vh
+//     width: 100%
+//     border-bottom: 1px solid #80808082
 
-    &___item
-        display: grid
-        grid-template-columns: 1fr 2fr
-        background-color: blue
-        width: 100%
-    &__image
-        width: 100%
-    &__price
-        border-left: 1px solid #80808082
-        border-right: 1px solid #80808082    
+//     &___item
+//         display: grid
+//         grid-template-columns: 1fr 2fr
+//         background-color: blue
+//         width: 100%
+//     &__image
+//         width: 100%
+//     &__price
+//         border-left: 1px solid #80808082
+//         border-right: 1px solid #80808082    
         
 
-    &__trash
-        background-color: #80808029
-        color: #a1a0a0    
-        display: flex
-        justify-content: center
-        align-items: center
+//     &__trash
+//         background-color: #80808029
+//         color: #a1a0a0    
+//         display: flex
+//         justify-content: center
+//         align-items: center
 
 .containerfollow
     display: flex   
@@ -114,6 +114,13 @@
     &__pricetotal h3 
         text-align: center
         border-bottom: 2px solid #80808082
+
+    &__subtotal
+        display: grid
+        grid-template-columns: 1fr 1fr
+    &__subtotal span
+        text-align: end    
+            
 .containerbutton
     display: flex
     place-content: flex-end

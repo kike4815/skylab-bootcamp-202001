@@ -8,44 +8,50 @@ import Navigation from './Navigation'
 import LoginAdmin from './LoginAdmin'
 import Landing from './Landing'
 import Contact from './Contact'
+import Footer from './Footer'
 import Listshopping from './Listshopping'
-import { registerUser, login, isLoggedIn, retrieveUser,loginAdmin, sails, search, addcart, logout, details } from '../logic' 
+import Addproduct from './Addproduct'
+import { registerUser, saveImage, login, isLoggedIn, retrieveUser, loginAdmin, sails, search, addcart, logout, details, shoppinglist, ordered, createproduct } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 
 export default withRouter(function ({ history }) {
   const [state, setState] = useContext(Context) //use context és per contexte global
-  const [user, setUser] = useState() // aquest hook és per poder-lo utilitzar en tots els components que interesen
-  const [_sails,setSails] = useState([])
-  const [_search,setSearch] = useState([])
-  const [_mustlogged, setMustlogged]= useState(false)
-  const [searchsale,setSearchSale] = useState(false) //aquest hook serveix per controlar si la persona ve de ofertes
+  const [user, setUser] = useState()
+  const [_sails, setSails] = useState([])
+  const [_search, setSearch] = useState([])
+  const [_mustlogged, setMustlogged] = useState(false)
+  const [searchsale, setSearchSale] = useState(false) //aquest hook serveix per controlar si la persona ve de ofertes
   const [_detail, Setdetail] = useState([])
-  
+  const [_shoppinglist, SetShoppinglist] = useState([])
 
-  // useEffect(() => {
-  //   // if (isLoggedIn()) {
-
-  //   //   history.push('/search')
-  //   // } else {
-
-  //     history.push('/landing')
-    
-  // }, [])
+  useEffect(() => {
+    if (isLoggedIn())
+        (async () => {
+            try {
+              const user = await retrieveUser() 
+              setUser(user)
+              setMustlogged(true)
+            } catch ({ message }) {
+              setState({ ...state, error: message })
+              setTimeout(() => setState({...state, error:undefined}), 3000)            
+            }
+        })()
+  },[])
 
   async function handleRegister(name, surname, email, password) {
     try {
       await registerUser(name, surname, email, password)
 
-    history.push('/login')
+      history.push('/login')
     } catch ({ message }) {
-      
+
       history.push('/register')
-      setState({...state, error:message})
-     
+      setState({ ...state, error: message })
+
 
       setTimeout(() => {
-        setState({...state, error:undefined})
+        setState({ ...state, error: undefined })
       }, 3000)
     }
   }
@@ -53,114 +59,174 @@ export default withRouter(function ({ history }) {
   async function handleLogin(email, password) {
     try {
       await login(email, password)
-      const user = await retrieveUser() 
+      const user = await retrieveUser()
       setUser(user)
       setMustlogged(true)
-      searchsale ? history.push('/searchSails'): history.push('/search')
+
+      setState({ page: 'search-sales' })
+
+      history.push('/search-sales')
     } catch ({ message }) {
       setState({ ...state, error: message })
 
       setTimeout(() => {
-        setState({...state, error:undefined})
+        setState({ ...state, error: undefined })
       }, 3000)
     }
   }
   async function handleLoginAdmin(email, password) {
+
     try {
       await loginAdmin(email, password)
-      const user = await retrieveUser() 
+      const user = await retrieveUser()
       setUser(user)
-      
-      history.push('/search')
+
+      history.push('/addproduct')
     } catch ({ message }) {
       setState({ ...state, error: message })
 
       setTimeout(() => {
-        setState({...state, error:undefined})
+        setState({ ...state, error: undefined })
       }, 3000)
     }
   }
 
-  async function handleToSails (){
-    try{
-      
-      const _sails = await sails()
-      setSails(_sails)
-      history.push('/searchSails')
+  async function handleToSails() {
+    try {
 
-    }catch({message}){
+      const _sails = await sails()
+      debugger
+      setSails(true)
+      history.push('/search-sales')
+
+    } catch ({ message }) {
       setState({ ...state, error: message })
     }
   }
 
-  async function handleToDetail (detail){
-    try{
-      
+  async function handleToDetail(detail) {
+    try {
+
       const _detail = await details(detail)
       Setdetail(_detail)
-     
 
-    }catch({message}){
+
+    } catch ({ message }) {
       setState({ ...state, error: message })
     }
   }
 
-  async function handleToCart (idproduct){
-    try{
-        
-    if (isLoggedIn()) {
-      
-      await addcart(idproduct)
-      debugger
-      const user = await retrieveUser() 
-      setUser(user)
-      debugger
-      setMustlogged(true)
-      setSearchSale(true)
-      debugger
-     } 
-    //  else {
-           
-    //   // setTimeout(() => {
-    //   //   setMustlogged(false)
-    //   //   history.push('/login')
-    //   // }, 3000)
-    // }
+  async function handleToCart(idproduct) {
+    try {
 
-    }catch({message}){
-      setState({ ...state, error: message })
-    }
-  }
+      if (isLoggedIn()) {
+        debugger
+        await addcart(idproduct)
 
-  async function handleToSearch (searchinput){
-    try{
-      
-      searchinput = searchinput.toLowerCase()
-      
-      const _search = await search(searchinput)
-      setSearch(_search)
-      setSails([])
-      
-      history.push('/search')
+        const user = await retrieveUser()
+        setUser(user)
 
-    }catch({message}){
-      setState({ ...state, error: message })
-    }
-  }
+        setMustlogged(true)
+        setSearchSale(true)
 
-  async function onGoToLogout (){
-    
-      if(user){
-        
-        logout()
-        setUser(undefined) //comprovar esto
-        setMustlogged(false)
-        history.push('/searchSails')
       }
-      
 
+
+    } catch ({ message }) {
+      setState({ ...state, error: message })
+    }
   }
 
+  async function handleToSearch(searchinput) {
+    try {
+
+      searchinput = searchinput.toLowerCase()
+      debugger
+      const _search = await search(searchinput)
+      debugger
+      setSails(false)
+      setSearch(_search)
+
+      // setTimeout(()=>{
+        
+        history.push('/search')
+
+      // }, 500)
+
+
+    } catch ({ message }) {
+      setState({ ...state, error: message })
+    }
+  }
+
+  async function handleGoToListShopping() {
+    try {
+
+      if (user) {
+        const shoppingList = await shoppinglist()
+        debugger
+        SetShoppinglist(shoppingList)
+
+        history.push('./listshopping')
+      }
+
+    } catch ({ message }) {
+      setState({ ...state, error: message })
+    }
+  }
+  async function goToOrdered() {
+    try {
+
+      if (user) {
+        const _order = await ordered()
+
+
+        history.push('./listshopping')
+      }
+
+    } catch ({ message }) {
+      setState({ ...state, error: message })
+    }
+  }
+
+  async function onGoToLogout() {
+
+    try {
+      logout()
+      const user = undefined
+      setUser(user)
+      const mustlogged = false
+      setMustlogged(mustlogged)
+
+      debugger
+      const _sails = await sails()
+      setSails(_sails)
+      debugger
+      history.push('/search-sales')
+    } catch ({ message }) {
+      setState({ ...state, error: message })
+    }
+  }
+  async function handleToCreated(category, subcategory, title, description, price, image, quantity, discount) {
+    try {
+
+      if (user) {
+
+        const productId = await createproduct(category, subcategory, title, description, price, quantity, Number(discount))
+        debugger
+        if (image) {
+          await saveImage(productId, image)
+        }
+
+
+        debugger
+        history.push('./search-sales')
+      }
+
+    } catch ({ message }) {
+      setState({ ...state, error: message })
+    }
+  }
 
   function handleGoToLogin() {
     history.push('/login')
@@ -173,19 +239,21 @@ export default withRouter(function ({ history }) {
     history.push('/search')
   }
   function handleGoToAdmin() {
-    history.push('/loginAdmin')
+    history.push('/admin-login') // TODO admin-login
   }
   function handleGoToContact() {
-    history.push('/Contact')
-  } 
-    function handleGoToSails() {
-      history.push('/searchSails')
+    history.push('/contact') // 
   }
-  function handleGoToListShopping() {
-    history.push('/listshopping')
+  function handleGoToSails() {
+    history.push('/search-sales')
+  }
+
+  function handleGoToLanding() {
+    history.push('/landing')
   }
 
   function handleMountLogin() {
+
     setState({ page: 'login' })
   }
 
@@ -194,25 +262,29 @@ export default withRouter(function ({ history }) {
   }
 
   function handleMountSearch() {
+
     setState({ page: 'search' })
   }
-  function handleMountSearchSails() {
-    setState({ page: 'searchSails' })
-  }
+
+
 
   const { page, error } = state
 
-  return <div className="app">
-    <Page name={page}>
-      <Route exact path="/" render={() => /* isLoggedIn() ? <Redirect to="/search" /> :  */<Redirect to="/landing" />} />       {/*esto es para hacer rutas exactas i que no te coja el primer route si se repiten*/}
-      <Route exact path="/register" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
-      <Route exact path="/login" render={() =>/*  isLoggedIn() ? *//*  <Redirect to="/search" /> : */ <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
-      <Route exact path="/search" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onMount={handleMountSearch} user={user} _search={_search} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail}/></>} />
-      <Route exact path="/searchSails" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/><Search onMount={handleMountSearchSails} user={user} _sails={_sails} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail}/></>} />
-      <Route path="/loginAdmin" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSails} />} />
-      <Route path="/landing" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <Landing onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} />} />
-      <Route path="/contact" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/> <Contact onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} /></>} />
-      <Route path="/listshopping" render={() =><><Header onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin}/><Navigation user={user} onGoToLogout={onGoToLogout} onGoToContact = {handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails ={handleToSails} onGoToUpdate onGoToShopping={handleGoToListShopping}/> <Listshopping onGoToBack = {handleGoToSails} user={user}/></>} />
-    </Page>
-  </div>
+return <div className="app">
+  <Page name={page}>
+    <Route exact path="/" render={() => /* isLoggedIn() ? <Redirect to="/search" /> :  */<Redirect to="/landing" />} />       {/*esto es para hacer rutas exactas i que no te coja el primer route si se repiten*/}
+    <Route exact path="/register" render={() => isLoggedIn() ? <Redirect to="/search-sales" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
+    <Route exact path="/login" render={() => isLoggedIn() ? <Redirect to="/search-sales" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
+    <Route exact path="/search" render={() => <><Header user={user} onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin} /><Navigation onGoToLanding={handleGoToLanding} user={user} onGoToLogout={onGoToLogout} onGoToContact={handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails={handleToSails} /* onGoToUpdate */ onGoToShopping={handleGoToListShopping} /><Search /* onMount={handleMountSearch} */ user={user} _search={_search} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail} /> </>} />
+
+
+    <Route path="/admin-login" render={() => /* isLoggedIn() ? <Redirect to="/search" /> : */ <LoginAdmin onSubmit={handleLoginAdmin} error={error} onGoToSearch={handleGoToSails} />} />
+    <Route path="/landing" render={() => /* /* isLoggedIn() ? <Redirect to="/search" /> : */  <Landing onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} />} />
+    <Route path="/contact" render={() => <><Header user={user} onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin} /><Navigation onGoToLanding={handleGoToLanding} user={user} onGoToLogout={onGoToLogout} onGoToContact={handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails={handleToSails} /* onGoToUpdate */ onGoToShopping={handleGoToListShopping} onMount={handleGoToSails} /> <Contact onGoToSails={handleToSails} error={error} onGoToSearch={handleGoToSearch} /><Footer /></>} />
+    <Route path="/listshopping" render={() => <><Header user={user} onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin} /><Navigation onGoToLanding={handleGoToLanding} user={user} onGoToLogout={onGoToLogout} onGoToContact={handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails={handleToSails} /* onGoToUpdate */ onGoToShopping={handleGoToListShopping} /> <Listshopping onGoToBack={handleGoToSails} goToOrdered={goToOrdered} onGoToCart={handleToCart} /><Footer /></>} />
+    <Route path="/addproduct" render={() => <><Addproduct onGoToSearch={handleGoToSearch} onGoToBack={handleGoToSails} goToCreate={handleToCreated} /></>} />
+
+    <Route exact path="/search-sales" render={() => <><Header user={user} onSubmit={handleToSearch} onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToAdmin={handleGoToAdmin} /><Navigation onGoToLanding={handleGoToLanding} user={user} onGoToLogout={onGoToLogout} onGoToContact={handleGoToContact} onGoToSearch={handleGoToSearch} onGoToSails={handleToSails} /* onGoToUpdate */ onGoToShopping={handleGoToListShopping} /><Search onToSails={handleGoToSails} onMount={handleMountSearch} user={user} _sails={_sails} onGoToCart={handleToCart} _mustlogged={_mustlogged} onGoToDetail={handleToDetail} _detail={_detail} searchsale={searchsale} /></>} />
+  </Page>
+</div>
 }) 

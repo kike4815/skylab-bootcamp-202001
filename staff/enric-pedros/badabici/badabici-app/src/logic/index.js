@@ -8,6 +8,10 @@ import sails from './sails'
 import search from './search'
 import addcart from './addcart'
 import details from './details'
+import shoppinglist from './shoppinglist'
+import ordered from './ordered'
+import createproduct from './create-product'
+import saveImage from './save-product-image'
 
 export {
     registerUser,
@@ -19,5 +23,9 @@ export {
     sails,
     search,
     addcart,
-    details
+    details,
+    shoppinglist,
+    ordered,
+    createproduct,
+    saveImage
 }

@@ -34,13 +34,13 @@ export default function ({ onSubmit, error, onGoToSearch}) {
                         <label name="email"><b>Email</b></label>
                         <input type="text" className='container-inputs__text' placeholder="Enter Email" name="email" required/>
 
-                            <label name="password"><b>Password</b></label>
-                            <input type="password" className='container-inputs__password' placeholder="Enter Password" name="password" required/>
+                        <label name="password"><b>Password</b></label>
+                        <input type="password" className='container-inputs__password' placeholder="Enter Password" name="password" required/>
 
-                                <a type="submit" className='button-login'/* onSubmit={handleSubmit} */>Login</a>
+                        <input type ="submit" value='log-in' className='button-login' /* onSubmit={handleSubmit} *//> 
 
+                        {error && <Feedback message={error} level="warn" />}
                     </div>
-                    {error && <Feedback message={error} level="warn" />}
 
 
                             <div className="container-links">

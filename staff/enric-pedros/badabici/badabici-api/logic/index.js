@@ -14,5 +14,6 @@ module.exports = {
     discounts: require('./discounts'),
     buyit: require('./ordered'),
     authenticateAdmin : require('./authenticate-admin'),
-    retrieveImage : require ('./retrieve-image')
+    retrieveImage : require ('./retrieve-image'),
+    saveImage: require('./save-image')
 }
