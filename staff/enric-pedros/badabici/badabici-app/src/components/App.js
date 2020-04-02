@@ -96,8 +96,15 @@ export default withRouter(function ({ history }) {
 
       const _sails = await sails()
       debugger
+
       setSails(true)
       history.push('/search-sales')
+
+
+      // setTimeout(()=>{
+        
+      //   history.push('/search-sales')
+      // }, 500)
 
     } catch ({ message }) {
       setState({ ...state, error: message })
