@@ -57,8 +57,9 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
     const handleModal = () => setOpenModal(!openModal)
     const handleModalLogin = () => setModalLogin(!modalLogin)
 
-
-    if (_sail) {
+    
+    if (_sail) { 
+        
         searchsale = true
 
         _sail.price = Number(_sail.price).toFixed(2)
@@ -68,7 +69,7 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
         return <>
 
 
-            <div className="container-item">
+             <div className="container-item">
                 <div className="container-item__image">
                     <img src="img/bh_aerolight_disc.jpg" alt="" />
                 </div>
@@ -95,7 +96,8 @@ export default function ({ _sail, onGoToCart, _mustlogged, onGoToDetail, _detail
             {openModal && <Detail message="detail component" close={handleModal} _detail={_detail} />}
         </>
     }
-    else {
+   
+    else if(_search){
         debugger
         _search.price = Number(_search.price).toFixed(2)
         _search.discount = Number(_search.discount).toFixed(2)

@@ -11,6 +11,7 @@ import { Context } from './ContextProvider'
 export default function ({ _sails, onGoToCart, _mustlogged, /* onMount */ user, onToSails, onGoToDetail, _detail, _search, searchsale }) {
     const [sails_, setSails] = useState([])
     debugger
+if(!_search){
 
     useEffect(()=>{
         (async()=>{
@@ -19,12 +20,15 @@ export default function ({ _sails, onGoToCart, _mustlogged, /* onMount */ user, 
             setSails(sailsData)
         })()
     }, [])  
-
+}
+else{
+    
     useEffect(()=>{
 
         setSails(_search)
 
     }, [_search])
+}
 
     return <>
         {user && <div className="future-breadcramp"><i className="fa fa-bicycle"></i> Bienvenido {user.name} <i className="fa fa-bicycle"></i></div>}
@@ -36,7 +40,7 @@ export default function ({ _sails, onGoToCart, _mustlogged, /* onMount */ user, 
                 </div> */}
                 <div className="results-container__elements">
                     {sails_ && sails_.map((sail) => <Item key={sail.id} _sail={sail} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail} searchsale={searchsale} />)}
-                    {_search && _search.map((search) => <Item key={search.id} _search={search} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail} />)}
+                    {/* {_search && _search.map((search) => <Item key={search.id} _search={search} onGoToCart={onGoToCart} _mustlogged={_mustlogged} onGoToDetail={onGoToDetail} _detail={_detail} />)} */}
                 </div>
             </section>
         </div>

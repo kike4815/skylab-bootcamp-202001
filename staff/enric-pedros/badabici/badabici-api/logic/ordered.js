@@ -8,7 +8,7 @@ module.exports = (id) => {
     let productId
 
 
-    return (async () => {debugger
+    return (async () => {
 
 
         const retrievedUser = await User.findById(id)
@@ -16,7 +16,7 @@ module.exports = (id) => {
 
         retrievedUser._id = id
 
-        const { chart } = retrievedUser //array de id's del carrito de la compra
+        const { chart } = retrievedUser 
 
 
         const order = await new Order({
@@ -35,13 +35,8 @@ module.exports = (id) => {
     
         }
         
-           
-        retrievedUser.save()        
+         retrievedUser.chart = []
 
-            
-        retrievedUser.chart = []
-
-        retrievedUser.save()
 
         const idorder= await Order.create(order)
 

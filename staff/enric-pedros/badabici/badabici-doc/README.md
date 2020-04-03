@@ -36,7 +36,7 @@ User can:
 ![](./use-cases-diagrams/usecaseuser.png)
 
 ### Flow
-![](./use-cases-diagrams/flow-chart.png)
+![](./use-cases-diagrams/flowchart.png)
 
 ### Technical Description
 --------------------------

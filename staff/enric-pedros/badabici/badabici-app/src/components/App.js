@@ -18,7 +18,7 @@ import { Route, withRouter, Redirect } from 'react-router-dom'
 export default withRouter(function ({ history }) {
   const [state, setState] = useContext(Context) //use context és per contexte global
   const [user, setUser] = useState()
-  const [_sails, setSails] = useState([])
+  const [_sails, setSails] = useState()
   const [_search, setSearch] = useState([])
   const [_mustlogged, setMustlogged] = useState(false)
   const [searchsale, setSearchSale] = useState(false) //aquest hook serveix per controlar si la persona ve de ofertes
