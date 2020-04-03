@@ -40,7 +40,11 @@ User can:
 
 ### Technical Description
 --------------------------
+
+#### Blocks
 ![](./use-cases-diagrams/blockcase.png)
+
+#### Data Model
 
 ![](./use-cases-diagrams/datamodel.png)
 
@@ -51,4 +55,4 @@ User can:
 
 ### Trello
 
-![](https://trello.com/b/upNSKRZq/badabici)
+[badabici Trello](https://trello.com/b/upNSKRZq/badabici)
